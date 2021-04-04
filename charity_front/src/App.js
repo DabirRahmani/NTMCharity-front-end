@@ -1,13 +1,22 @@
 //import logo from './logo.svg';
 //import './App.css';
 import React from 'react'
+import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom';
+import Login from './view/scripts/pages/login/login.js';
+
+
 
 
 const App =() =>{
 
-  return (<div>
-    
-  </div>)
+    return (<Router>
+      <div className="App" style={{overflowY:"hidden", height:"100vh"}}>
+          <Switch>
+              <Route path="/login" component={Login}/>
+          </Switch>
+      </div>
+    </Router>);
+
 }
 
 /*
