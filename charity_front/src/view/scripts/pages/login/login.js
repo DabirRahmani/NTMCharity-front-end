@@ -30,27 +30,28 @@ const Login = () => {
   {
     setSignInBtnClicked(true);
 
-
     LoginRequest({username, password})
     .then((Response)=>
     {
-      console.log("here is response:",Response.data)
-      localStorage.setItem('email',Response.data.email)
-      localStorage.setItem('username',Response.data.username)
-      localStorage.setItem('password',password)
-      setIsLoginSucced("visible")
-      history.push("/");
-
-    })
-    .catch((error)=>
-    {
-      if(error.response.status ===401)
-      {        
-        setSignInBtnClicked(false);
-        form.resetFields();
-        setIsLoginFailed("visible")
+      if(Response.data.success === "1")
+      {
+        localStorage.setItem('email',Response.data.email)
+        localStorage.setItem('username',Response.data.username)
+        localStorage.setItem('password',password)
+        setIsLoginSucced("visible")
+        history.push("/");
+      } 
+      else if(Response.data.success === "0")
+      {
+        if(Response.data.error === "wrongUsernameOrPass")
+        {
+          setSignInBtnClicked(false);
+          form.resetFields();
+          setIsLoginFailed("visible")
+        }
       }
-    });
+    }).catch(console.log("opps something went wrong"));
+   
   };
 
 
