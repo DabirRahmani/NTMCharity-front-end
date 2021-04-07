@@ -10,8 +10,9 @@ const App =() =>{
     return (<Router>
       <div className="App" style={{overflowY:"hidden"}}>
           <Switch>
-              <Route path="/login" component={Login}/>
-              <Route path="/signup" component={SignUp}/>
+              <Route  path="/login" component={Login}/>
+              <Route  path="/signup" component={SignUp}/>
+              <Route  path="/" component={Login}/>
 
           </Switch>
       </div>
