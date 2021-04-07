@@ -64,10 +64,16 @@ const SignUp = () =>
                 return <Alert severity="success">Signup Successful!</Alert>
 
             case "0":
-                return <Alert severity="error">Email and Username are used!</Alert>
+                return <Alert severity="error">Signup failed!</Alert>
 
             case "netError":
                 return <Alert severity="error">Network Error!</Alert>
+
+            case "emailUsernameError":
+                 return <Alert severity="error">Email and Username are used!</Alert>
+
+            case "usernameError":
+                  return <Alert severity="error">Email is used!</Alert>
 
         }
     }
