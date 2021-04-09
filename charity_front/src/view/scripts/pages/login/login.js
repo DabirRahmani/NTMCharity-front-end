@@ -1,137 +1,182 @@
-import React, {useState, useEffect , JSON} from "react";
-import {Form, Input, Button, Checkbox, Typography, Divider, Layout, Row, Col, Alert} from 'antd';
-import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {Link, useHistory} from 'react-router-dom';
-import 'antd/dist/antd.css';
-import {RollbackOutlined} from '@ant-design/icons'
-import {setState} from 'react'
-import axios from 'axios'
+import React, {useState, useEffect } from "react";
+import { useHistory} from 'react-router-dom';
 import LoginRequest from '../../../../core/login-signup/loginRequest'
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 
 
 const Login = () => {
 
   
-  const { Header, Content, Footer } = Layout;
+  //const { Header, Content, Footer } = Layout;
   const { Text } = Typography;
   const [signInBtnClicked,setSignInBtnClicked ]= useState(false)
-  const [form] = Form.useForm();
+  //const [form] = Form.useForm();
   const [isLoginSucced, setIsLoginSucced]= useState("hidden")
   const history = useHistory();
   const [isLoginFailed, setIsLoginFailed]= useState("hidden")
   const [thisWillChangeWhenPassOrUsernameChanged, setChange]= useState(""); //used for hiding fail messege
+  const classes = useStyles();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [status, setStatus] = useState("");
+
+
+
+  const alert = () => {
+
+    switch(status){
+      case "1":
+          return <Alert severity="success">SignIn Successful!</Alert>
+
+      case "wrongUsernameOrPass":
+          return <Alert severity="error">Wrong email or password!</Alert>
+
+          case "0":
+            return <Alert severity="error">Pleas fill all filds!</Alert>
+  }
+
+  }
 
 
   useEffect(()=>{setIsLoginFailed("hidden")},[thisWillChangeWhenPassOrUsernameChanged])
 
 
-  const onFinish = ({username, password, remember}) => 
+  const onSigninSubmit = (e) => 
   {
-    setSignInBtnClicked(true);
+    e.preventDefault();
 
-    LoginRequest({username, password})
-    .then((Response)=>
+    e.preventDefault();
+    if((password === "") || (username === ""))
     {
-      if(Response.data.success === "1")
+      setStatus("0");
+    } else {
+
+
+
+      LoginRequest({username, password})
+      .then((Response)=>
       {
-        localStorage.setItem('email',Response.data.email)
-        localStorage.setItem('username',Response.data.username)
-        localStorage.setItem('password',password)
-        setIsLoginSucced("visible")
-        history.push("/");
-      } 
-      else if(Response.data.success === "0")
-      {
-        if(Response.data.error === "wrongUsernameOrPass")
+        if(Response.data.success === "1")
         {
-          setSignInBtnClicked(false);
-          form.resetFields();
-          setIsLoginFailed("visible")
+       //   localStorage.setItem('email',Response.data.email)
+       //   localStorage.setItem('username',Response.data.username)
+       //   localStorage.setItem('password',password)
+      //    setIsLoginSucced("visible")
+          //history.push("/");
+          setStatus("1");
+          history.push("/signin");
+  
+        } 
+        else if(Response.data.success === "0")
+        {
+          if(Response.data.error === "wrongUsernameOrPass")
+          {
+            setStatus("wrongUsernameOrPass");
+          //  setSignInBtnClicked(false);
+        //    setIsLoginFailed("visible")
+          }
         }
-      }
-    }).catch(console.log("opps something went wrong"));
+      });
+    }
+
    
   };
 
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-  
-
   return (
-    <Layout style={{height:'100vh'}}  >
-
-
-
-      <Row justify="space-around" align="middle">
-
-        <Col span={8}></Col>
-        <Col span={8} style={{top:'100px', minWidth:'300px', }}>
-
-           <Alert message="با موفقیت وارد شدید" style={{visibility:isLoginSucced, direction:'rtl', fontSize:'20px', textAlign:'center'}} type="success" />
-           <Alert message="نام کاربری یا کلمه عبور اشتباه است" style={{visibility:isLoginFailed, direction:'rtl', fontSize:'20px', textAlign:'center'}} type="error" />
-
-
-          <Content style={{padding: '24px 24px', background: '#fff'}}>
-
-            <div style={{direction: 'rtl', padding: '0px 24px'}}>
-              <Link to="/" style={{fontSize: '20px' ,color: '#000000', direction: 'rtl'}} >بازگشت‌</Link>
-            </div>
-
-
-            <Form
-            style={{ padding: '24px 20px'}}
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            form= {form}>
-
-              <Form.Item
-                label="نام کاربری"
-                name="username"
-                style={{direction:'rtl'}}
-                rules={[{ required: true, message: 'لطفا نام کاربری خود را وارد کنید' }]}>
-                <Input  style={{direction:'ltr'}} onChange={(e)=> setChange(e.target.value)} disabled={signInBtnClicked} />
-              </Form.Item>
-            
-            
-              <Form.Item
-                label="رمـز عـبـور"
-                name="password"
-                style={{direction:'rtl'}}
-                rules={[{ required: true, message: 'لطفا رمز عبور خود را وارد کنید' }]}>
-                <Input.Password style={{direction:'ltr'}}  disabled={signInBtnClicked} onChange={(e)=> setChange(e.target.value)} />  
-              </Form.Item>
-            
-              <Form.Item name="remember" valuePropName="checked" >
-                <Checkbox disabled={signInBtnClicked}>Remember me</Checkbox>
-              </Form.Item>
-            
-              <Form.Item >
-                <Button type="primary" htmlType="submit" loading={signInBtnClicked} >ورود</Button>
-              </Form.Item>
-
-
-                
-            </Form>
-
-            <div style={{direction:'ltr'}} >
-              <Text style={{fontSize: '20px' ,color: '#000000'}} >حساب کاربری ندارید؟ </Text>
-              <Link to="/signup" style={{fontSize: '20px'}} >ثبت نام کنید</Link>
-            </div>
-                
-          </Content>
-                
-                
-        </Col>
-        <Col span={8}></Col>
-
-      </Row>
-              
-    </Layout>
+    
+      <Container component="main" maxWidth="xs" background-color="#ffffff">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              onChange={(e)=>setUsername(e.target.value)}
+              value={username}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              onChange={(e)=>setPassword(e.target.value)}
+              value={password}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              onClick={onSigninSubmit}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign in
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+        <Box mt={5}>
+        </Box>
+        {alert()}
+      </Container>
 
   );
   
