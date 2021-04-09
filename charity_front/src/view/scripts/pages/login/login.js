@@ -3,7 +3,6 @@ import { useHistory} from 'react-router-dom';
 import LoginRequest from '../../../../core/login-signup/loginRequest'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -40,18 +39,12 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
 
   
-  //const { Header, Content, Footer } = Layout;
-  const { Text } = Typography;
-  const [signInBtnClicked,setSignInBtnClicked ]= useState(false)
-  //const [form] = Form.useForm();
-  const [isLoginSucced, setIsLoginSucced]= useState("hidden")
   const history = useHistory();
-  const [isLoginFailed, setIsLoginFailed]= useState("hidden")
-  const [thisWillChangeWhenPassOrUsernameChanged, setChange]= useState(""); //used for hiding fail messege
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState("");
+  const [disableViews, setDisableViews] = useState(false)
 
 
 
@@ -62,7 +55,7 @@ const Login = () => {
         return <Alert severity="success">SignIn Successful!</Alert>
 
       case "wrongUsernameOrPass":
-        return <Alert severity="error">Wrong email or password!</Alert>
+        return <Alert severity="error">Wrong user name or password!</Alert>
 
       case "0":
         return <Alert severity="error">Please fill all fields!</Alert>
@@ -83,23 +76,22 @@ const Login = () => {
   const onSigninSubmit = (e) => 
   {
     e.preventDefault();
-
-    e.preventDefault();
     if((password === "") || (username === ""))
     {
       setStatus("0");
-      setSignInBtnClicked(true);
-    } else {
+    } 
+    else 
+    {
 
-
+      setDisableViews(true)
 
       LoginRequest({username, password})
       .then((Response)=>
       {
-        console.log(Response)
         if(Response.data.success === "1")
         {
           setStatus("1");
+
       //    history.push("/signin");
         } 
         else if(Response.data.success === "0")
@@ -107,6 +99,8 @@ const Login = () => {
           if(Response.data.error === "wrongUsernameOrPass")
           {
             setStatus("wrongUsernameOrPass");
+            setDisableViews(false)
+
           }
         }
       }).catch((e)=> {
@@ -114,11 +108,10 @@ const Login = () => {
             {
               setStatus("oops");
             }
-          
+            setDisableViews(false)
+
         });
     }
-
-   
   };
 
 
@@ -136,14 +129,15 @@ const Login = () => {
             <TextField
               onChange={(e)=>setUsername(e.target.value)}
               value={username}
+              disabled={disableViews}
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="User Name"
               label="User Name"
-              name="email"
-              autoComplete="email"
+              name="User Name"
+              autoComplete="User Name"
               autoFocus
             />
             <TextField
@@ -151,6 +145,7 @@ const Login = () => {
               value={password}
               variant="outlined"
               margin="normal"
+              disabled={disableViews}
               required
               fullWidth
               name="password"
@@ -160,6 +155,7 @@ const Login = () => {
               autoComplete="current-password"
             />
             <Button
+              disabled={disableViews}
               onClick={onSigninSubmit}
               type="submit"
               fullWidth

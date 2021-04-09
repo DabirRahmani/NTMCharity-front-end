@@ -43,6 +43,7 @@ const SignUp = () =>
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState("");
     const history = useHistory();
+    const [disableViews, setDisableViews] = useState(false);
 
     useEffect(()=>{setStatus("remove")},[ username, email])
 
@@ -69,6 +70,7 @@ const SignUp = () =>
       }
       else
       {
+        setDisableViews(true);
         SignUpRequest({username,password,email})
         .then((res)=>
         {
@@ -79,9 +81,11 @@ const SignUp = () =>
             } 
             else if(res.data.success === "0")
             {
+              setDisableViews(false)
               setStatus(res.data.status);
             }
-        }).catch(()=>{setStatus("net")})
+        //    setDisableViews(false);
+        }).catch(()=>{setStatus("net"); setDisableViews(false);})
         
       }
 
@@ -98,13 +102,13 @@ const SignUp = () =>
               return <Alert severity="error">Please fill all fields!</Alert>
 
             case "emailError":
-                return <Alert severity="error">Email is Used!</Alert>
+                return <Alert severity="error">Email already exists!</Alert>
 
             case "emailUsernameError":
-                 return <Alert severity="error">Email and Username are used!</Alert>
+                 return <Alert severity="error">Email and Username already exist!</Alert>
 
             case "usernameError":
-                  return <Alert severity="error">Username is used!</Alert>
+                  return <Alert severity="error">Username already exists!</Alert>
 
             case "net":
             return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
@@ -136,6 +140,7 @@ const SignUp = () =>
             <Grid container spacing={2}>
               <Grid item xs={12}>  
                 <TextField
+                  disabled={disableViews}
                   onChange={(e)=>setUsername(e.target.value)}
                   value={username}
                   variant="outlined"
@@ -149,6 +154,7 @@ const SignUp = () =>
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  disabled={disableViews}
                   onChange={(e)=>setEmail(e.target.value)}
                   value={email}
                   variant="outlined"
@@ -162,6 +168,7 @@ const SignUp = () =>
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  disabled={disableViews}
                   onChange={(e)=>setPassword(e.target.value)}
                   value={password}
                   variant="outlined"
@@ -176,6 +183,7 @@ const SignUp = () =>
               </Grid>
             </Grid>
             <Button
+              disabled={disableViews}
               onClick={onSignupSubmit}
               type="submit"
               fullWidth
