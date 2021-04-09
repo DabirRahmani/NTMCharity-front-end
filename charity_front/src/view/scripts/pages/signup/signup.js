@@ -44,6 +44,7 @@ const SignUp = () =>
     const [status, setStatus] = useState("");
     const history = useHistory();
     const [disableViews, setDisableViews] = useState(false);
+    const [cPassword, setCPassword] = useState("");
 
     useEffect(()=>{setStatus("remove")},[ username, email])
 
@@ -55,10 +56,17 @@ const SignUp = () =>
       {
         setStatus("0");
       }
+      else if(password != cPassword)
+      {
+        setStatus("confirmPass")
+        setPassword("");
+        setCPassword("");
+      }
       else if(password.length <6)
       {
         setStatus("checkPassword")
         setPassword("");
+        setCPassword("");
       }
       else if(!validator.isEmail(email))
       {
@@ -120,10 +128,13 @@ const SignUp = () =>
               return <Alert severity="error">Pleass enter a valid email!</Alert>
 
             case "checkUsername":
-              return <Alert severity="error">User Name must be at least 4 characters!</Alert>
+              return <Alert severity="error">Username must be at least 4 characters!</Alert>
             
             case "remove":
               return <div></div>
+
+            case "confirmPass":
+              return <Alert severity="error">Paswwords don't match</Alert>
         }
     }
 
@@ -147,7 +158,7 @@ const SignUp = () =>
                   required
                   fullWidth
                   id="username"
-                  label="User Name"
+                  label="Username"
                   name="username"
                   autoComplete="user"
                 />
@@ -179,6 +190,20 @@ const SignUp = () =>
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  disabled={disableViews}
+                  onChange={(e)=>setCPassword(e.target.value)}
+                  value={cPassword}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="Confirm password"
+                  label="Confirm Password"
+                  type="password"
+                  id="password"
                 />
               </Grid>
             </Grid>
