@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
+import {useHistory} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,22 +39,35 @@ const SignUp = () =>
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState("");
+    const history = useHistory();
+
     
     const onSignupSubmit=(e)=>
     {
-        e.preventDefault();
+      e.preventDefault();
+      if((password === "") || (username === "") || (email === ""))
+      {
+        setStatus("0");
+      }
+      else
+      {
         SignUpRequest({username,password,email})
         .then((res)=>
         {
-            setStatus(res.data.status)
-            
-        })
-
-        .catch(() => {
-            setStatus('netError')
-        })
+            if(res.data.success === "1")
+            {
+              setStatus(res.data.success)
+              history.push("/signup");
+            } 
+            else if(res.data.success === "0")
+            {
+              setStatus(res.data.status);
+            }
+        }).catch(()=>{setStatus("net")})
         
+      }
+
     }
 
     const classes = useStyles();
@@ -62,21 +76,24 @@ const SignUp = () =>
         switch(status){
             case "1":
                 return <Alert severity="success">Signup Successful!</Alert>
-
             case "0":
-                return <Alert severity="error">Signup failed!</Alert>
+              return <Alert severity="error">Please fill all filds!</Alert>
 
-            case "netError":
-                return <Alert severity="error">Network Error!</Alert>
+            case "emailError":
+                return <Alert severity="error">Email is Used!</Alert>
 
             case "emailUsernameError":
                  return <Alert severity="error">Email and Username are used!</Alert>
 
             case "usernameError":
-                  return <Alert severity="error">Email is used!</Alert>
+                  return <Alert severity="error">Username is used!</Alert>
+
+            case "net":
+            return <Alert severity="error">network error!</Alert>
 
         }
     }
+
     return( 
         <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
@@ -141,7 +158,7 @@ const SignUp = () =>
             </Button>
             <Grid container justify="flex-end">
               <Grid item xs={9}>
-                <Link href="/login"style={{marginLeft: "-2%"}} variant="body2" >
+                <Link href="/signin"style={{marginLeft: "-2%"}} variant="body2" >
                   Already have an account? Sign in
                 </Link>
               </Grid>
