@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SignUpRequest from '../../../../core/login-signup/signupRequest';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
+import validator from 'validator'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +44,8 @@ const SignUp = () =>
     const [status, setStatus] = useState("");
     const history = useHistory();
 
+    useEffect(()=>{setStatus("remove")},[ username, email])
+
     
     const onSignupSubmit=(e)=>
     {
@@ -49,6 +53,19 @@ const SignUp = () =>
       if((password === "") || (username === "") || (email === ""))
       {
         setStatus("0");
+      }
+      else if(password.length <6)
+      {
+        setStatus("checkPassword")
+        setPassword("");
+      }
+      else if(!validator.isEmail(email))
+      {
+        setStatus("checkEmail")
+      }
+      else if(username.length < 4)
+      {
+        setStatus("checkUsername")
       }
       else
       {
@@ -73,11 +90,12 @@ const SignUp = () =>
     const classes = useStyles();
     const alert = () => {
          
-        switch(status){
+        switch(status)
+        {
             case "1":
                 return <Alert severity="success">Signup Successful!</Alert>
             case "0":
-              return <Alert severity="error">Please fill all filds!</Alert>
+              return <Alert severity="error">Please fill all fields!</Alert>
 
             case "emailError":
                 return <Alert severity="error">Email is Used!</Alert>
@@ -89,8 +107,19 @@ const SignUp = () =>
                   return <Alert severity="error">Username is used!</Alert>
 
             case "net":
-            return <Alert severity="error">network error!</Alert>
+            return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
 
+            case "checkPassword":
+              return <Alert severity="error">Password must be at least 6 characters!</Alert>
+
+            case "checkEmail":
+              return <Alert severity="error">Pleass enter a valid email!</Alert>
+
+            case "checkUsername":
+              return <Alert severity="error">User Name must be at least 4 characters!</Alert>
+            
+            case "remove":
+              return <div></div>
         }
     }
 

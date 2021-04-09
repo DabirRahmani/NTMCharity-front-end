@@ -59,19 +59,25 @@ const Login = () => {
 
     switch(status){
       case "1":
-          return <Alert severity="success">SignIn Successful!</Alert>
+        return <Alert severity="success">SignIn Successful!</Alert>
 
       case "wrongUsernameOrPass":
-          return <Alert severity="error">Wrong email or password!</Alert>
+        return <Alert severity="error">Wrong email or password!</Alert>
 
-          case "0":
-            return <Alert severity="error">Pleas fill all filds!</Alert>
+      case "0":
+        return <Alert severity="error">Please fill all fields!</Alert>
+
+      case "oops":
+        return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
+
+      case "remove":
+        return <div></div>
   }
 
   }
 
 
-  useEffect(()=>{setIsLoginFailed("hidden")},[thisWillChangeWhenPassOrUsernameChanged])
+  useEffect(()=>{setStatus("remove")},[password, username])
 
 
   const onSigninSubmit = (e) => 
@@ -82,6 +88,7 @@ const Login = () => {
     if((password === "") || (username === ""))
     {
       setStatus("0");
+      setSignInBtnClicked(true);
     } else {
 
 
@@ -89,27 +96,26 @@ const Login = () => {
       LoginRequest({username, password})
       .then((Response)=>
       {
+        console.log(Response)
         if(Response.data.success === "1")
         {
-       //   localStorage.setItem('email',Response.data.email)
-       //   localStorage.setItem('username',Response.data.username)
-       //   localStorage.setItem('password',password)
-      //    setIsLoginSucced("visible")
-          //history.push("/");
           setStatus("1");
-          history.push("/signin");
-  
+      //    history.push("/signin");
         } 
         else if(Response.data.success === "0")
         {
           if(Response.data.error === "wrongUsernameOrPass")
           {
             setStatus("wrongUsernameOrPass");
-          //  setSignInBtnClicked(false);
-        //    setIsLoginFailed("visible")
           }
         }
-      });
+      }).catch((e)=> {
+            if(!e.status)
+            {
+              setStatus("oops");
+            }
+          
+        });
     }
 
    
@@ -118,8 +124,7 @@ const Login = () => {
 
   return (
     
-      <Container component="main" maxWidth="xs" background-color="#ffffff">
-        <CssBaseline />
+      <Container component="main" maxWidth="xs" >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -136,7 +141,7 @@ const Login = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="User Name"
               name="email"
               autoComplete="email"
               autoFocus
@@ -164,9 +169,9 @@ const Login = () => {
             >
               Sign in
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/signup" variant="body2">
+            <Grid container justify="flex-end">
+            <Grid item xs={9}>
+                <Link href="/signup"style={{marginLeft: "-2%"}} variant="body2" >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
