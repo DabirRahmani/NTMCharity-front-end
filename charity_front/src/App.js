@@ -1,5 +1,3 @@
-//import logo from './logo.svg';
-//import './App.css';
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom';
 import Login from './view/scripts/pages/login/login';
@@ -9,7 +7,7 @@ const App =() =>
 {
 
     return (<Router>
-      <div className="App" style={{overflowY:"hidden"}}>
+      <div className="App">
           <Switch>
               <Route path="/signup" component={SignUp}/>
               <Route path="/signin" component={Login}/>
