@@ -55,7 +55,7 @@ const Login = () => {
         return <Alert severity="success">SignIn Successful!</Alert>
 
       case "wrongUsernameOrPass":
-        return <Alert severity="error">Wrong user name or password!</Alert>
+        return <Alert severity="error">Wrong username or password!</Alert>
 
       case "0":
         return <Alert severity="error">Please fill all fields!</Alert>
@@ -134,10 +134,10 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
-              id="User Name"
-              label="User Name"
-              name="User Name"
-              autoComplete="User Name"
+              id="Username"
+              label="Username"
+              name="Username"
+              autoComplete="Username"
               autoFocus
             />
             <TextField
