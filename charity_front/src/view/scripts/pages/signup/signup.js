@@ -4,6 +4,10 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -13,6 +17,7 @@ import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
 import validator from 'validator'
+
 
 
 
@@ -34,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    formControl: {
+      width: '100%'
+    }
   }));
 
 const SignUp = () => 
@@ -45,6 +53,7 @@ const SignUp = () =>
     const history = useHistory();
     const [disableViews, setDisableViews] = useState(false);
     const [cPassword, setCPassword] = useState("");
+    const [type, setType] = useState("");
 
     useEffect(()=>{setStatus("remove")},[ username, email])
 
@@ -76,10 +85,13 @@ const SignUp = () =>
       {
         setStatus("checkUsername")
       }
+      else if(type===""){
+        setStatus("invalid type")
+      }
       else
       {
         setDisableViews(true);
-        SignUpRequest({username,password,email})
+        SignUpRequest({username,password,email,type})
         .then((res)=>
         {
             if(res.data.success === "1")
@@ -125,7 +137,7 @@ const SignUp = () =>
               return <Alert severity="error">Password must be at least 6 characters!</Alert>
 
             case "checkEmail":
-              return <Alert severity="error">Pleass enter a valid email!</Alert>
+              return <Alert severity="error">Please enter a valid email!</Alert>
 
             case "checkUsername":
               return <Alert severity="error">Username must be at least 4 characters!</Alert>
@@ -135,6 +147,9 @@ const SignUp = () =>
 
             case "confirmPass":
               return <Alert severity="error">Paswwords don't match</Alert>
+
+            case "invalid type":
+              return <Alert severity="error">Please select your type</Alert>
         }
     }
 
@@ -205,6 +220,21 @@ const SignUp = () =>
                   type="password"
                   id="password"
                 />
+              </Grid>
+              <Grid item xs={12} >
+                 <FormControl fullWidth variant="outlined" classNema={classes.formControl}>
+                   <InputLabel  id="demo-simple-select-outlined-label">Sign up as</InputLabel>
+                   <Select
+                     labelId="demo-simple-select-outlined-label"
+                     id="demo-simple-select-outlined"
+                     value={type}
+                     onChange={(e) => setType(e.target.value)}
+                     label="Sign up as :"
+                   >
+                     <MenuItem value={3}>Donator</MenuItem>
+                     <MenuItem value={4}>Needy</MenuItem>
+                    </Select>
+                  </FormControl>
               </Grid>
             </Grid>
             <Button
