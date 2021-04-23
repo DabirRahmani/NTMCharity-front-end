@@ -7,14 +7,14 @@ const App =() =>
 {
 
     return (<Router>
-      <div className="App">
-          <Switch>
-              <Route path="/signup" component={SignUp}/>
-              <Route path="/signin" component={Login}/>
-
-          </Switch>
-      </div>
-    </Router>);
+        <div className="App">
+            <Switch>
+                <Route path="/signup" component={SignUp}/>
+                <Route path="/signin" component={Login}/>
+  
+            </Switch>
+        </div>
+      </Router>);
 
 }
 
