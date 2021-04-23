@@ -212,7 +212,7 @@ const SingleEvent = (probs)=> {
       {
 
 
-        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:title, description:description, listofneeds:listOfNeeds,imageurl:imageurl});
+        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:title, description:description, listofneeds:listOfNeeds,imageurl:imageurl, username:username});
       }
 
     

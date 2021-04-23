@@ -1,13 +1,20 @@
 import axios from "axios";
 
-const getEventsRequest =({username, password})=> 
+const GetEventsRequests =({admintoken})=> 
 {
-      return axios.create({baseURL: "http://127.0.0.1:8000/App1"}).post( '/login', {username: username, password: password})
 }
 
-const setEventStatusRequest =({username, password})=> 
+const DeleteRequestedEvent =({admintoken, eventid,feedback})=> 
 {
-      return axios.create({baseURL: "http://127.0.0.1:8000/App1"}).post( '/login', {username: username, password: password})
 }
+
+const ConfrimRequestedEvent =({admintoken, eventid, feedback})=> 
+{
+}
+
+const ModifyRequestedEvent =({admintoken,eventid, title, description,listofneeds,imageurl,feedback })=> 
+{
+}
+
 
 export {getEventsRequest, setEventStatusRequest}

@@ -1,15 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import store from '../../../../core/adminPanel/store/eventManagerStore'
 import SingleEvent from './singleEvent'
 import Button from '@material-ui/core/Button'
-import {useState} from 'react'
 import Alert from '@material-ui/lab/Alert';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
-
+import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
 
 
 
@@ -23,6 +21,8 @@ function useForceUpdate(){
 
 const EventRequestRenderer =()=>
 {
+
+
 
     const forceUpdate = useForceUpdate();
 
@@ -156,7 +156,12 @@ const EventRequestRenderer =()=>
         setDianogStatus(true)
         setDianogLinearProgressStatus("block")
 
+        let subject ="event number "+res.eventid+" title: "+ res.title+ " modified and confirmed successfully";
+        let message="hi "+" "+ res.username+" your event confrimed\n here is feedback: "+res.feedback;
 
+        PostEmailRequest({"email":"jbuhubhakq@nucleant.org",subject,message})
+        .then((response)=>{console.log(response)})
+        
         store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
 
 
@@ -205,31 +210,6 @@ const EventRequestRenderer =()=>
         setDianogTitle("")
     }
 
-    var aws = require('aws-sdk');
-
-
-
-
-
-var fs = require('fs');
-
-const fileName = 'contacts.csv';
-
-const s3 = new aws.S3({
-    accessKeyId: "f179ac6d-cbed-4df5-8ed1-86e5bfbf2de1",
-    secretAccessKey: "5e156507cf92fb6f964dbca72836446cca0b6b516d488c82fe2feb90a99a18f8",
-    endpoint: "https://s3.ir-thr-at1.arvanstorage.com",
-    s3ForcePathStyle: true
-   });
-
-
-
-console.log(fs.readFile);
-
-
-console.log(fs)
-
-console.log(require('fs'))
 
     return(<div>
 

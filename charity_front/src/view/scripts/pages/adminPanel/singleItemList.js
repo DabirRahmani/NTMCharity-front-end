@@ -9,7 +9,7 @@ const SingleItemList =(probs)=>
         probs.deleteitem(probs.value)
     }
 
-    return (<div id={probs.id} key={probs.key}>
+    return (<div id={probs.id} key={probs.id}>
         <IconButton style={{display: "inline-block"}} edge="start" onClick={deleteIconClicked}>
             <DeleteIcon />
         </IconButton>
