@@ -2,19 +2,26 @@ import React from 'react'
 import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom';
 import Login from './view/scripts/pages/login/login';
 import SignUp from './view/scripts/pages/signup/signup';
+import AdminPanel from './view/scripts/pages/adminPanel/panel'
+import ReactDOM from 'react-dom'
+import Home from './view/scripts/pages/home/home'
+import Err404 from './view/scripts/pages/404'
 
 const App =() =>
 {
 
-    return (<Router>
-      <div className="App">
-          <Switch>
-              <Route path="/signup" component={SignUp}/>
-              <Route path="/signin" component={Login}/>
-
-          </Switch>
-      </div>
-    </Router>);
+    return (<Router >
+        <div id="app" className="App">
+            <Switch>
+                <Route path="/signup" component={SignUp}/>
+                <Route path="/signin" component={Login}/>
+                <Route path="/admin-panel" component={AdminPanel}/>
+                <Route exact path="/" component={Home}/>
+                <Route component={Err404}/>
+            </Switch>
+            
+        </div>
+      </Router>);
 
 }
 

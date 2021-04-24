@@ -5,9 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode height= "100vh">
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 
