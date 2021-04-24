@@ -26,7 +26,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
-
 const drawerWidth = 240;
 
 
@@ -111,6 +110,8 @@ const useStyles = makeStyles((theme) => ({
 
  function Dashboard()
  {
+
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -145,7 +146,11 @@ const useStyles = makeStyles((theme) => ({
     return ({"eventRequest": eventRequest, "test": test});
   }
 
- 
+  if(localStorage.getItem("user_type")!== "1")
+  {
+    return <div style={{padding:"24px"}}>404 page not found</div>
+  }
+  else
   return (
       <div id="admin-panel" className={classes.root}>
 
@@ -154,23 +159,15 @@ const useStyles = makeStyles((theme) => ({
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
+
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Admin Panel
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+
+          <Typography position="end" component="h1" variant="h6" color="inherit">
+            {localStorage.getItem("username")}
+          </Typography>
+
         </Toolbar>
       </AppBar>
       <Drawer

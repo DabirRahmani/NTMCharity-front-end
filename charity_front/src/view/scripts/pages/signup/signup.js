@@ -17,8 +17,14 @@ import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
 import validator from 'validator'
-
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import VerifyEmailRequest from '../../../../core/login-signup/verifyEmailRequest'
+import HomeIcon from '@material-ui/icons/Home';
+import NoEncryptionIcon from '@material-ui/icons/NoEncryption';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +61,27 @@ const SignUp = () =>
     const [cPassword, setCPassword] = useState("");
     const [type, setType] = useState("");
 
+    const [verificationCode, setVerificationCode]= useState("");
+
+    const [dianogStatus, setDianogStatus] = useState(false)
+
+    const [verifyTextFieldError, setVerifyTextFieldError] = useState(false)
+
+    const [disableVerifyTextField,setDisableVerifyTextField]= useState(true)
+
     useEffect(()=>{setStatus("remove")},[ username, email])
+
+    useEffect(()=>{
+      if(/\S/.test(disableVerifyTextField))
+      {
+        setDisableVerifyTextField(false)
+
+      }else
+      {
+        setDisableVerifyTextField(true)
+
+      }
+    },[verificationCode])
 
     
     const onSignupSubmit=(e)=>
@@ -94,18 +120,17 @@ const SignUp = () =>
         SignUpRequest({username,password,email,type})
         .then((res)=>
         {
+          console.log("res:"+res)
             if(res.data.success === "1")
             {
-              setStatus(res.data.success)
-              history.push("/signup");
+              setDianogStatus(true)
             } 
             else if(res.data.success === "0")
             {
               setDisableViews(false)
               setStatus(res.data.status);
             }
-        //    setDisableViews(false);
-        }).catch(()=>{setStatus("net"); setDisableViews(false);})
+        }).catch(()=>{setStatus("net"); setDisableViews(false);console("err")})
         
       }
 
@@ -117,7 +142,7 @@ const SignUp = () =>
         switch(status)
         {
             case "1":
-                return <Alert severity="success">Signup Successful!</Alert>
+                return <Alert severity="success">Signup Successful! you can sign in now</Alert>
             case "0":
               return <Alert severity="error">Please fill all fields!</Alert>
 
@@ -153,8 +178,77 @@ const SignUp = () =>
         }
     }
 
+    const verifyEmailClicked =() => {
+
+      VerifyEmailRequest({email,"code":verificationCode})
+      .then((res)=>{
+        if(res.data.success=== "1")
+        {
+            setDianogStatus(false)
+            setStatus(res.data.success)
+        }
+        else
+        {
+          setVerificationCode("")
+          setVerifyTextFieldError(true)
+        }
+      }).catch((e)=>{console.log(e)})
+
+    }
+
+    const goHome =()=>{
+      history.push("/")
+    }
+
+    const signOut=()=>{
+        localStorage.removeItem("username")
+        localStorage.removeItem("token")
+        localStorage.removeItem("email")
+        localStorage.removeItem("user_type")
+        history.push("/signup")
+    }
+
+    if(localStorage.getItem("user_type") !== null)
+    {
+      console.log(localStorage.getItem("user_type"))
+
+      return <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+        <h3  >you are signed in as</h3>
+        <h2 style={{padding:"4px", color:"#e53935"}} >{localStorage.getItem("username")}</h2>
+        <h3 style={{paddingRight:"8px"}} >you can  </h3>
+        <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50"}} >  back to home</Button>
+        <h3 style={{padding:"8px"}} >or</h3>
+        <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#ffc107"}}>sign out</Button>
+        <h3 style={{padding:"8px"}} >to continue</h3>
+        </div>
+    } 
+    else
     return( 
         <Container component="main" maxWidth="xs">
+
+        <Dialog  style={{backgroundColor: 'transparent', minWidth:"400px"}} open={dianogStatus}>
+        <Typography style={{padding:"24px"}} alien="center">an email with verification code sent to {email}</Typography>
+        <TextField
+          rowsMax={1}
+          size="medium"
+          placeholder="code"
+          style={{disabled:{disableVerifyTextField},alignSelf:'center', width:'80px', paddingLeft:"24px", paddingRight:"24px",paddingBottom:"24px", fontSize:"32px"}}
+          value={verificationCode}
+          error={verifyTextFieldError}
+          onChange={(e)=>setVerificationCode(e.target.value)}
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={verifyEmailClicked}
+          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center", width:"90px"}}
+          startIcon={<VerifiedUserIcon />}>
+            verify
+          </Button>
+        </Dialog>
+
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -218,11 +312,11 @@ const SignUp = () =>
                   name="Confirm password"
                   label="Confirm Password"
                   type="password"
-                  id="password"
+                  id="cpassword"
                 />
               </Grid>
               <Grid item xs={12} >
-                 <FormControl fullWidth variant="outlined" classNema={classes.formControl}>
+                 <FormControl fullWidth variant="outlined" className={classes.formControl} disabled={disableViews}>
                    <InputLabel  id="demo-simple-select-outlined-label">Sign up as</InputLabel>
                    <Select
                      labelId="demo-simple-select-outlined-label"

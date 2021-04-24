@@ -22,6 +22,13 @@ export default function reducer(state=[], action)
             {
                 return state.filter(n=> n.eventid !== action.payload.eventid);
             }
+
+        case "RESET":
+            {
+                return []
+            }
+
+        default:{}
     }
 }
  

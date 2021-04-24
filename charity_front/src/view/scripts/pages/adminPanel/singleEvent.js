@@ -43,6 +43,8 @@ import Input from '@material-ui/core/Input';
 const SingleEvent = (probs)=> {
 
 
+
+
   
     const [feedback, setFeedback]= useState("");
     const [feedbackStatus, setFeedbackStatus]= useState(false);
@@ -58,7 +60,8 @@ const SingleEvent = (probs)=> {
 
     const [username, setUsername]= useState(probs.username)
 
-    const [listOfNeeds, setListOfNeeds] = useState(Object.values(probs.listofneeds))
+    const [listOfNeeds, setListOfNeeds] = useState("")
+
 
     const [imageurl, setImageUrl] = useState(probs.imageurl)
 
@@ -82,7 +85,7 @@ const SingleEvent = (probs)=> {
 
     const [modifiedDescriptionStatus, setModifiedDescriptionStatus] = useState(false)
 
-    const [modifiedListOfNeeds, setModifiedListOfNeeds] = useState(Object.values(probs.listofneeds))
+    const [modifiedListOfNeeds, setModifiedListOfNeeds] = useState("")
 
     const [newListItem, setNewListItem] = useState("")
 
@@ -92,8 +95,22 @@ const SingleEvent = (probs)=> {
 
     const [disableConfrimModifyButton,setDisableConfrimModifyButton] = useState(true)
 
-    const [backDropStatus, setBackDropStatus] = useState(true)
+    const [torenderUseEffect, setrenderer] = useState(true)
 
+    useEffect(()=>{
+      if(probs.listofneeds === null)
+      {
+
+      }
+      else if(probs.listofneeds === undefined){
+
+      } 
+      else 
+      {
+        setListOfNeeds(Object.values(probs.listofneeds))
+        setModifiedListOfNeeds(Object.values(probs.listofneeds))
+      }
+    },[torenderUseEffect])
 
     
       useEffect(()=>{
@@ -157,7 +174,7 @@ const SingleEvent = (probs)=> {
           setDisableButtons(true)
         } else
         {
-          probs.ondelete({eventid:eventid, feedback:feedback});
+          probs.ondelete({eventid:eventid, feedback:feedback, username:username, title:title});
         }
      }
     
@@ -172,7 +189,7 @@ const SingleEvent = (probs)=> {
           setDisableButtons(true)
         } else
         {
-          probs.onconfirm({eventid:eventid, feedback:feedback});
+          probs.onconfirm({eventid:eventid, feedback:feedback, username:username, title:title});
         }
       }
 
@@ -210,9 +227,7 @@ const SingleEvent = (probs)=> {
 
       const onConfirmModifyClicked=()=>
       {
-
-
-        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:title, description:description, listofneeds:listOfNeeds,imageurl:imageurl, username:username});
+        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:imageurl, username:username});
       }
 
     

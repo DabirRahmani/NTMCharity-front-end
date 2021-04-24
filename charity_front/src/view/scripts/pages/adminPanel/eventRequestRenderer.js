@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import store from '../../../../core/adminPanel/store/eventManagerStore'
 import SingleEvent from './singleEvent'
 import Button from '@material-ui/core/Button'
@@ -8,6 +8,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
+import {ConfrimRequestedEvent,DeleteRequestedEvent,ModifyRequestedEvent,GetEventsRequests} from '../../../../core/adminPanel/eventManagerRequest'
+import UserBioRequest from '../../../../core/userBioRequest'
+
 
 
 
@@ -31,70 +34,39 @@ const EventRequestRenderer =()=>
     const [dianogStatusCode, setDianogStatusCode]= React.useState("")
     const [dianogLinearProgressStatus,setDianogLinearProgressStatus]= React.useState("block")
 
+    
     const add4VarToStore=()=>
-    {
-        
-    store.dispatch({
-        type:"ADD_EVENT",
-        payload:{
-            eventid:"1",
-            title:"its title for event 1",
-            description:"and here is have wrote some description",
-            creator:"dabir_rahmani",
-            enabled:"true",
-            date:"99/11/11",
-            status:"status1", 
-            imageurl:"",
-            listofneeds:{"item1":"some needs","item2":"ab madani"}
-        }
-    })  
+    {}
 
-    store.dispatch({
-        type:"ADD_EVENT",
-        payload:{
-            eventid:"2",
-            title:"zelzele zadegan jonob",
-            description:"salam dar rostaye asb moos kola omad zelzele, matel naken bel dele ",
-            creator:"user1",
-            enabled:"true",
-            date:"000,0,0,0",
-            status:"status1", 
-            imageurl:"https://cdn.vox-cdn.com/thumbor/wBRCdEaZtpAd2bJBlOhtRC6euVk=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/21937385/binglogo.jpg",
-            listofneeds:{"item1":"111","item3":"2222","item4":"rr","item5":"eee","item2h":"gdf","item2g":"sfdsg","itemf2":"gfdog","itejm2":"gufdg","itlem2":"gfdkg","ite;m2":"gfdhg","ite'm2":"gfdgg","ityem2":"gfdgd"}
-        }
-    })  
 
-    store.dispatch({
-        type:"ADD_EVENT",
-        payload:{
-            eventid:"3",
-            title:"title1",
-            description:"description1",
-            creator:"creator1",
-            enabled:"true",
-            date:"date1",
-            status:"status1", 
-            imageurl:"https://upload.wikimedia.org/wikipedia/commons/c/c7/Bing_logo_%282016%29.svg",
-            listofneeds:{}
-        }
-    })  
 
-    store.dispatch({
-        type:"ADD_EVENT",
-        payload:{
-            eventid:"4",
-            title:"title1",
-            description:"description1",
-            creator:"creator1",
-            enabled:"true",
-            date:"date1",
-            status:"status1", 
-            imageurl:"https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-            listofneeds:{"item2":"2222"}
-        }
-    })  
-    forceUpdate();
-    }
+    useEffect(()=>{
+        store.dispatch({type: "RESET", payload:{}})
+
+        GetEventsRequests({admintoken:localStorage.getItem("token")})
+        .then((response)=>{
+            console.log(response)
+            Object.values(response.data.event_set)
+            .map(d=>
+                store.dispatch({
+                    type:"ADD_EVENT",
+                    payload:{
+                        eventid:d.id,
+                        title:d.title,
+                        description:d.description,
+                        creator:d.creator_username,
+                        enabled:"true",
+                        date:d.create_date,
+                        status:d.status,
+                        imageurl:d.image_url,
+                        listofneeds:d.list_of_needs 
+                    }})
+                )
+                forceUpdate();
+    
+        })
+    },[])
+
 
     const mapSotreToEvents = ()=>{
         if(store.getState() === undefined)
@@ -131,12 +103,55 @@ const EventRequestRenderer =()=>
         setDianogStatus(true)
         setDianogLinearProgressStatus("block")
 
+        ConfrimRequestedEvent({eventid:res.eventid,feedback:res.feedback,admintoken:localStorage.getItem("token")})
+        .then((response)=>{
+            console.log(response)
+            if(response.data.success === "1")
+            {
+                store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
 
-        store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
+                let subject ="event number "+res.eventid+" title: "+ res.title+ " confirmed successfully";
+                let message="hi "+ res.username+" your event confrimed\nhere is feedback: "+res.feedback;
+        
+                UserBioRequest({username:res.username})
+                .then((responsed)=>{
+                    console.log(responsed)
 
-        setDianogTitle("event number "+res.eventid+" confrimed successfully")
-        setDianogStatusCode("1")
-        setDianogLinearProgressStatus("none")
+                    PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
+                    .then((response)=>{
+                        console.log(response)
+
+                        setDianogTitle("event number "+res.eventid+" confrimed successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+                    .catch((e)=>{
+                        setDianogTitle("event number "+res.eventid+" confrimed successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+
+                })
+                .catch((e)=>{
+                    setDianogTitle("event number "+res.eventid+" confrimed successfully")
+                    setDianogStatusCode("1")
+                    setDianogLinearProgressStatus("none")
+                })
+
+            }
+            else
+            {
+                setDianogTitle("somthing went wrong")
+                setDianogStatusCode("0")
+                setDianogLinearProgressStatus("none")
+            }
+        }).catch((e)=>{
+            setDianogTitle("somthing went wrong")
+            setDianogStatusCode("0")
+            setDianogLinearProgressStatus("none")
+        })
+
+
     }
 
     const deleteEvent = (res)=>
@@ -144,11 +159,56 @@ const EventRequestRenderer =()=>
         setDianogStatus(true)
         setDianogLinearProgressStatus("block")
 
-        store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
 
-        setDianogLinearProgressStatus("none")
-        setDianogTitle("event number "+res.eventid+" deleted successfully")
-        setDianogStatusCode("1")
+        DeleteRequestedEvent({eventid:res.eventid,feedback:res.feedback,admintoken:localStorage.getItem("token")})
+        .then((response)=>{
+            if(response.data.success === "1")
+            {
+                store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
+
+                let subject ="event number "+res.eventid+" title: "+ res.title+ " has been deleted";
+                let message="hi "+ res.username+" your event request deleted\nhere is feedback: "+res.feedback;
+
+                UserBioRequest({username:res.username})
+                .then((responsed)=>{
+                    console.log(responsed)
+
+                    PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
+                    .then((response)=>{
+                        console.log(response)
+
+                        setDianogTitle("event number "+res.eventid+" deleted successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+                    .catch((e)=>{
+                        setDianogTitle("event number "+res.eventid+" deleted successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+
+                })
+                .catch((e)=>{
+                    setDianogTitle("event number "+res.eventid+" deleted successfully")
+                    setDianogStatusCode("1")
+                    setDianogLinearProgressStatus("none")
+                })
+
+
+
+            }
+            else
+            {
+                setDianogTitle("somthing went wrong")
+                setDianogStatusCode("0")
+                setDianogLinearProgressStatus("none")
+            }
+        }).catch((e)=>{
+            setDianogTitle("somthing went wrong")
+            setDianogStatusCode("0")
+            setDianogLinearProgressStatus("none")
+        })
+
     }
 
     const modifyEvent = (res)=>
@@ -156,18 +216,70 @@ const EventRequestRenderer =()=>
         setDianogStatus(true)
         setDianogLinearProgressStatus("block")
 
-        let subject ="event number "+res.eventid+" title: "+ res.title+ " modified and confirmed successfully";
-        let message="hi "+" "+ res.username+" your event confrimed\n here is feedback: "+res.feedback;
 
-        PostEmailRequest({"email":"jbuhubhakq@nucleant.org",subject,message})
-        .then((response)=>{console.log(response)})
-        
-        store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
+       console.log(res.listofneeds)
 
 
-        setDianogTitle("event number "+res.eventid+" modified and confirmed successfully")
-        setDianogStatusCode("1")
-        setDianogLinearProgressStatus("none")
+        ModifyRequestedEvent({eventid:res.eventid,
+            feedback:res.feedback,
+            title:res.title,
+            description:res.description, 
+            listofneeds:res.listofneeds,
+            imageurl:res.imageurl,
+            admintoken:localStorage.getItem("token")})
+            .then((response)=>{
+
+
+                if(response.data.success === "1")
+                {
+                    console.log(response)
+
+                    store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
+    
+                    let subject ="event number "+res.eventid+" title: "+ res.title+ " confirmed afrter modified";
+                    let message="hi "+ res.username+" your event request confrimed after a few changes\nhere is feedback: "+res.feedback;
+    
+                    UserBioRequest({username:res.username})
+                    .then((responsed)=>{
+                        console.log(responsed)
+    
+                        PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
+                        .then((response)=>{
+                            console.log(response)
+    
+                            setDianogTitle("event number "+res.eventid+" modified and confirmed successfully")
+                            setDianogStatusCode("1")
+                            setDianogLinearProgressStatus("none")
+                        })
+                        .catch((e)=>{
+                            setDianogTitle("event number "+res.eventid+" modified and confirmed successfully")
+                            setDianogStatusCode("1")
+                            setDianogLinearProgressStatus("none")
+                        })
+    
+                    })
+                    .catch((e)=>{
+                        setDianogTitle("event number "+res.eventid+" modified and confirmed successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+    
+                }
+                else
+                {
+                    setDianogTitle("somthing went wrong")
+                    setDianogStatusCode("0")
+                    setDianogLinearProgressStatus("none")
+                }
+                
+                
+            })
+            .catch((e)=>{
+                console.log(e)
+                setDianogTitle("somthing went wrong")
+                setDianogStatusCode("0")
+                setDianogLinearProgressStatus("none")
+            })
 
     }
 
@@ -216,7 +328,7 @@ const EventRequestRenderer =()=>
 
         <Dialog  style={{backgroundColor: 'transparent'}} open={dianogStatus}>
         <DialogTitle>{dianogTitle}</DialogTitle>
-        <LinearProgress style={{margin:24, display:dianogLinearProgressStatus}} />
+        <LinearProgress style={{width:"200px",margin:24, display:dianogLinearProgressStatus}} />
         {CreateDialogButton()}
         </Dialog>
 

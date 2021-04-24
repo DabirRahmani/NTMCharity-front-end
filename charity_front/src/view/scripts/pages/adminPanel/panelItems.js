@@ -12,6 +12,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
+import { Typography } from '@material-ui/core';
 
 
 export const mainListItems =(probs) => 
@@ -21,10 +22,11 @@ export const mainListItems =(probs) =>
     <div>
 
     <ListItem button onClick={()=>probs.eventRequest()}>
+    <Tooltip title={<Typography fontSize="16">Event Requests</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <EventBusyIcon />
       </ListItemIcon>
-      <ListItemText primary="Event Requests" />
+      </Tooltip>
     </ListItem>
 
     </div>
