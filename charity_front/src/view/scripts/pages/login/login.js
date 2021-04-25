@@ -19,6 +19,10 @@ import EmailIcon from '@material-ui/icons/Email';
 import CancelIcon from '@material-ui/icons/Cancel'
 import ForgotPasswordRequest from '../../../../core/login-signup/forgotPasswordRequest'
 import ChangePasswordRequest from '../../../../core/login-signup/changePasswordRequest'
+import UserBioRequest from '../../../../core/userBioRequest'
+import VerifyEmailRequest from '../../../../core/login-signup/verifyEmailRequest'
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,9 +74,11 @@ const Login = () => {
 
   const [sendCodebtnStatus,setSendCodebtnStatus] = useState("inherit")
 
+  const [verifyEmailCode, setVerifyEmailCode]= useState("")
 
+  const [verifyDianoStatus, setVerifyDianoStatus] = useState(false)
 
-
+  const [usernameforverify, setUsernameForverify] = useState("");
 
 
   const alert = () => {
@@ -95,7 +101,35 @@ const Login = () => {
 
       case "passwordChanged":
         return <Alert severity="success">Password changed, you can sign in now!</Alert>
+
+      case "emailconfrimed":
+        return <Alert severity="success" >email confrimed you can sign in now</Alert>
+
+      case "emailVerificationError":
+        return <Alert severity="warning" display="inherit">
+
+          <Typography style={{display:"inline-block"}}>
+          your email is not verified, 
+          </Typography>
+
+          <Button
+            style={{backgroundColor:"#4caf50",display:"inline-block",alignSelf:'center', marginRight:"6px", marginLeft:"6px",textAlign: "center"}}
+            variant="contained"
+            size="small"
+            onClick={()=> {setVerifyDianoStatus(true)}}
+            >
+              verify
+          </Button>
+
+
+          <Typography style={{display:"inline-block"}}>
+          it now
+          </Typography>
+          </Alert>
   }
+
+
+
 
   }
 
@@ -118,7 +152,6 @@ const Login = () => {
       LoginRequest({username, password})
       .then((Response)=>
       {
-        console.log(Response)
         if(Response.data.success === "1")
         {
           setStatus("1");
@@ -126,6 +159,7 @@ const Login = () => {
           localStorage.setItem("token",Response.data.token)
           localStorage.setItem("email",Response.data.email)
           localStorage.setItem("user_type",Response.data.user_type)
+          if(localStorage.getItem("user_type") === "1"){ history.push("/admin-panel")}
         } 
         else if(Response.data.success === "0")
         {
@@ -138,8 +172,19 @@ const Login = () => {
             
 
           }
+          if(Response.data.status === "emailVerificationError")
+          {
+            setPassword("")
+            setDisableViews(false)
+
+            setUsernameForverify(username);
+
+            setStatus("emailVerificationError");
+          }
+
         }
       }).catch((e)=> {
+
             if(!e.status)
             {
               setStatus("oops");
@@ -171,7 +216,6 @@ const Login = () => {
     {
       ForgotPasswordRequest({"email":resetPasswordEmail})
       .then((res)=>{
-        console.log(res)
         if(res.data.success === "1")
         {
           setEmailSentForChangePassword(false)
@@ -199,7 +243,6 @@ const Login = () => {
       {
         ChangePasswordRequest({"email":resetPasswordEmail, "pass1":resetPasswordPassword, "code":resetPasswordCode})
         .then((res)=>{
-            console.log(res)
 
             if(res.data.success === "1")
             {
@@ -239,9 +282,34 @@ const Login = () => {
     setChangePassbtnStatus("none")
   }
 
+  const verifyEmail=()=>{
+
+    UserBioRequest({username:usernameforverify})
+    .then((responsed)=>{
+
+
+        VerifyEmailRequest({email:responsed.data.email,"code":verifyEmailCode})
+        .then((res)=>{
+          if(res.data.success=== "1")
+          {
+              setVerifyDianoStatus(false)
+              setStatus("emailconfrimed")
+          }
+          else
+          {
+            setVerifyEmailCode("")
+          }
+        })
+      
+      }
+    )
+
+
+
+  }
+
   if(localStorage.getItem("user_type") !== null)
   {
-    console.log(localStorage.getItem("user_type"))
 
     return <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
       <h3  >you are signed in as</h3>
@@ -270,16 +338,6 @@ const Login = () => {
           disabled={!emailSentForChangePassword}
         />
 
-        <TextField
-          rowsMax={1}
-          size="medium"
-          placeholder="password"
-          disabled={emailSentForChangePassword}
-          style={{ alignSelf:'center', width:'300px', paddingLeft:"24px", paddingRight:"24px",paddingBottom:"24px", fontSize:"32px"}}
-          value={resetPasswordPassword}
-          type="password"
-          onChange={(e)=>setResetPasswordPassword(e.target.value)}
-        />
 
         <TextField
           rowsMax={1}
@@ -340,6 +398,28 @@ const Login = () => {
         </Dialog>
 
 
+        <Dialog open={verifyDianoStatus}  style={{backgroundColor: 'transparent', minWidth:"400px"}}>
+
+        <TextField
+          rowsMax={1}
+          size="medium"
+          placeholder="code"
+          style={{ alignSelf:'center', width:'80px', paddingLeft:"24px", paddingRight:"24px",paddingBottom:"24px",marginTop:"24px", fontSize:"32px"}}
+          value={verifyEmailCode}
+          onChange={(e)=>setVerifyEmailCode(e.target.value)}
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={verifyEmail}
+          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,margin:24, textAlign: "center", width:"100px"}}
+          startIcon={<LockOutlinedIcon />}>
+            verify
+        </Button>
+
+        </Dialog>
 
         <div className={classes.paper}>
 

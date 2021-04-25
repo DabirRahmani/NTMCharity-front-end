@@ -120,7 +120,6 @@ const SignUp = () =>
         SignUpRequest({username,password,email,type})
         .then((res)=>
         {
-          console.log("res:"+res)
             if(res.data.success === "1")
             {
               setDianogStatus(true)
@@ -130,7 +129,7 @@ const SignUp = () =>
               setDisableViews(false)
               setStatus(res.data.status);
             }
-        }).catch(()=>{setStatus("net"); setDisableViews(false);console("err")})
+        }).catch(()=>{setStatus("net"); setDisableViews(false);})
         
       }
 
@@ -192,7 +191,7 @@ const SignUp = () =>
           setVerificationCode("")
           setVerifyTextFieldError(true)
         }
-      }).catch((e)=>{console.log(e)})
+      })
 
     }
 
@@ -210,7 +209,6 @@ const SignUp = () =>
 
     if(localStorage.getItem("user_type") !== null)
     {
-      console.log(localStorage.getItem("user_type"))
 
       return <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
         <h3  >you are signed in as</h3>
