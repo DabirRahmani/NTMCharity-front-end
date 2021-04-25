@@ -312,7 +312,7 @@ const Login = () => {
   {
 
     return <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
-      <h3  >you are signed in as</h3>
+      <h3 style={{overflow: 'hidden',whiteSpace:"nowrap",textOverflow:"ellipsis"}}>you are signed in as</h3>
       <h2 style={{padding:"4px", color:"#e53935"}} >{localStorage.getItem("username")}</h2>
       <h3 style={{paddingRight:"8px"}} >you can  </h3>
       <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50"}} >  back to home</Button>

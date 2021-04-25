@@ -51,6 +51,7 @@ const EventRequestRenderer =()=>
     useEffect(()=>{
         store.dispatch({type: "RESET", payload:{}})
 
+
         GetEventsRequests({admintoken:localStorage.getItem("token")})
         .then((response)=>{
 
@@ -75,7 +76,7 @@ const EventRequestRenderer =()=>
                 forceUpdate();
     
         })
-        .catch(()=>{setNetworkError(true)})
+        .catch((e)=>{setNetworkError(true); })
     },[reload])
 
 
@@ -120,7 +121,6 @@ const EventRequestRenderer =()=>
 
         ConfrimRequestedEvent({eventid:res.eventid,feedback:res.feedback,admintoken:localStorage.getItem("token")})
         .then((response)=>{
-            console.log(response)
             if(response.data.success === "1")
             {
                 store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
@@ -228,8 +228,6 @@ const EventRequestRenderer =()=>
         setDianogLinearProgressStatus("block")
 
 
-       console.log(res.listofneeds)
-
 
         ModifyRequestedEvent({eventid:res.eventid,
             feedback:res.feedback,
@@ -243,7 +241,6 @@ const EventRequestRenderer =()=>
 
                 if(response.data.success === "1")
                 {
-                    console.log(response)
 
                     store.dispatch({type:"DELETE_EVENT", payload:{eventid:res.eventid}})
     
@@ -252,11 +249,9 @@ const EventRequestRenderer =()=>
     
                     UserBioRequest({username:res.username})
                     .then((responsed)=>{
-                        console.log(responsed)
     
                         PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
                         .then((response)=>{
-                            console.log(response)
     
                             setDianogTitle("event number "+res.eventid+" modified and confirmed successfully")
                             setDianogStatusCode("1")
@@ -286,7 +281,6 @@ const EventRequestRenderer =()=>
                 
             })
             .catch((e)=>{
-                console.log(e)
                 setDianogTitle("somthing went wrong")
                 setDianogStatusCode("0")
                 setDianogLinearProgressStatus("none")

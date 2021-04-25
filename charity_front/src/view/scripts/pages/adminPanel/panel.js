@@ -183,8 +183,8 @@ const useStyles = makeStyles((theme) => ({
             {localStorage.getItem("username")}
           </Typography>
 
-          <IconButton>
-             <PowerSettingsNewIcon onClick={signOut}  style={{color:"#ffc107"}}/>
+          <IconButton onClick={signOut}>
+             <PowerSettingsNewIcon   style={{color:"#ffc107"}}/>
           </IconButton>
 
         </Toolbar>
