@@ -146,6 +146,9 @@ const useStyles = makeStyles((theme) => ({
     setActiveSection("none")
   }
 
+  //render menu sections, based on activeSection value, this will change by functions.item
+  //which are defined below, its sth similar to delegate set values for each function
+  //which are passed to other item components by probs to each menu items
   const RenderSection =()=>{
       switch(activeSection)
       {

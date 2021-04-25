@@ -47,6 +47,7 @@ const EventRequestRenderer =()=>
     }
 
 
+    //create store in each reload
     useEffect(()=>{
         store.dispatch({type: "RESET", payload:{}})
 
@@ -78,6 +79,7 @@ const EventRequestRenderer =()=>
     },[reload])
 
 
+    //this will render on any component render
     const mapSotreToEvents = ()=>{
         if(networkError === true)
         {
@@ -107,6 +109,9 @@ const EventRequestRenderer =()=>
 
         }
     }
+
+    //three below stateless component will request to change backend data base then 
+    //change store properties and send email, which is given by bio request 
 
     const confirmEvent = (res)=>
     {
@@ -289,6 +294,7 @@ const EventRequestRenderer =()=>
 
     }
 
+    
     const CreateDialogButton=()=>
     {
         if(dianogStatusCode==="1")

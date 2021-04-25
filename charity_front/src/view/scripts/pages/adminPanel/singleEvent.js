@@ -97,6 +97,7 @@ const SingleEvent = (probs)=> {
 
     const [torenderUseEffect, setrenderer] = useState(true)
 
+    //prevent to get null object from list of needs
     useEffect(()=>{
       if(probs.listofneeds === null)
       {
@@ -240,13 +241,14 @@ const SingleEvent = (probs)=> {
   
     const CreatelistOfNeeds=()=>
     {
+      console.log(listOfNeeds)
       if((listOfNeeds.length > 0) && (onCacellModify !== "none"))
       {
-        return listOfNeeds.map(e=> <div  key={e} id={e}><LabelImportantIcon style={{display: "inline-block",color:"#000000" ,opacity: 0.5 ,fontSize:12}}/> <Typography style={{display: "inline-block",fontSize:12, color:"#000000" ,opacity: 0.5}}>{e}</Typography></div>)
+        return listOfNeeds.map(e=> {if(e !== "") return <div  key={e} id={e}><LabelImportantIcon style={{display: "inline-block",color:"#000000" ,opacity: 0.5 ,fontSize:12}}/> <Typography style={{display: "inline-block",fontSize:12, color:"#000000" ,opacity: 0.5}}>{e}</Typography></div>} )
       }
       if(onCacellModify === "none")
       {
-        return modifiedListOfNeeds.map(e=> <SingleItemList  key={e} value={e} deleteitem={deleteItem} id={e}/>)
+        return modifiedListOfNeeds.map(e=> {if(e !== "") return <SingleItemList  key={e} value={e} deleteitem={deleteItem} id={e}/>})
       }
       else
       {
