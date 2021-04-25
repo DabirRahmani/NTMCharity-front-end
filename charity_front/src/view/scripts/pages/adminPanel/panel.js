@@ -25,6 +25,10 @@ import EventRequestRenderer from './eventRequestRenderer'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+
+import { useHistory} from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -115,6 +119,8 @@ const useStyles = makeStyles((theme) => ({
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
+  const history = useHistory();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -124,7 +130,13 @@ const useStyles = makeStyles((theme) => ({
 
   const [activeSection, setActiveSection]= React.useState("none");
 
-
+  const signOut=()=>{
+    localStorage.removeItem("username")
+    localStorage.removeItem("token")
+    localStorage.removeItem("email")
+    localStorage.removeItem("user_type")
+    history.push("/signin")
+}
 
   const eventRequest =()=>{
     setActiveSection("eventRequests")
@@ -168,6 +180,10 @@ const useStyles = makeStyles((theme) => ({
             {localStorage.getItem("username")}
           </Typography>
 
+          <IconButton>
+             <PowerSettingsNewIcon onClick={signOut}  style={{color:"#ffc107"}}/>
+          </IconButton>
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -179,7 +195,7 @@ const useStyles = makeStyles((theme) => ({
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon  />
           </IconButton>
         </div>
         <Divider />

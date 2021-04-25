@@ -10,7 +10,11 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
 import {ConfrimRequestedEvent,DeleteRequestedEvent,ModifyRequestedEvent,GetEventsRequests} from '../../../../core/adminPanel/eventManagerRequest'
 import UserBioRequest from '../../../../core/userBioRequest'
+import Box from '@material-ui/core/Box';
+import { Typography } from '@material-ui/core';
 
+import IconButton from '@material-ui/core/IconButton';
+import SyncIcon from '@material-ui/icons/Sync';
 
 
 
@@ -34,10 +38,13 @@ const EventRequestRenderer =()=>
     const [dianogStatusCode, setDianogStatusCode]= React.useState("")
     const [dianogLinearProgressStatus,setDianogLinearProgressStatus]= React.useState("block")
 
-    
-    const add4VarToStore=()=>
-    {}
+    const [networkError, setNetworkError] = React.useState(false)
 
+    const [reload, setReload] = React.useState(0)
+
+    const forceReload =()=>{
+        setReload(reload=>reload+1)
+    }
 
 
     useEffect(()=>{
@@ -45,7 +52,9 @@ const EventRequestRenderer =()=>
 
         GetEventsRequests({admintoken:localStorage.getItem("token")})
         .then((response)=>{
-            console.log(response)
+
+            setNetworkError(false);
+
             Object.values(response.data.event_set)
             .map(d=>
                 store.dispatch({
@@ -65,19 +74,20 @@ const EventRequestRenderer =()=>
                 forceUpdate();
     
         })
-    },[])
+        .catch(()=>{setNetworkError(true)})
+    },[reload])
 
 
     const mapSotreToEvents = ()=>{
-        if(store.getState() === undefined)
+        if(networkError === true)
+        {
+            return(<Alert severity="error">something went wrong!</Alert>)
+        }
+        else
+        if((store.getState() === undefined) || (store.getState().length === 0))
         {
             return( <Alert severity="info">there is no request!</Alert> )
         }
-        else 
-        if(store.getState().length === 0 )
-        {
-            return(<Alert severity="info">there is no request!</Alert>)
-        } 
         else
         {
             return(store.getState()
@@ -115,11 +125,9 @@ const EventRequestRenderer =()=>
         
                 UserBioRequest({username:res.username})
                 .then((responsed)=>{
-                    console.log(responsed)
 
                     PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
                     .then((response)=>{
-                        console.log(response)
 
                         setDianogTitle("event number "+res.eventid+" confrimed successfully")
                         setDianogStatusCode("1")
@@ -171,11 +179,9 @@ const EventRequestRenderer =()=>
 
                 UserBioRequest({username:res.username})
                 .then((responsed)=>{
-                    console.log(responsed)
 
                     PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
                     .then((response)=>{
-                        console.log(response)
 
                         setDianogTitle("event number "+res.eventid+" deleted successfully")
                         setDianogStatusCode("1")
@@ -332,7 +338,14 @@ const EventRequestRenderer =()=>
         {CreateDialogButton()}
         </Dialog>
 
-        <Button onClick={add4VarToStore}>addd</Button>
+        <Box display="flex"  >
+        <Typography  display="block" color="inherit" noWrap  style={{flexGrow: 1}}/>
+
+
+          <IconButton onClick={forceReload} display="block" position="end" color="primary" aria-label="add to shopping cart" style={{marginBottom:"24px",marginRight:"12px", marginTop:"-24px"}}>
+          <SyncIcon/>
+          </IconButton>
+        </Box>
 
         <div>{mapSotreToEvents()}</div>
         
