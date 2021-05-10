@@ -23,7 +23,7 @@ import Paper from '@material-ui/core/Paper';
 import { Container } from '@material-ui/core';
 
 
-const Profile =(RequestedUsername) =>{
+const Profile =() =>{
     
     const history = useHistory();
     const [status , setStatus] = useState('');
@@ -68,7 +68,12 @@ const Profile =(RequestedUsername) =>{
             setMobilenumber(res.data.mobile_number)
             setHousephone(res.data.house_phone)
             setWorkplacephone(res.data.workplace_phone)
-            setGender(res.data.gender)
+            if(res.data.gender){
+              setGender("1")
+            }
+            else{
+              setGender("0")
+            }
             setMarreid(res.data.married)
             setBirthdate(res.data.birth_date)
             setIsprofilecompleted(res.data.is_profile_completed)
@@ -129,7 +134,6 @@ const Profile =(RequestedUsername) =>{
                 display:"flow-root",
                 justifyContent:"space-around",
                 margin:"20px 0px",
-                borderBottom:"1px solid blue"
             }}>
                 
                 <Container component="main" maxWidth="xs">
@@ -139,7 +143,7 @@ const Profile =(RequestedUsername) =>{
             {usernamee} Profile
           </Typography>
           <form className={classes.form} noValidate>
-            <Grid container spacing={20}>
+            <Grid container>
                <Grid item xs={12} className={classes.margiiin}>
                  <TextField
                  disabled={disableViews}
@@ -171,8 +175,8 @@ const Profile =(RequestedUsername) =>{
                     value={gender}
                     label="Gender"
                   >
-                    <MenuItem value={5}>Male</MenuItem>
-                    <MenuItem value={6}>Female</MenuItem>
+                    <MenuItem value={0}>Male</MenuItem>
+                    <MenuItem value={1}>Female</MenuItem>
                    </Select>
                  </FormControl>
                </Grid>

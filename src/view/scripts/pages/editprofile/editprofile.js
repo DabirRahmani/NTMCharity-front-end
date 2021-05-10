@@ -157,8 +157,6 @@ const EditProfile =() =>
           case "oops":
             return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
     
-          case "remove":
-            return <div></div>
       }
     }
 
@@ -233,8 +231,8 @@ const EditProfile =() =>
                     onChange={(e) => setGender(e.target.value)}
                     label="Gender"
                   >
-                    <MenuItem value={5}>Male</MenuItem>
-                    <MenuItem value={6}>Female</MenuItem>
+                    <MenuItem value={0}>Male</MenuItem>
+                    <MenuItem value={1}>Female</MenuItem>
                    </Select>
                  </FormControl>
                </Grid>
