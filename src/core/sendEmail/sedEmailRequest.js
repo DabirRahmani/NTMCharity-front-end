@@ -7,7 +7,7 @@ const PostEmailRequest =(probs)=>
     const to_list=probs.email;
     const separated_with= ""
 
-    return axios.create({baseURL: "http://127.0.0.1:1234/App1/SendEmail"}).post( "", {message, subject, to_list,separated_with})
+    return axios.create({baseURL: BackendUrl()}).post( "/SendEmail", {message, subject, to_list,separated_with})
 }
 
 export default PostEmailRequest
