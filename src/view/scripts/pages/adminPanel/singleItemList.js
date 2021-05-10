@@ -13,7 +13,7 @@ const SingleItemList =(probs)=>
         <IconButton style={{display: "inline-block"}} edge="start" onClick={deleteIconClicked}>
             <DeleteIcon />
         </IconButton>
-        <Typography style={{display: "inline-block"}}>
+        <Typography  style={{display: "inline-block",verticalAlign:"sub"}}>
         {probs.value}
         </Typography> 
 

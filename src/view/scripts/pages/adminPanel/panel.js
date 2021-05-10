@@ -26,6 +26,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import VerifyUsersRenderer from './verifyUsersRenderer'
 
 import { useHistory} from 'react-router-dom';
 
@@ -142,9 +143,11 @@ const useStyles = makeStyles((theme) => ({
     setActiveSection("eventRequests")
   }
 
-  const test =()=>{
-    setActiveSection("none")
+  const verifyUsers=()=>{
+    setActiveSection("verifyUsers")
   }
+
+
 
   //render menu sections, based on activeSection value, this will change by functions.item
   //which are defined below, its sth similar to delegate set values for each function
@@ -153,12 +156,13 @@ const useStyles = makeStyles((theme) => ({
       switch(activeSection)
       {
         case("eventRequests"):   return(<EventRequestRenderer/>)
+        case("verifyUsers"): return(<VerifyUsersRenderer/>)
         default:return(<div></div>)
       }
   }
 
   const functions =()=>{
-    return ({"eventRequest": eventRequest, "test": test});
+    return ({"eventRequest": eventRequest, "verifyUsers": verifyUsers});
   }
 
   if(localStorage.getItem("user_type")!== "1")

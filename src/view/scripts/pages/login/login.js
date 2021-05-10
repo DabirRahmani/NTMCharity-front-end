@@ -338,6 +338,16 @@ const Login = () => {
           disabled={!emailSentForChangePassword}
         />
 
+        <TextField
+          rowsMax={1}
+          type="password"
+          disabled={emailSentForChangePassword}
+          size="medium"
+          placeholder="password"
+          style={{alignSelf:'center', width:'300px', paddingLeft:"24px", paddingRight:"24px",paddingBottom:"24px", fontSize:"32px"}}
+          value={resetPasswordPassword}
+          onChange={(e)=>setResetPasswordPassword(e.target.value)}
+        />
 
         <TextField
           rowsMax={1}

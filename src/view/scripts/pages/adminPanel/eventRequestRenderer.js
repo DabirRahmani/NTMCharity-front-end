@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
-import {ConfrimRequestedEvent,DeleteRequestedEvent,ModifyRequestedEvent,GetEventsRequests} from '../../../../core/adminPanel/eventManagerRequest'
+import {ConfrimRequestedEvent,DeleteRequestedEvent,ModifyRequestedEvent,GetEventsRequests,EditRequestForRequestedEvent} from '../../../../core/adminPanel/eventManagerRequest'
 import UserBioRequest from '../../../../core/userBioRequest'
 import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
@@ -51,11 +51,11 @@ const EventRequestRenderer =()=>
     useEffect(()=>{
         store.dispatch({type: "RESET", payload:{}})
 
-
         GetEventsRequests({admintoken:localStorage.getItem("token")})
         .then((response)=>{
 
             setNetworkError(false);
+
 
             Object.values(response.data.event_set)
             .map(d=>
@@ -70,13 +70,16 @@ const EventRequestRenderer =()=>
                         date:d.create_date,
                         status:d.status,
                         imageurl:d.image_url,
-                        listofneeds:d.list_of_needs 
+                        listofneeds:d.list_of_needs,
+                        moneytarget:d.money_target
                     }})
                 )
                 forceUpdate();
     
         })
-        .catch((e)=>{setNetworkError(true); })
+        .catch((e)=>{
+            setNetworkError(true); 
+        })
     },[reload])
 
 
@@ -104,9 +107,12 @@ const EventRequestRenderer =()=>
                 listofneeds={e.listofneeds}
                 date={e.date}
                 description={e.description}
+                moneytarget={e.moneytarget}
                 ondelete={deleteEvent}
                 onconfirm={confirmEvent}
-                onconfrimmodify={modifyEvent}/>))
+                onconfrimmodify={modifyEvent}
+                onedit={editEvent}/>
+                ))
 
         }
     }
@@ -222,12 +228,62 @@ const EventRequestRenderer =()=>
 
     }
 
+    const editEvent =(res)=>{
+        setDianogStatus(true)
+        setDianogLinearProgressStatus("block")
+
+        EditRequestForRequestedEvent({eventid:res.eventid,feedback:res.feedback,admintoken:localStorage.getItem("token")})
+        .then((response)=>{
+            console.log(response)
+            if(response.data.success === "1")
+            {
+
+                let subject ="event number "+res.eventid+" title: "+ res.title+ " requested to edit";
+                let message="hi "+ res.username+" your event request needs some edit\nhere is feedback: "+res.feedback;
+
+                UserBioRequest({username:res.username})
+                .then((responsed)=>{
+
+                    PostEmailRequest({"email":responsed.data.email,subject:subject,message:message})
+                    .then((response)=>{
+
+                        setDianogTitle("event number "+res.eventid+" requested for edit successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+                    .catch((e)=>{
+                        setDianogTitle("event number "+res.eventid+" requested for edit successfully")
+                        setDianogStatusCode("1")
+                        setDianogLinearProgressStatus("none")
+                    })
+
+                })
+                .catch((e)=>{
+                    setDianogTitle("event number "+res.eventid+" requested for edit successfully")
+                    setDianogStatusCode("1")
+                    setDianogLinearProgressStatus("none")
+                })
+
+
+
+            }
+            else
+            {
+                setDianogTitle("somthing went wrong")
+                setDianogStatusCode("0")
+                setDianogLinearProgressStatus("none")
+            }
+        }).catch((e)=>{
+            setDianogTitle("somthing went wrong")
+            setDianogStatusCode("0")
+            setDianogLinearProgressStatus("none")
+        })
+
+    }
     const modifyEvent = (res)=>
     {
         setDianogStatus(true)
         setDianogLinearProgressStatus("block")
-
-
 
         ModifyRequestedEvent({eventid:res.eventid,
             feedback:res.feedback,
@@ -235,6 +291,7 @@ const EventRequestRenderer =()=>
             description:res.description, 
             listofneeds:res.listofneeds,
             imageurl:res.imageurl,
+            moneytarget:res.moneytarget,
             admintoken:localStorage.getItem("token")})
             .then((response)=>{
 
