@@ -15,6 +15,7 @@ export default function reducer(state=[], action)
                     status:action.payload.status,
                     imageurl:action.payload.imageurl,
                     listofneeds:action.payload.listofneeds,
+                    moneytarget:action.payload.moneytarget,
                 }] ;
             }
 

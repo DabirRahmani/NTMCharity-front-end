@@ -14,7 +14,6 @@ import Button from '@material-ui/core/Button';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Typography } from '@material-ui/core';
 
-
 export const mainListItems =(probs) => 
 {
 
@@ -28,6 +27,15 @@ export const mainListItems =(probs) =>
       </ListItemIcon>
       </Tooltip>
     </ListItem>
+
+    <ListItem button onClick={()=>probs.verifyUsers()}>
+    <Tooltip title={<Typography fontSize="16">verify users</Typography>} placement="right-end" fontSize="32px">
+      <ListItemIcon>
+      <PeopleIcon />
+      </ListItemIcon>
+      </Tooltip>
+    </ListItem>
+
 
     </div>
   )

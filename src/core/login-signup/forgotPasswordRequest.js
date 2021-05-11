@@ -1,8 +1,9 @@
 import axios from "axios";
+import BackendUrl from '../backendUrl'
 
 const ForgotPasswordRequest =({email})=> 
 {
-      return axios.create({baseURL: "http://127.0.0.1:8000/App1"}).post( '/ForgotPassword', {email:email})
+      return axios.create({baseURL: BackendUrl()}).post( '/ForgotPassword', {email:email})
 }
 
 export default ForgotPasswordRequest;

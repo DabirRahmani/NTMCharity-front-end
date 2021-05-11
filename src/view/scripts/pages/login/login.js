@@ -160,6 +160,7 @@ const Login = () => {
           localStorage.setItem("email",Response.data.email)
           localStorage.setItem("user_type",Response.data.user_type)
           if(localStorage.getItem("user_type") === "1"){ history.push("/admin-panel")}
+          if(localStorage.getItem("user_type") !== null){history.push("/")}
         } 
         else if(Response.data.success === "0")
         {
@@ -338,6 +339,16 @@ const Login = () => {
           disabled={!emailSentForChangePassword}
         />
 
+        <TextField
+          rowsMax={1}
+          type="password"
+          disabled={emailSentForChangePassword}
+          size="medium"
+          placeholder="password"
+          style={{alignSelf:'center', width:'300px', paddingLeft:"24px", paddingRight:"24px",paddingBottom:"24px", fontSize:"32px"}}
+          value={resetPasswordPassword}
+          onChange={(e)=>setResetPasswordPassword(e.target.value)}
+        />
 
         <TextField
           rowsMax={1}

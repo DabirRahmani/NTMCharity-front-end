@@ -62,6 +62,7 @@ const SingleEvent = (probs)=> {
 
     const [listOfNeeds, setListOfNeeds] = useState("")
 
+    const [moneyTarget, setMoneyTarget] = useState(probs.moneytarget)
 
     const [imageurl, setImageUrl] = useState(probs.imageurl)
 
@@ -75,11 +76,15 @@ const SingleEvent = (probs)=> {
 
     const [inModify, setInModify]= useState("none")
 
+    const [inOnRequestEdit,setInOnRequestEdit]= useState("unherit")
+
     const [onCacellModify, setOnCacellModify] = useState("block")
 
     const [modifiedDescription, setModifiedDescription] = useState(probs.description)
 
     const [modifiedTitle, setModifiedTitle] = useState(probs.title)
+
+    const [modifiedMoneyTarget,setModifiedMoneyTarget]= useState(probs.moneytarget)
 
     const [modifiedTitleStatus, setModifiedTitleStatus] = useState(false)
 
@@ -170,6 +175,7 @@ const SingleEvent = (probs)=> {
           setInOnDelete("inherit")
           setInOnConfrim("none")
           setInOnModify("none")
+          setInOnRequestEdit("none")
           setInDeleteOrConfirm("inherit")
           setFeedbackStatus(true)
           setDisableButtons(true)
@@ -185,6 +191,7 @@ const SingleEvent = (probs)=> {
           setInOnDelete("none")
           setInOnConfrim("inherit")
           setInOnModify("none")
+          setInOnRequestEdit("none")
           setInDeleteOrConfirm("inherit")
           setFeedbackStatus(true)
           setDisableButtons(true)
@@ -194,11 +201,41 @@ const SingleEvent = (probs)=> {
         }
       }
 
+      const onRequestEditClicked=()=>{
+        if(inDeleteOrConfirm === "none")
+        {
+          setInOnDelete("none")
+          setInOnConfrim("none")
+          setInOnModify("none")
+          setInOnRequestEdit("inherit")
+          setInDeleteOrConfirm("inherit")
+          setFeedbackStatus(true)
+          setDisableButtons(true)
+        }else
+        {
+          probs.onedit({eventid:eventid, feedback:feedback, username:username, title:title});
+          setFeedback("")
+          setInOnDelete("inherit")
+          setInOnConfrim("inherit")
+          setInOnModify("inherit")
+          setInOnRequestEdit("inherit")
+          setInDeleteOrConfirm("none")
+          setInModify("none")
+          setFeedbackStatus(false)
+          setDisableButtons(false)
+  
+          setOnCacellModify("block")
+          setNewItemDisplay("none")
+
+        }
+      }
+
       const onCancelClicked=()=>{
         setFeedback("")
         setInOnDelete("inherit")
         setInOnConfrim("inherit")
         setInOnModify("inherit")
+        setInOnRequestEdit("inherit")
         setInDeleteOrConfirm("none")
         setInModify("none")
         setFeedbackStatus(false)
@@ -212,6 +249,7 @@ const SingleEvent = (probs)=> {
         setInOnDelete("none") //hide delete btn
         setInOnConfrim("none") //hide confrim btn
         setInOnModify("none") //hide modify btn
+        setInOnRequestEdit("none")
         setInDeleteOrConfirm("inherit") //show feedback field
         setInModify("inherit") //show confrim modify bottun
         setFeedbackStatus(true)
@@ -228,7 +266,7 @@ const SingleEvent = (probs)=> {
 
       const onConfirmModifyClicked=()=>
       {
-        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:imageurl, username:username});
+        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:imageurl, username:username,moneytarget:modifiedMoneyTarget});
       }
 
     
@@ -241,7 +279,6 @@ const SingleEvent = (probs)=> {
   
     const CreatelistOfNeeds=()=>
     {
-      console.log(listOfNeeds)
       if((listOfNeeds.length > 0) && (onCacellModify !== "none"))
       {
         return listOfNeeds.map(e=> {if(e !== "") return <div  key={e} id={e}><LabelImportantIcon style={{display: "inline-block",color:"#000000" ,opacity: 0.5 ,fontSize:12}}/> <Typography style={{display: "inline-block",fontSize:12, color:"#000000" ,opacity: 0.5}}>{e}</Typography></div>} )
@@ -290,9 +327,14 @@ const SingleEvent = (probs)=> {
   
             <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
               <Typography style={{fontSize:15, display:onCacellModify}} >{title}</Typography>
-
               <div style={{display: inModify, width:'100%'}}></div>
             </div>
+
+            <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
+              <Typography style={{fontSize:15, display:onCacellModify}} >${moneyTarget}</Typography>
+              <div style={{display: inModify, width:'100%'}}></div>
+            </div>
+
             <div style={{flexBasis: '33.33%'}} >
               <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5}} >#{eventid}</Typography>
             </div>
@@ -307,16 +349,27 @@ const SingleEvent = (probs)=> {
   
           <AccordionDetails style={{alignItems: 'center'}}>
             <div style={{flex: '70%'}}  >
-                <Typography style={{ display: onCacellModify}}>
+                <Typography  style={{ display: onCacellModify}}>
                   {description}
                 </Typography>
+
+                <TextField
+                  label="$required"
+                  rowsMax={1}
+                  fullWidth
+                  placeholder="$required"
+                  style={{display: inModify, width:'20%'}}
+                  value={modifiedMoneyTarget}
+                  onChange={(e)=>setModifiedMoneyTarget(e.target.value)}
+                  type="number"
+                />
 
                 <TextField
                   label="New Title"
                   rowsMax={1}
                   fullWidth
                   placeholder="please write a title"
-                  style={{display: inModify, width:'100%'}}
+                  style={{display: inModify, maxWidth:'40%'}}
                   value={modifiedTitle}
                   error={modifiedTitleStatus}
                   onChange={(e)=>setModifiedTitle(e.target.value)}
@@ -392,7 +445,18 @@ const SingleEvent = (probs)=> {
              >
               Cancel
             </Button>
-
+            
+            <Button
+             variant="contained"
+             color="primary"
+             disabled={disableButtons}
+             size="small"
+             variant="contained"
+             style= {{paddingRight:16,paddingLeft:16,minWidth:"150px", display:inOnRequestEdit, backgroundColor:"#ffc107"}}
+             onClick={onRequestEditClicked}
+             >
+              Request Edit
+            </Button>
   
             <Button
              variant="contained"
