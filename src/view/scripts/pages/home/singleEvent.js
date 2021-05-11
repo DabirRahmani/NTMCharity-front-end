@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import ListIcon from '@material-ui/icons/List';
+import Donate from '../donate/donate'
 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
@@ -20,6 +21,9 @@ const SingleEvent = (probs)=> {
 
     const [imageStatus, setImageStatus] = useState("none")
 
+    const [openDialog, setOpenDialog] = useState(false)
+
+    const [donatedmoney, setdonatedmoney]= useState(probs.donatedmoney)
 
     const ListOfNeedsRenderer=()=>
     {
@@ -47,12 +51,46 @@ const SingleEvent = (probs)=> {
 
     }
 
+    const renderDonateDialog=()=>{
+      if(openDialog === true)
+      {
+        return <Donate donatemount={decRemained} close={closeDialog} id={probs.eventid} remained={probs.moneytarget - probs.donatedmoney} />
+      }
+    }
 
+    const decRemained =(probs)=>{
+      setdonatedmoney(+donatedmoney + +probs)
+    }
+
+    const closeDialog=()=>{
+      setOpenDialog(false)
+    }
+
+    const createDonateButton=()=>{
+
+      if(localStorage.getItem("token") === null )
+      return <div> sign in to donate </div>
+      
+      if(localStorage.getItem("user_type")=== "4")
+      return <div> cant donate as needy </div>
+
+
+      return <Button 
+      onClick={()=>{setOpenDialog(true)}}
+      variant="contained"
+      size="small"
+      size="small" 
+      style={{background:"#4caf50"}}>Donate 
+      </Button>
+
+    }
 
 
     return(
 
       <div id={probs.eventid} key={probs.eventid} style={{paddingBottom:16}}>
+
+        {renderDonateDialog()}
   
         <Accordion >
   
@@ -67,7 +105,7 @@ const SingleEvent = (probs)=> {
             </div>
 
             <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
-              <Typography style={{fontSize:15, display:onCacellModify}} >${probs.moneytarget}</Typography>
+              <Typography style={{fontSize:15, display:onCacellModify}} >${probs.moneytarget-donatedmoney}</Typography>
               <div style={{display: inModify, width:'100%'}}></div>
             </div>
 
@@ -117,7 +155,7 @@ const SingleEvent = (probs)=> {
           <Divider />
   
           <AccordionActions>
-
+            {createDonateButton()}
 
           </AccordionActions>
   

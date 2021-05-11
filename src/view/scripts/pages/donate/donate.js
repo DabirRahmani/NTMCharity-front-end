@@ -9,17 +9,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DonateRequest from "../../../../core/donaterequest/donaterequest";
 import {useHistory} from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
+import { SyncProblemSharp } from "@material-ui/icons";
 
 const Donate = (props) =>{
-    //props.id
-    //props.remained
-    const history = useHistory();
+
     const [donatemount, setDonatemount] = useState('');
     const [id, setId] = useState(props.id);
     const [status, setStatus] = useState('');
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [remained, setRemained] = useState(props.remained);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     
 
     const onDonateSubmit=(p)=>
@@ -34,14 +33,15 @@ const Donate = (props) =>{
       }
       else
       {
-        DonateRequest(id,token,donatemount)
+        DonateRequest({id,token,donatemount})
         .then((resp)=>
         {
-          if(resp.target.success === "1")
+          console.log(resp);
+          if(resp.data.success === "1")
           {
             setStatus("1");
-            //(gotoevent(id));
-            setOpen(false);
+            props.close()
+            props.donatemount(donatemount)
           }
 
         }).catch((p)=> {
@@ -51,16 +51,12 @@ const Donate = (props) =>{
             {
               setStatus("oops");
             }
-            //setDisableViews(false)
         });
 
       }
 
     };
 
-    //const gotoevent =() =>{
-    //  history.push("./event")
-    //}
 
     const alert = () => {
 
@@ -80,20 +76,8 @@ const Donate = (props) =>{
     }
   }
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-   
-    const handleClose = () => {
-      setOpen(false);
-    };
-   
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Donate!
-        </Button>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth>
+        <Dialog open={open}  aria-labelledby="form-dialog-title" fullWidth>
           <DialogTitle id="form-dialog-title">Donate</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -110,7 +94,7 @@ const Donate = (props) =>{
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} style={{
+            <Button onClick={()=>{props.close()}} style={{
                 backgroundColor: "#ffc107"
             }}>
               Cancel
@@ -123,7 +107,6 @@ const Donate = (props) =>{
             {alert()}
           </DialogActions>
         </Dialog>
-      </div>
       
     );
 

@@ -1,3 +1,4 @@
+import Alert from '@material-ui/lab/Alert'
 import SingleEvent from './singleEvent'
 
 
@@ -21,6 +22,8 @@ const EventRenderer = (props)=>{
             donatedmoney={e.donated_money}
             
             />})
+
+            return <Alert severity="info">there is no request!</Alert> 
         }
 
 return <div>

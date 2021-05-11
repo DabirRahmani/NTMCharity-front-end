@@ -1,9 +1,6 @@
 import axios from 'axios';
+import BackendUrl from '../backendUrl'
 
-
-//token
-//donatemount
-//id
 const DonateRequest =({id, token, donatemount})=>
 {
     return axios.create({baseURL: BackendUrl()}).post('/DonateMoney', {event_id:id,

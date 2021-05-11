@@ -34,8 +34,15 @@ const RequestEventDialog =(probs)=>
         //اطلاعات مورد نیاز برای ریکوئست لیست اینجا باید اپدیت بشن
         GetRequestedEvents({token:localStorage.getItem("token")})
         .then((res)=>{
-            let arr = Object.values(res.data.event_set)
-            setRequestList(arr)
+            if(res.data.event_set === undefined)
+            {
+                setRequestList([])
+            }
+            else {
+                let arr = Object.values(res.data.event_set)
+                setRequestList(arr)
+            }
+
         })
     },[reload])
 

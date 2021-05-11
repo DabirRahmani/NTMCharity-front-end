@@ -13,13 +13,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import HomeIcon from '@material-ui/icons/Home';
+
 import { Container } from '@material-ui/core';
 
 
@@ -97,7 +92,10 @@ const Profile =() =>{
 
 
 
+  const goHome=()=>{
+    history.push("/")
 
+  }
 
 
     const goeditprofile =()=>{
@@ -127,7 +125,10 @@ const Profile =() =>{
       }));
       const classes = useStyles();
       
-
+      if(localStorage.getItem("token")=== null)
+      {
+        return <div style={{padding:"24px"}}>404 page not found</div>
+      }
     return(
         <div>
             <div style={{
@@ -263,6 +264,25 @@ const Profile =() =>{
                   startIcon={<CheckCircleOutlineIcon />}
                   >
                     Edit Profile
+               </Button>
+
+               <Button
+                  className={classes.margiiin}
+                  variant="contained"
+                  style={{ width:'50%', display:"inline-block"}}
+                  onClick={goHome}
+                  //size="small"
+                  style= {{
+                  backgroundColor: "#ffc107",
+                  paddingRight:24,
+                  paddingLeft:24,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  variant="contained"
+                  color="primary"       
+                  startIcon={<HomeIcon />}
+                  >
+                    home
                </Button>
                </Grid>
             

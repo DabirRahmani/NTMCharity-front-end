@@ -12,19 +12,12 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 import Typography from '@material-ui/core/Typography';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
-import validator from 'validator';
 
 
 const EditProfile =() =>
@@ -69,7 +62,12 @@ const EditProfile =() =>
             setMobilenumber(res.data.mobile_number)
             setHousephone(res.data.house_phone)
             setWorkplacephone(res.data.workplace_phone)
-            setGender(res.data.gender)
+            if(res.data.gender){
+              setGender("1")
+            }
+            else{
+              setGender("0")
+            }
             setMarreid(res.data.married)
             setBirthdate(res.data.birth_date)
             setIsprofilecompleted(res.data.is_profile_completed)
@@ -184,7 +182,10 @@ const EditProfile =() =>
     }));
     const classes = useStyles();
 
-
+    if(localStorage.getItem("token")=== null)
+    {
+      return <div style={{padding:"24px"}}>404 page not found</div>
+    }
     return(
 
       <Container component="main" maxWidth="xs">
