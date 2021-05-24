@@ -22,6 +22,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Donate from '../donate/donate'
+import GDonate from '../donate/generaldonate'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import GDonatelogedin from '../donate/generaldonatelogedin'
 
 
 const Home =()=>
@@ -32,10 +39,13 @@ const Home =()=>
     const history = useHistory();
 
     const [requestDialogStatus, setRequestDialogStatus] = useState(false);
+    const [donateDialogStatus, setDonateDialogStatus] = useState(false);
 
     const [pageNumber, setPageNumber]= useState(1)
 
     const [pageCount, setPageCount] = useState(1)
+
+    const [donatedmoney, setdonatedmoney]= useState()
 
     const [searchKey, setSearchKey] = useState("")
 
@@ -96,6 +106,30 @@ const Home =()=>
 
     }
 
+    const renderDonateDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("token")===null)
+            {
+
+                return <GDonate close={ccloseDialog} id="redialog" />
+            }
+            else if(localStorage.getItem("user_type")==="3")
+            {
+                return <GDonatelogedin close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
+
+    const oopenDialog =()=>
+    {
+        setDonateDialogStatus(true);
+    }
+  
+    const ccloseDialog=()=>{
+        setDonateDialogStatus(false);
+    }
+
     const signupBarAlert =()=>
     {
         if(localStorage.getItem("token")=== null)
@@ -129,6 +163,21 @@ const Home =()=>
         </Alert>
 
     }
+
+    const createDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")!="4")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50"}}>General Donate 
+            </Button>
+        }
+  
+      }
 
     const CreateOpenRequestButton =()=>{
 
@@ -245,6 +294,12 @@ const Home =()=>
 
         <Grid item xs={1}/>
         </Grid>
+
+        <AccordionActions>
+            {renderDonateDialog()}
+            {createDonateButton()}
+
+        </AccordionActions>
 
         </div>
         </div>
