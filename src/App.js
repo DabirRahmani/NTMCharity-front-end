@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom'
 import Home from './view/scripts/pages/home/home'
 import Err404 from './view/scripts/pages/404'
 import Donate from './view/scripts/pages/donate/donate';
+import mainpage from './view/scripts/pages/mainpage/mainpage';
 
 const App =() =>
 {
@@ -22,6 +23,7 @@ const App =() =>
                 <Route path="/Donate" component={Donate}/>
                 <Route path="/editprofile" component={EditProfile}/>
                 <Route path="/admin-panel" component={AdminPanel}/>
+                <Route path="/main-page" component={mainpage}/>
                 <Route exact path="/" component={Home}/>
                 <Route component={Err404}/>
             </Switch>

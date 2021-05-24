@@ -22,13 +22,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Donate from '../donate/donate'
-import GDonate from '../donate/generaldonate'
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionActions from '@material-ui/core/AccordionActions';
-import GDonatelogedin from '../donate/generaldonatelogedin'
+import NeedReqDialog from './needRequest/NeedReqDialog';
 
 import Donate from '../donate/donate'
 import GDonate from '../donate/generaldonate'
@@ -66,6 +60,8 @@ const Home =()=>
     const [donatedmoney, setdonatedmoney]= useState()
 
     const [searchKey, setSearchKey] = useState("")
+
+    const [NeedReqDialogStatus, setNeedReqDialogStatus]=useState(false);
 
     const [lastTransActions, setLastTransActions] = useState([]);
 
@@ -127,6 +123,14 @@ const Home =()=>
     {
         setRequestDialogStatus(true);
     }
+    const openNeedDialog =()=>
+    {
+        setNeedReqDialogStatus(true);
+    }
+    
+    const closeNeedDialog=()=>{
+        setNeedReqDialogStatus(false);
+    }
 
     const closeDialog=()=>{
         setRequestDialogStatus(false);
@@ -136,6 +140,12 @@ const Home =()=>
 
         if(requestDialogStatus === true)
         return <RequestEventDialog id="redialog"  closeDialog={closeDialog}/>
+
+    }
+    const NeedReqDialogRenderer=()=>{
+
+        if(NeedReqDialogStatus === true)
+        return <NeedReqDialog id="redialog"  closeDialog={closeNeedDialog}/>
 
     }
 
@@ -223,6 +233,18 @@ const Home =()=>
             Request New Event
        </Button>
     }
+    const CreateOpenNeedRequestButton =()=>{
+
+        if(localStorage.getItem("token") !== null)
+        return <Button 
+        style={{marginLeft: '68%',whiteSpace: 'nowrap' , marginTop: '-5%'}}
+        variant="contained"
+        size="small"
+        onClick={openNeedDialog} 
+        size="small"  >
+            New Need Request!
+       </Button>
+    }
 
     const goProflie =()=>{
         history.push('./profile')
@@ -297,11 +319,14 @@ const Home =()=>
 
         return(
          <div >
-
+             
             <CssBaseline />
 
              <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap"}}>
+                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                 </AllInclusiveIcon>
+                <Typography style={{fontSize:"30px", fontFamily: "Spicy Rice",color: "pink"}}>
 
                 <Typography style={{fontSize:"30px"}}>
                 NTM CHARITY!
@@ -333,6 +358,10 @@ const Home =()=>
         {signupBarAlert()}
 
         <div style={{display: "flex", flexDirection: "row", justifyContent:"space-between", alignItems:"flex-start"}}>
+
+        {CreateOpenRequestButton()}
+        {CreateOpenNeedRequestButton()}
+        </div>
 
         <div style={{marginLeft:"5%",marginRight:"5%",marginTop:"24px", backgroundColor:"inherit", minWidth:"50%",maxWidth:"50%"}}>
 
@@ -367,6 +396,8 @@ const Home =()=>
         <Grid item xs={1}/>
         <Grid item xs={10}>
         {requestDialogRenderer()}
+        {NeedReqDialogRenderer()}
+
         </Grid>
         <Grid item xs={1}/>
         </Grid>
