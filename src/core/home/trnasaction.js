@@ -10,4 +10,13 @@ const GetLastTransactions =(probs)=>
     })
 }
 
-export default GetLastTransactions
+const GetTopTransactions =(probs)=> 
+{
+    return axios.create({baseURL: BackendUrl()})
+    .post( '/BiggestTransactionList',
+    {
+        count:probs.count
+    })
+}
+
+export {GetTopTransactions,GetLastTransactions}
