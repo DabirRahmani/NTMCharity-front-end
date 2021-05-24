@@ -22,6 +22,16 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
+
+import Donate from '../donate/donate'
+import GDonate from '../donate/generaldonate'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import GDonatelogedin from '../donate/generaldonatelogedin'
+
+
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -311,6 +321,15 @@ const Home =()=>
         </Grid>
         <Grid item xs={1}/>
         </Grid>
+
+        <AccordionActions>
+            {renderDonateDialog()}
+            {createDonateButton()}
+
+        </AccordionActions>
+
+
+
         </div>
         
         </div>
