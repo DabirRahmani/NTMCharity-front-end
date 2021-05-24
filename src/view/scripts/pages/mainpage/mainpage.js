@@ -25,7 +25,7 @@ const mainpage =()=>
                 <Typography style={{fontSize:"30px",fontFamily: "Spicy Rice",color: "pink"}}>
                 NTM CHARITY!
                 </Typography>
-                <button style={{marginLeft:"68%", backgroundColor: "salmon"}}
+                <button href="/" style={{marginLeft:"68%", backgroundColor: "salmon"}}
                  >
                  GoHome
                  </button>
@@ -44,7 +44,7 @@ const mainpage =()=>
                 Thank you for your look…
                 <br/>
                 Our site is for charity build and we want to help every one in every wherein our country who need.in our site you can makes a lot of events and you can make event for every act of god wich damaged lots of people in a city or village or in every parts of country …
-In our site every needy people can whatch the store list of things that donators pull them in the site and they can choose what they want and then they request is going over by charity owner and if needy is really need that product he or she can get it …
+                In our site every needy people can whatch the store list of things that donators pull them in the site and they can choose what they want and then they request is going over by charity owner and if needy is really need that product he or she can get it …
 
                 </p>
             </div>
@@ -90,4 +90,3 @@ In our site every needy people can whatch the store list of things that donators
     )
 }
 export default mainpage;
-//https://www.aparat.com/embed/82PpZ
