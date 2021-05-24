@@ -3,13 +3,14 @@ import 'antd/dist/antd.css';
 import axios from 'axios';
 import { Select } from 'antd';
 import { Redirect,Link,withRouter } from 'react-router-dom';
-import { Input } from '@material-ui/core';
+import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
 import SingleEvent from '../home/singleEvent'
-import react ,{ useState , useEffect} from 'react';
+import { useState , useEffect} from 'react';
 import ClearlIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { fade } from '@material-ui/core/styles';
 
 const Search = (props)=>{
 
@@ -17,27 +18,81 @@ const Search = (props)=>{
 
    const searchclick=()=>{
     props.onclick(title)
-   }
-   const cancelclick=()=>{
+    }
+
+   const cancelclick=()=>
+   {
        settitle("")
        props.onclick("")
    }
 
+   const [status, setStatus]= useState(false)
 
-    return  <div>
-        <Input  
+   const [inputBackGround,setInputBackGround]= useState(fade("#fff", 0.15))
+
+   useEffect(()=>{
+       if(!(/\S/.test(title)))
+       {
+        settitle("")
+        setStatus(false)
+
+       } 
+       else
+       {
+           setStatus(true)
+       }
+   },[title])
+
+   const CreateCancelButton=()=>{
+       if(status === true)
+       return <IconButton 
+       style={{ 
+           minWidth:"24px",
+       }}        
+       size="small" 
+       onClick={cancelclick}>
+           <ClearlIcon/>
+       </IconButton>
+
+       return <div style={{marginRight:"30px", display:"inline"}}></div>
+   }
+
+    return  <div
+    onMouseEnter={()=>{setInputBackGround(fade("#fff", 0.35))}}
+    onMouseLeave={()=>{setInputBackGround(fade("#fff", 0.15))}}
+    style={{ 
+        minWidth:'248px',
+        width: '180px',
+        paddingLeft:"10px",
+        marginLeft:"12px",
+        backgroundColor: inputBackGround,
+        borderRadius:"4px"
+    }}
+    >
+        <InputBase  
+        style={{ 
+        width: '180px',
+        minWidth:'180px'
+
+        }}
         value={title} 
-        style={{ width: '50%', backgroundColor: "white", paddingLeft:"10px"}} 
         placeholder="search"  
-        onChange={(e)=> settitle(e.target.value)}  />
+        onChange={(e)=> settitle(e.target.value)}
+        />
+
+        {CreateCancelButton()}
+
                 
-        <IconButton onClick={searchclick}>
+        <IconButton 
+        style={{ 
+            minWidth:"24px",
+        }}  
+        size="small" 
+        onClick={searchclick}>
             <SearchIcon/>
         </IconButton>
         
-        <IconButton onClick={cancelclick}>
-            <ClearlIcon/>
-        </IconButton>
+
      </div>
     }
 export default Search;
