@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert'
 import SingleEvent from './singleEvent'
-
+import React from 'react';
 
 
 const EventRenderer = (props)=>{

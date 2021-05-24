@@ -13,6 +13,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Typography } from '@material-ui/core';
+import StoreIcon from '@material-ui/icons/Store';
 
 export const mainListItems =(probs) => 
 {
@@ -36,6 +37,13 @@ export const mainListItems =(probs) =>
       </Tooltip>
     </ListItem>
 
+    <ListItem button onClick={()=>probs.storeManagement()}>
+    <Tooltip title={<Typography fontSize="16">store management</Typography>} placement="right-end" fontSize="32px">
+      <ListItemIcon>
+      <StoreIcon />
+      </ListItemIcon>
+      </Tooltip>
+    </ListItem>
 
     </div>
   )

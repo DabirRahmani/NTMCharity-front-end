@@ -30,6 +30,24 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import GDonatelogedin from '../donate/generaldonatelogedin'
 
+import Donate from '../donate/donate'
+import GDonate from '../donate/generaldonate'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import GDonatelogedin from '../donate/generaldonatelogedin'
+
+
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import GetLastTransactions from '../../../../core/home/trnasaction'
 
 const Home =()=>
 {
@@ -49,10 +67,12 @@ const Home =()=>
 
     const [searchKey, setSearchKey] = useState("")
 
+    const [lastTransActions, setLastTransActions] = useState([]);
+
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
         .then((res)=>{
-            console.log(res);
+
             if(res.data.event_set !== null)
             if(res.data.event_set !== undefined)
             {
@@ -61,7 +81,20 @@ const Home =()=>
             } else {seteventList([])}
             else {seteventList([])}
         })
+
+        GetLastTransactions({count:"10"})
+        .then(e=> {
+            console.log(e)
+            
+            if(e.data.success === "1")
+            {
+                setLastTransActions(Object.values(e.data.transaction_set))
+
+            }
+        })
+
     },[reload])
+
 
     const SearchClick = (props) =>{
         GetEvents({key:props,number:"1"})
@@ -206,14 +239,14 @@ const Home =()=>
     const createActionButtons=()=>{
         if(localStorage.getItem("token") !== null)
         return <div>
-          <IconButton >
-             <AccountCircleIcon onClick={goProflie}   style={{color:"#ffc107"}}/>
+          <IconButton onClick={goProflie} >
+             <AccountCircleIcon    style={{color:"#ffc107"}}/>
           </IconButton>
 
           {showadminpanelButton()}
 
-          <IconButton >
-             <PowerSettingsNewIcon onClick={signOut}   style={{color:"#ffc107"}}/>
+          <IconButton onClick={signOut} >
+             <PowerSettingsNewIcon    style={{color:"#ffc107"}}/>
           </IconButton>
 
           
@@ -222,8 +255,8 @@ const Home =()=>
 
     const showadminpanelButton =()=>{
         if(localStorage.getItem("user_type") === "1")
-        return <IconButton >
-            <SettingsIcon onClick={goAdminPanel}   style={{color:"#ffc107"}}/>
+        return <IconButton onClick={goAdminPanel}>
+            <SettingsIcon    style={{color:"#ffc107"}}/>
             </IconButton>
     }
 
@@ -237,6 +270,31 @@ const Home =()=>
         setReload(reload+1)
     }
 
+
+    const CreateTable =()=>{
+
+        return <TableContainer>
+        <Table size="small" >
+          <TableHead>
+            <TableRow>
+              <TableCell>Username</TableCell>
+              <TableCell >Amount</TableCell>
+              <TableCell >Event ID</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {lastTransActions.map((item) => (
+              <TableRow key={item.id + "tr"}>
+                <TableCell >{item.username}</TableCell>
+                <TableCell >{item.amount}</TableCell>
+                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    }
+
         return(
          <div >
 
@@ -244,16 +302,18 @@ const Home =()=>
 
              <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap"}}>
-                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
-                 </AllInclusiveIcon>
+
                 <Typography style={{fontSize:"30px"}}>
                 NTM CHARITY!
                 </Typography>
-                <div style={{marginLeft: "30%", width: "40%"}}>
+
+                <div style={{ minWidth: "40%", maxWidth: "40%"}}>
                 <Search
                 onclick={SearchClick}
                 />
                 </div> 
+
+                <div style={{ width: '-webkit-fill-available'}}> </div>
 
                 <Typography position="end" component="h1" variant="h6" color="inherit">
                     {localStorage.getItem("username")}
@@ -261,37 +321,53 @@ const Home =()=>
 
                 {createActionButtons()}
 
+
+
+
+
             </Toolbar>
         </AppBar>
 
+
+
         {signupBarAlert()}
-        
-        <div style={{marginLeft:"10%",marginRight:"10%",marginTop:"24px", backgroundColor:"inherit"}}>
 
-        <div style={{display:"-webkit-box"}} >
-        <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
+        <div style={{display: "flex", flexDirection: "row", justifyContent:"space-between", alignItems:"flex-start"}}>
 
-        {CreateOpenRequestButton()}
-        </div>
+        <div style={{marginLeft:"5%",marginRight:"5%",marginTop:"24px", backgroundColor:"inherit", minWidth:"50%",maxWidth:"50%"}}>
 
-            <EventRenderer 
-            eventList={eventList}
-            />
+            <div style={{display:"-webkit-box"}} >
+            <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
+
+            {CreateOpenRequestButton()}
+            </div>
+
+            <EventRenderer eventList={eventList}/>
 
             <Pagination page={pageNumber} count={pageCount} color="primary" onChange={handlePageNumber} style={{paddingTop:"40px" }}/>
 
             <div style={{marginBottom:"32px"}}></div>
         </div>
-        <div>
+
             
+            <Paper style={{marginRight:"5%", marginTop:"56px", minWidth:"auto", width:"-webkit-fill-available", padding:"12px", marginBottom:"180px"}}>
+                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold"}}> Latest transitions</div>
+                {CreateTable()}
+                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold"}}> Top transaction amouts</div>
+            </Paper>
+
+
+        </div>
+        
+
+
+
+        <div>
         <Grid container >
         <Grid item xs={1}/>
-
         <Grid item xs={10}>
         {requestDialogRenderer()}
-
         </Grid>
-
         <Grid item xs={1}/>
         </Grid>
 
@@ -302,6 +378,7 @@ const Home =()=>
         </AccordionActions>
 
         </div>
+        
         </div>
     )
 }
