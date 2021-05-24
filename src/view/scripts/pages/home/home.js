@@ -22,13 +22,14 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
+import GDonatelogedin from '../donate/generaldonatelogedin'
+
 import Donate from '../donate/donate'
 import GDonate from '../donate/generaldonate'
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionActions from '@material-ui/core/AccordionActions';
-import GDonatelogedin from '../donate/generaldonatelogedin'
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -38,6 +39,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import GetLastTransactions from '../../../../core/home/trnasaction'
+import DonateProduct from '../donate/donateproduct'
 import {GetLastTransactions} from '../../../../core/home/trnasaction'
 import {GetTopTransactions} from '../../../../core/home/trnasaction'
 
@@ -174,6 +177,15 @@ const Home =()=>
             }
         }
       }
+    const renderDonateProducrDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("user_type")==="3")
+            {
+                return <DonateProduct close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
 
       const openNeedDialog =()=>
       {
@@ -247,6 +259,20 @@ const Home =()=>
             size="small"
             size="small" 
             style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>General Donate 
+            </Button>
+        }
+  
+      }
+    const createProductDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")==="3")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50"}}>Donate Product
             </Button>
         }
   
@@ -404,6 +430,13 @@ const Home =()=>
 
             <div style={{minWidth:"550px",maxWidth:"50%"}}>
 
+            {CreateOpenRequestButton()}
+            
+            {renderDonateDialog()}
+            {renderDonateProducrDialog()}
+            {createDonateButton()}
+            {createProductDonateButton()}
+            </div>
                 <div style={{display:"-webkit-box"}} >
                 <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
 
