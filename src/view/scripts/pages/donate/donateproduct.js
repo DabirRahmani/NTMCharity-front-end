@@ -7,7 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DonateRequest from "../../../../core/donaterequest/donaterequest";
-import GDonateRequestLogedin from "../../../../core/donaterequest/gdonaterequestlogedin";
+import GDonateRequest from "../../../../core/donaterequest/gdonaterequest";
+import DonateProducrRequest from "../../../../core/donaterequest/donateproductrequest";
 import {useHistory} from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 import { SyncProblemSharp } from "@material-ui/icons";
@@ -16,32 +17,36 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Grid from '@material-ui/core/Grid';
 
-const GDonatelogedin = (props) =>{
+const DonateProduct = (props) =>{
 
-    const [donatemount, setDonatemount] = useState('');
+    const [number, setNumber] = useState('');
+    const [product, setProduct] = useState('');
     const [id, setId] = useState(props.id);
     const [status, setStatus] = useState('');
-    const [unknown, setUnknown] = useState('');
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [open, setOpen] = React.useState(true);
-
-    const [state , setState] = useState(true);
-    
-      const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-      };
+    const history = useHistory();
     
 
     const onDonateSubmit=(p)=>
     {
-      if(donatemount==="")
+      if(number==="")
       {
         setStatus("2")
       }
       else
       {
-      GDonateRequestLogedin({donatemount})
+          if(product==="")
+          {
+              setStatus("3")
+          }
+        DonateProducrRequest({token,product,number})
         .then((resp)=>
         {
           console.log(resp);
@@ -49,7 +54,8 @@ const GDonatelogedin = (props) =>{
           {
             setStatus("1");
             props.close()
-            props.donatemount(donatemount)
+            props.number(number)
+            props.product(product)
           }
 
         }).catch((p)=> {
@@ -60,7 +66,9 @@ const GDonatelogedin = (props) =>{
               setStatus("oops");
             }
         });
+
       }
+
     };
 
 
@@ -71,7 +79,9 @@ const GDonatelogedin = (props) =>{
           return <Alert severity="success">Profile Edited Successfully!</Alert>
 
         case "2":
-          return <Alert severity="error">Dont You Donate?!</Alert>
+          return <Alert severity="error">Set a number?!</Alert>
+        case "3":
+          return <Alert severity="error">Choose a Product!</Alert>
   
         case "0":
           return <Alert severity="error">Please Donate Less Than RemainedMoney!</Alert>
@@ -87,24 +97,29 @@ const GDonatelogedin = (props) =>{
           <DialogTitle id="form-dialog-title">Donate</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              You Can Donate How Much You Want...!
+              You Can Donate Any Product You Want...!
             </DialogContentText>
-            <FormControlLabel
-             control={
-               <Checkbox
-                 checked={state}
-                 onChange={()=>{if(state===false){setState(true)}else setState(false)}}
-                 name="checkedF"
-                 //indeterminate
-            />}
-            label="Unknown Donator"
-           />
+            <Grid >
+                <FormControl variant="outlined" style={{ width:'100%'} }>
+                  <InputLabel  id="demo-simple-select-outlined-label">Product</InputLabel>
+                  <Select
+                    value={product}
+                    onChange={(e) => setProduct(e.target.value)}
+                    label="Product"
+                  >
+                    <MenuItem value={1}>Rob</MenuItem>
+                    <MenuItem value={2}>Rice</MenuItem>
+                    <MenuItem value={3}>Oile</MenuItem>
+                    <MenuItem value={4}>Meat</MenuItem>
+                   </Select>
+                 </FormControl>
+               </Grid>
             <TextField
               autoFocus
-              onChange={(e)=>{setDonatemount(e.target.value)}}
+              onChange={(e)=>{setNumber(e.target.value)}}
               margin="dense"
               id="name"
-              label="Donate Mount"
+              label="Number of Product"
               type="number"
               fullWidth
             />
@@ -128,4 +143,4 @@ const GDonatelogedin = (props) =>{
 
 }
 
-export default GDonatelogedin;
+export default DonateProduct;

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import BackendUrl from '../backendUrl'
 
-const GDonateRequestLogedin =({unknown,donatemount})=>
+const GDonateRequestLogedin =({donatemount})=>
 {
-    return axios.create({baseURL: BackendUrl()}).post('/DonateMoney', {Unknown:unknown, amount:donatemount})
+    return axios.create({baseURL: BackendUrl()}).post('/GeneralDonate', {money_amount:donatemount})
 }
 
 export default GDonateRequestLogedin

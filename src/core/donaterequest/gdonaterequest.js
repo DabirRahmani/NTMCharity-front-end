@@ -3,7 +3,7 @@ import BackendUrl from '../backendUrl'
 
 const GDonateRequest =({donatemount})=>
 {
-    return axios.create({baseURL: BackendUrl()}).post('/DonateMoney', {amount:donatemount})
+    return axios.create({baseURL: BackendUrl()}).post('/GeneralDonate', {money_amount:donatemount})
 }
 
 export default GDonateRequest

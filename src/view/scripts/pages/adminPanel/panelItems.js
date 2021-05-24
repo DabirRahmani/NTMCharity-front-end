@@ -37,6 +37,14 @@ export const mainListItems =(probs) =>
       </Tooltip>
     </ListItem>
 
+    <ListItem button onClick={()=>probs.delivery()}>
+    <Tooltip title={<Typography fontSize="16">delivery</Typography>} placement="right-end" fontSize="32px">
+      <ListItemIcon>
+      <PeopleIcon />
+      </ListItemIcon>
+      </Tooltip>
+    </ListItem>
+
     <ListItem button onClick={()=>probs.storeManagement()}>
     <Tooltip title={<Typography fontSize="16">store management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>

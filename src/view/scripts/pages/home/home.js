@@ -22,12 +22,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Donate from '../donate/donate'
-import GDonate from '../donate/generaldonate'
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionActions from '@material-ui/core/AccordionActions';
 import GDonatelogedin from '../donate/generaldonatelogedin'
 
 import Donate from '../donate/donate'
@@ -36,7 +30,6 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionActions from '@material-ui/core/AccordionActions';
-import GDonatelogedin from '../donate/generaldonatelogedin'
 
 
 import Paper from '@material-ui/core/Paper';
@@ -48,6 +41,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import GetLastTransactions from '../../../../core/home/trnasaction'
+import DonateProduct from '../donate/donateproduct'
 
 const Home =()=>
 {
@@ -144,12 +138,20 @@ const Home =()=>
         {
             if(localStorage.getItem("token")===null)
             {
-
                 return <GDonate close={ccloseDialog} id="redialog" />
             }
             else if(localStorage.getItem("user_type")==="3")
             {
                 return <GDonatelogedin close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
+    const renderDonateProducrDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("user_type")==="3")
+            {
+                return <DonateProduct close={ccloseDialog} id="redialog" />
             }
         }
       }
@@ -207,6 +209,20 @@ const Home =()=>
             size="small"
             size="small" 
             style={{background:"#4caf50"}}>General Donate 
+            </Button>
+        }
+  
+      }
+    const createProductDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")==="3")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50"}}>Donate Product
             </Button>
         }
   
@@ -340,6 +356,11 @@ const Home =()=>
             <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
 
             {CreateOpenRequestButton()}
+            
+            {renderDonateDialog()}
+            {renderDonateProducrDialog()}
+            {createDonateButton()}
+            {createProductDonateButton()}
             </div>
 
             <EventRenderer eventList={eventList}/>
@@ -358,9 +379,6 @@ const Home =()=>
 
 
         </div>
-        
-
-
 
         <div>
         <Grid container >
@@ -370,12 +388,6 @@ const Home =()=>
         </Grid>
         <Grid item xs={1}/>
         </Grid>
-
-        <AccordionActions>
-            {renderDonateDialog()}
-            {createDonateButton()}
-
-        </AccordionActions>
 
         </div>
         
