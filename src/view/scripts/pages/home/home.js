@@ -22,7 +22,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
-
+import NeedReqDialog from './needRequest/NeedReqDialog';
 
 const Home =()=>
 {
@@ -38,6 +38,8 @@ const Home =()=>
     const [pageCount, setPageCount] = useState(1)
 
     const [searchKey, setSearchKey] = useState("")
+
+    const [NeedReqDialogStatus, setNeedReqDialogStatus]=useState(false);
 
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
@@ -84,6 +86,14 @@ const Home =()=>
     {
         setRequestDialogStatus(true);
     }
+    const openNeedDialog =()=>
+    {
+        setNeedReqDialogStatus(true);
+    }
+    
+    const closeNeedDialog=()=>{
+        setNeedReqDialogStatus(false);
+    }
 
     const closeDialog=()=>{
         setRequestDialogStatus(false);
@@ -93,6 +103,12 @@ const Home =()=>
 
         if(requestDialogStatus === true)
         return <RequestEventDialog id="redialog"  closeDialog={closeDialog}/>
+
+    }
+    const NeedReqDialogRenderer=()=>{
+
+        if(NeedReqDialogStatus === true)
+        return <NeedReqDialog id="redialog"  closeDialog={closeNeedDialog}/>
 
     }
 
@@ -139,6 +155,18 @@ const Home =()=>
         onClick={openDialog} 
         size="small"  >
             Request New Event
+       </Button>
+    }
+    const CreateOpenNeedRequestButton =()=>{
+
+        if(localStorage.getItem("token") !== null)
+        return <Button 
+        style={{marginLeft: '68%',whiteSpace: 'nowrap' , marginTop: '-5%'}}
+        variant="contained"
+        size="small"
+        onClick={openNeedDialog} 
+        size="small"  >
+            New Need Request!
        </Button>
     }
 
@@ -190,14 +218,14 @@ const Home =()=>
 
         return(
          <div >
-
+             
             <CssBaseline />
 
              <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap"}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
-                <Typography style={{fontSize:"30px"}}>
+                <Typography style={{fontSize:"30px", fontFamily: "Spicy Rice",color: "pink"}}>
                 NTM CHARITY!
                 </Typography>
                 <div style={{marginLeft: "30%", width: "40%"}}>
@@ -223,6 +251,7 @@ const Home =()=>
         <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
 
         {CreateOpenRequestButton()}
+        {CreateOpenNeedRequestButton()}
         </div>
 
             <EventRenderer 
@@ -240,6 +269,7 @@ const Home =()=>
 
         <Grid item xs={10}>
         {requestDialogRenderer()}
+        {NeedReqDialogRenderer()}
 
         </Grid>
 
