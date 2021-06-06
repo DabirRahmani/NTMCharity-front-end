@@ -32,6 +32,7 @@ import StoreManagementRenderer from './storManagement/StoreManagementRenderer'
 import { useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home';
+import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
 
 const drawerWidth = 240;
 
@@ -152,8 +153,13 @@ const useStyles = makeStyles((theme) => ({
   const storeManagement=()=>{
     setActiveSection("storeManagement")
   }
+
   const delivery=()=>{
     setActiveSection("delivery")
+  }
+
+  const adminmanagement=()=>{
+    setActiveSection("adminmanagement")
   }
 
 
@@ -167,13 +173,17 @@ const useStyles = makeStyles((theme) => ({
         case("verifyUsers"): return(<VerifyUsersRenderer/>)
         case("storeManagement"): return(<StoreManagementRenderer/>)
         case("delivery"): return(<DeliveryRenderer/>)
+        case("adminmanagement"): return(<AdminManagementRenderer/>)
         default:return(<div></div>)
       }
   }
 
   const functions =()=>{
-    return ({"eventRequest": eventRequest, "verifyUsers": verifyUsers, "storeManagement": storeManagement,
-  "delivery": delivery});
+    return ({"eventRequest": eventRequest, 
+    "verifyUsers": verifyUsers, 
+    "storeManagement": storeManagement,
+    "delivery": delivery, 
+    "adminmanagement":adminmanagement});
   }
 
   if(localStorage.getItem("user_type")!== "1")
