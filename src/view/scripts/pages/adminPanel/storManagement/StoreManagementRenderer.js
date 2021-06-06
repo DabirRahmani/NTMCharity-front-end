@@ -26,6 +26,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TextField from '@material-ui/core/TextField';
+import Chart from './Chart'
 
 const StoreManagementRenderer =()=>{
 
@@ -766,8 +767,8 @@ const StoreManagementRenderer =()=>{
 
 
 
-        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'480px', display: '-webkit-inline-box'}}>
-        diagram feature        
+        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: '-webkit-inline-box'}}>
+            <Chart />
         </div>
 
             

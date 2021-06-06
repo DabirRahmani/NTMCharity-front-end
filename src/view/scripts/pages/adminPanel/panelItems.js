@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Typography } from '@material-ui/core';
 import StoreIcon from '@material-ui/icons/Store';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 
 export const mainListItems =(probs) => 
 {
@@ -49,6 +50,14 @@ export const mainListItems =(probs) =>
     <Tooltip title={<Typography fontSize="16">store management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <StoreIcon />
+      </ListItemIcon>
+      </Tooltip>
+    </ListItem>
+
+    <ListItem button onClick={()=>probs.adminmanagement()}>
+    <Tooltip title={<Typography fontSize="16">admin management</Typography>} placement="right-end" fontSize="32px">
+      <ListItemIcon>
+      <VerifiedUserIcon />
       </ListItemIcon>
       </Tooltip>
     </ListItem>
