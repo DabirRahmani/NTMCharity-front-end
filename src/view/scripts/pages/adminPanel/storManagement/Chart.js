@@ -2,28 +2,39 @@ import { useEffect, useState } from "react";
 import { PieChart } from 'react-minimal-pie-chart';
 
 
-const Chart =()=>{
+const Chart =(probs)=>
+{
 
-    const [text,settext] = useState("")
+    console.log(probs.type, probs.id)
+
+    const [onFocused, setOnFocused] = useState("")
+
+    const colors =["#FF3333","#7533FF","#2BD139","#FF8B1E", "#2CEECA"]
+
     const [data, setdata]= useState([
-        { title: 'One', value: 10, color: '#E38627',key:"ss", },
-        { title: 'Two', value: 15, color: '#C13C37',key:"ddd" },
-        { title: 'Three', value: 20, color: '#6A2135' , key:"dddd"},
-        ])
+        { title: 'One', value: 10, color: colors[0],key:"ss", },
+        { title: 'Two', value: 15, color: colors[1],key:"ddd" },
+        { title: 'Three', value: 20, color: colors[2] , key:"dddd"},
+        { title: 'other', value: 5, color: colors[3] , key:"ddddd"},
+    ])
+
+    useEffect(()=>{
+        console.log("sallam")
+    },[probs.id, probs.type])
 
     return <div>
-        <div style={{maxWidth:"40vh"}}>
+        <div style={{ width:"100%"}}>
         <PieChart
-            label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
-            onMouseOver={(e) => settext(e.target.innerHTML.replace(/<\/?title>/g,''))}
-            onMouseOut={e=> settext("")}
+            label={({ dataEntry }) => {if (dataEntry.title === "other") return dataEntry.title}}
+            onMouseOver={(e) => setOnFocused(e.target.innerHTML.replace(/<\/?title>/g,''))}
+            onMouseOut={e=> setOnFocused("")}
             animate={true}
             data={data}
             />
         </div>
 
 
-        <div>{text}</div>
+        <div>{onFocused}</div>
     </div>
 }
 

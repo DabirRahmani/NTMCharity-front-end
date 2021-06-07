@@ -42,6 +42,7 @@ const SignleItem =(probs)=>
                     edit={probs.edit}
                     change={probs.change}
                     counter={probs.counter}
+                    focus={probs.focus}
                     />})
             }
             else
@@ -87,7 +88,7 @@ const SignleItem =(probs)=>
 
     const CreateTitleButton =()=>{
         return <Button 
-        onClick={()=>{setStatus(true)}}
+        onClick={()=>{setStatus(true); probs.focus({type:"cat", id:probs.id})}}
         size="medium" 
         style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space', display:"-webkit-box", fontSize:"18px", fontWeight:'bold'}}>
             {probs.title}
