@@ -18,9 +18,6 @@ import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
 import validator from 'validator'
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import VerifyEmailRequest from '../../../../core/login-signup/verifyEmailRequest'
 import HomeIcon from '@material-ui/icons/Home';

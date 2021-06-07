@@ -27,9 +27,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import VerifyUsersRenderer from './verifyUsersRenderer'
-
+import DeliveryRenderer from './deliveryRenderer'
+import StoreManagementRenderer from './storManagement/StoreManagementRenderer'
 import { useHistory} from 'react-router-dom';
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import HomeIcon from '@material-ui/icons/Home';
+import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
 
 const drawerWidth = 240;
 
@@ -147,6 +150,17 @@ const useStyles = makeStyles((theme) => ({
     setActiveSection("verifyUsers")
   }
 
+  const storeManagement=()=>{
+    setActiveSection("storeManagement")
+  }
+
+  const delivery=()=>{
+    setActiveSection("delivery")
+  }
+
+  const adminmanagement=()=>{
+    setActiveSection("adminmanagement")
+  }
 
 
   //render menu sections, based on activeSection value, this will change by functions.item
@@ -157,12 +171,19 @@ const useStyles = makeStyles((theme) => ({
       {
         case("eventRequests"):   return(<EventRequestRenderer/>)
         case("verifyUsers"): return(<VerifyUsersRenderer/>)
+        case("storeManagement"): return(<StoreManagementRenderer/>)
+        case("delivery"): return(<DeliveryRenderer/>)
+        case("adminmanagement"): return(<AdminManagementRenderer/>)
         default:return(<div></div>)
       }
   }
 
   const functions =()=>{
-    return ({"eventRequest": eventRequest, "verifyUsers": verifyUsers});
+    return ({"eventRequest": eventRequest, 
+    "verifyUsers": verifyUsers, 
+    "storeManagement": storeManagement,
+    "delivery": delivery, 
+    "adminmanagement":adminmanagement});
   }
 
   if(localStorage.getItem("user_type")!== "1")
@@ -186,6 +207,10 @@ const useStyles = makeStyles((theme) => ({
           <Typography position="end" component="h1" variant="h6" color="inherit">
             {localStorage.getItem("username")}
           </Typography>
+
+          <IconButton onClick={()=>{history.push("/")}} >
+             <HomeIcon style={{color:"#ffc107"}}/>
+          </IconButton>
 
           <IconButton onClick={signOut}>
              <PowerSettingsNewIcon   style={{color:"#ffc107"}}/>

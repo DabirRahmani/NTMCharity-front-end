@@ -25,25 +25,58 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { Height } from '@material-ui/icons';
 
 
+import Donate from '../donate/donate'
+import GDonate from '../donate/generaldonate'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import GDonatelogedin from '../donate/generaldonatelogedin'
+
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import {GetLastTransactions} from '../../../../core/home/trnasaction'
+import {GetTopTransactions} from '../../../../core/home/trnasaction'
+
+import NeedReqDialog from './needRequest/NeedReqDialog';
+
 const Home =()=>
 {
     const [eventList,seteventList]=useState([]);
+
     const [reload, setReload] = useState(0);
 
     const history = useHistory();
 
     const [requestDialogStatus, setRequestDialogStatus] = useState(false);
 
+    const [donateDialogStatus, setDonateDialogStatus] = useState(false);
+
     const [pageNumber, setPageNumber]= useState(1)
 
     const [pageCount, setPageCount] = useState(1)
 
+    const [donatedmoney, setdonatedmoney]= useState()
+
     const [searchKey, setSearchKey] = useState("")
+
+    const [lastTransActions, setLastTransActions] = useState([]);
+
+    const [topTransActions, setTopTransActions] = useState([]);
+
+    const [NeedReqDialogStatus, setNeedReqDialogStatus]=useState(false);
+
 
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
         .then((res)=>{
-            console.log(res);
+
             if(res.data.event_set !== null)
             if(res.data.event_set !== undefined)
             {
@@ -52,7 +85,35 @@ const Home =()=>
             } else {seteventList([])}
             else {seteventList([])}
         })
+
+        GetLastTransactions({count:"10"})
+        .then(e=> {
+            
+            if(e.data.success === "1")
+            {
+                console.log(lastTransActions)
+                var vv= Object.values(e.data.transaction_set)
+                setLastTransActions(vv.sort((a,b)=>{ if(a.id > b.id) return -1; return 1}))
+
+                GetTopTransactions({count:"10"})
+                .then(e=> {
+                    
+                    if(e.data.success === "1")
+                    {
+                        var v= Object.values(e.data.transaction_set)
+                        setTopTransActions(v.sort((a,b)=>{ if(a.amount > b.amount) return -1; return 1}))
+                    }
+                })
+
+            }
+        })
+
+
     },[reload])
+
+    const closeNeedDialog=()=>{
+        setNeedReqDialogStatus(false);
+    }
 
     const SearchClick = (props) =>{
         GetEvents({key:props,number:"1"})
@@ -81,6 +142,13 @@ const Home =()=>
         
     }
 
+    const NeedReqDialogRenderer=()=>{
+
+        if(NeedReqDialogStatus === true)
+        return <NeedReqDialog id="redialog"  closeDialog={closeNeedDialog}/>
+
+    }
+
     const openDialog =()=>
     {
         setRequestDialogStatus(true);
@@ -95,6 +163,48 @@ const Home =()=>
         if(requestDialogStatus === true)
         return <RequestEventDialog id="redialog"  closeDialog={closeDialog}/>
 
+    }
+
+    const renderDonateDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("token")===null)
+            {
+                return <GDonate close={ccloseDialog} id="redialog" />
+            }
+            else 
+            {
+                return <GDonatelogedin close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
+
+      const openNeedDialog =()=>
+      {
+          setNeedReqDialogStatus(true);
+      }
+      
+
+      const CreateOpenNeedRequestButton =()=>{
+
+        if(localStorage.getItem("token") !== null)
+        return <Button 
+        style={{whiteSpace: 'nowrap'}}
+        variant="contained"
+        size="small"
+        onClick={openNeedDialog} 
+        size="small"  >
+            New Need Request!
+       </Button>
+    }
+
+    const oopenDialog =()=>
+    {
+        setDonateDialogStatus(true);
+    }
+  
+    const ccloseDialog=()=>{
+        setDonateDialogStatus(false);
     }
 
     const signupBarAlert =()=>
@@ -131,8 +241,22 @@ const Home =()=>
 
     }
 
-    const CreateOpenRequestButton =()=>{
+    const createDonateButton=()=>{
 
+        if(localStorage.getItem("user_type")!="4")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>General Donate 
+            </Button>
+        }
+  
+      }
+
+    const CreateOpenRequestButton =()=>{
         if(localStorage.getItem("token") !== null)
         return <Button 
         variant="contained"
@@ -159,14 +283,14 @@ const Home =()=>
     const createActionButtons=()=>{
         if(localStorage.getItem("token") !== null)
         return <div>
-          <IconButton >
-             <AccountCircleIcon onClick={goProflie}   style={{color:"#ffc107"}}/>
+          <IconButton onClick={goProflie} >
+             <AccountCircleIcon    style={{color:"#ffc107"}}/>
           </IconButton>
 
           {showadminpanelButton()}
 
-          <IconButton >
-             <PowerSettingsNewIcon onClick={signOut}   style={{color:"#ffc107"}}/>
+          <IconButton onClick={signOut} >
+             <PowerSettingsNewIcon    style={{color:"#ffc107"}}/>
           </IconButton>
 
           
@@ -175,8 +299,8 @@ const Home =()=>
 
     const showadminpanelButton =()=>{
         if(localStorage.getItem("user_type") === "1")
-        return <IconButton >
-            <SettingsIcon onClick={goAdminPanel}   style={{color:"#ffc107"}}/>
+        return <IconButton onClick={goAdminPanel}>
+            <SettingsIcon    style={{color:"#ffc107"}}/>
             </IconButton>
     }
 
@@ -189,6 +313,57 @@ const Home =()=>
         setPageNumber(value)
         setReload(reload+1)
     }
+
+
+    const CreateTable =()=>{
+
+        return <TableContainer>
+        <Table size="small" >
+          <TableHead>
+            <TableRow>
+              <TableCell>Username</TableCell>
+              <TableCell >Amount</TableCell>
+              <TableCell >Event ID</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {lastTransActions.map((item) => (
+              <TableRow key={item.id + "tr"}>
+                <TableCell >{item.username}</TableCell>
+                <TableCell >{item.amount}</TableCell>
+                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    }
+
+    
+    const CreateTable02 =()=>{
+
+        return <TableContainer>
+        <Table size="small" >
+          <TableHead>
+            <TableRow>
+              <TableCell>Username</TableCell>
+              <TableCell >Amount</TableCell>
+              <TableCell >Event ID</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {topTransActions.map((item) => (
+              <TableRow key={item.id + "tr"}>
+                <TableCell >{item.username}</TableCell>
+                <TableCell >{item.amount}</TableCell>
+                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    }
+
 
         return(
          <div >
@@ -208,16 +383,20 @@ const Home =()=>
 
              <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap"}}>
+               
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
                 <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
                 NTM CHARITY!
                 </Typography>
-                <div style={{marginLeft: "30%", width: "40%"}}>
+
+                <div style={{ minWidth: "40%", maxWidth: "40%"}}>
                 <Search
                 onclick={SearchClick}
                 />
                 </div> 
+
+                <div style={{ width: '-webkit-fill-available'}}> </div>
 
                 <Typography position="end" component="h1" variant="h6" color="inherit">
                     {localStorage.getItem("username")}
@@ -225,41 +404,73 @@ const Home =()=>
 
                 {createActionButtons()}
 
+
+
+
+
             </Toolbar>
         </AppBar>
 
+
+
         {signupBarAlert()}
+
+        <div style={{marginTop:"24px",marginRight:"3%", marginLeft:"3%"}}>
+
         
-        <div style={{marginLeft:"10%",marginRight:"10%",marginTop:"24px", backgroundColor:"inherit"}}>
+        <div style={{display: "inline-flex",flexWrap:"wrap", flexDirection: "row", alignItems:"flex-start", justifyContent:"space-evenly", width:"100%"}}>
 
-        <div style={{display:"-webkit-box"}} >
-        <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
-        {CreateOpenRequestButton()}
-        </div>
+            <div style={{minWidth:"550px",maxWidth:"50%"}}>
 
-            <EventRenderer 
-            eventList={eventList}
-            />
+                <div style={{display:"-webkit-box"}} >
+                <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
-            <Pagination page={pageNumber} count={pageCount} color="primary" onChange={handlePageNumber} style={{paddingTop:"40px" }}/>
+                {CreateOpenRequestButton()}
 
-            <div style={{marginBottom:"32px"}}></div>
-        </div>
-        <div>
+                {createDonateButton()}
+
+                {CreateOpenNeedRequestButton()}
+
+                </div>
+
+                <EventRenderer eventList={eventList}/>
+
+                <Pagination page={pageNumber} count={pageCount} color="primary" onChange={handlePageNumber} style={{paddingTop:"40px" }}/>
+
+                <div style={{marginBottom:"32px"}}></div>
+            </div>
+
             
+            <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px"}}>
+                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold"}}> Latest transitions</div>
+                {CreateTable()}
+                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold"}}> Top transaction amouts</div>
+                {CreateTable02()}
+            </Paper>
+
+
+        </div>
+        
+        </div>
+
+
+
+        <div>
         <Grid container >
         <Grid item xs={1}/>
-
         <Grid item xs={10}>
         {requestDialogRenderer()}
-
         </Grid>
-
         <Grid item xs={1}/>
         </Grid>
-        
+
+
+            {renderDonateDialog()}
+            {NeedReqDialogRenderer()}
+
         </div>
+        
         </div>
         
     )
