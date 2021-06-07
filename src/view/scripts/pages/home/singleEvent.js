@@ -69,10 +69,10 @@ const SingleEvent = (probs)=> {
     const createDonateButton=()=>{
 
       if(localStorage.getItem("token") === null )
-      return <div> sign in to donate </div>
+      return <div style={{fontFamily:"Orelega One"}}> sign in to donate </div>
       
       if(localStorage.getItem("user_type")=== "4")
-      return <div> cant donate as needy </div>
+      return <div style={{fontFamily:"Orelega One"}}> cant donate as needy </div>
 
 
       return <Button 
@@ -80,7 +80,7 @@ const SingleEvent = (probs)=> {
       variant="contained"
       size="small"
       size="small" 
-      style={{background:"#4caf50"}}>Donate 
+      style={{background:"#4caf50",fontFamily:"Orelega One"}}>Donate 
       </Button>
 
     }
@@ -99,31 +99,31 @@ const SingleEvent = (probs)=> {
             aria-controls="panel1c-content"
             id="panel1c-header">
   
-            <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
+            <div style={{flexBasis: '33.33%',marginRight: '30px',fontFamily:"Orelega One"}} >
               <Typography style={{fontSize:15, display:onCacellModify}} >{probs.title}</Typography>
               <div style={{display: inModify, width:'100%'}}></div>
             </div>
 
             <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
-              <Typography style={{fontSize:15, display:onCacellModify}} >${probs.moneytarget-donatedmoney}</Typography>
+              <Typography style={{fontSize:15, display:onCacellModify,fontFamily:"Orelega One"}} >${probs.moneytarget-donatedmoney}</Typography>
               <div style={{display: inModify, width:'100%'}}></div>
             </div>
 
             <div style={{flexBasis: '33.33%'}} >
-              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5}} >#{probs.eventid}</Typography>
+              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5,fontFamily:"Orelega One"}} >#{probs.eventid}</Typography>
             </div>
             <div style={{flexBasis: '33.33%'}} >
-              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5}} >{probs.username}</Typography>
+              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5,fontFamily:"Orelega One"}} >{probs.username}</Typography>
             </div>
             <div style={{flexBasis: '33.33%'}} >
-              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5}} >{probs.date}</Typography>
+              <Typography style={{fontSize:15, color:"#000000" ,opacity: 0.5,fontFamily:"Orelega One"}} >{probs.date}</Typography>
             </div>
   
           </AccordionSummary>
   
           <AccordionDetails style={{alignItems: 'center'}}>
             <div style={{flex: '70%'}}  >
-                <Typography  style={{ display: onCacellModify}}>
+                <Typography  style={{ display: onCacellModify,fontFamily:"Orelega One"}}>
                   {probs.description}
                 </Typography>
 
@@ -133,7 +133,7 @@ const SingleEvent = (probs)=> {
                 <Typography style={{display: 'inline-block'}} >List of needs</Typography>
                 </div>
 
-                <div style={{marginLeft:"16px"}}>
+                <div style={{marginLeft:"16px",fontFamily:"Orelega One"}}>
                 {ListOfNeedsRenderer()}
                 </div>
 

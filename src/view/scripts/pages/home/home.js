@@ -22,6 +22,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { Height } from '@material-ui/icons';
+
+
 import Donate from '../donate/donate'
 import GDonate from '../donate/generaldonate'
 import Accordion from '@material-ui/core/Accordion';
@@ -209,7 +212,7 @@ const Home =()=>
         if(localStorage.getItem("token")=== null)
         return <Alert  
         severity="info" 
-        style={{marginLeft: "20%", marginRight: "20%", marginTop: "16px", marginBottom: "16px"}} 
+        style={{marginLeft: "20%", marginRight: "20%", marginTop: "16px", marginBottom: "16px",fontFamily:"Mate SC"}} 
         >
 
         You are not signed in, 
@@ -218,7 +221,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px"}}
+        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signup"
         >
             signup
@@ -228,7 +231,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px"}}
+        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signin"
         >
             signin
@@ -259,7 +262,8 @@ const Home =()=>
         variant="contained"
         size="small"
         onClick={openDialog} 
-        size="small"  >
+        size="small" 
+        style={{fontFamily:"Orelega One"}} >
             Request New Event
        </Button>
     }
@@ -363,13 +367,26 @@ const Home =()=>
 
         return(
          <div >
-
+             
+             <video autoPlay loop muted 
+             style={{
+                 position:"fixed",
+                 width:"100%",
+                 height:"-webkit-fill-available",
+                 objectFit:"cover",
+                 zIndex:"-1"
+             }}
+             >
+             <source src="https://aspb14.cdn.asset.aparat.com/aparat-video/2ea268816548e03a178d3c7d3cb2939116315664-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImEwNmQ5MDEyZTg3M2ExN2E0M2NlZWY5YjY4NDk0OWVkIiwiZXhwIjoxNjIyODk5MDE1LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.YT4VEhQ7WbRxHzffdE0XWkQrOlxpfCj3Au_0m6vJ9fU"/>
+             </video>
             <CssBaseline />
 
              <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap"}}>
-
-                <Typography style={{fontSize:"30px"}}>
+               
+                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                 </AllInclusiveIcon>
+                <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
                 NTM CHARITY!
                 </Typography>
 
@@ -403,10 +420,11 @@ const Home =()=>
         
         <div style={{display: "inline-flex",flexWrap:"wrap", flexDirection: "row", alignItems:"flex-start", justifyContent:"space-evenly", width:"100%"}}>
 
+
             <div style={{minWidth:"550px",maxWidth:"50%"}}>
 
                 <div style={{display:"-webkit-box"}} >
-                <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px"}}>Active events</div>
+                <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
                 {CreateOpenRequestButton()}
 
@@ -447,12 +465,14 @@ const Home =()=>
         <Grid item xs={1}/>
         </Grid>
 
+
             {renderDonateDialog()}
             {NeedReqDialogRenderer()}
 
         </div>
         
         </div>
+        
     )
 }
 export default Home;

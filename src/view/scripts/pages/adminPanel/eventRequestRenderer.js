@@ -92,7 +92,7 @@ const EventRequestRenderer =()=>
         else
         if((store.getState() === undefined) || (store.getState().length === 0))
         {
-            return( <Alert severity="info">there is no request!</Alert> )
+            return( <Alert severity="info" style={{fontFamily:"Mate SC"}}>there is no request!</Alert> )
         }
         else
         {

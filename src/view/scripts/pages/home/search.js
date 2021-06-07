@@ -66,7 +66,8 @@ const Search = (props)=>{
         paddingLeft:"10px",
         marginLeft:"12px",
         backgroundColor: inputBackGround,
-        borderRadius:"4px"
+        borderRadius:"4px",
+        fontFamily:"Sigmar One"
     }}
     >
         <InputBase  
