@@ -57,6 +57,10 @@ const StoreManagementRenderer =()=>{
 
     const [status, setStatus]= useState(false)
 
+    const [onFocusId, setOnFocusId]= useState(0);
+
+    const [onFocuseType, setOnFocuseType]= useState("root");
+
     useEffect(()=>{
         GetCatList().then((res)=>{
             if(res.data.empty !== "0")
@@ -139,6 +143,7 @@ const StoreManagementRenderer =()=>{
                 add={Add}
                 change={Change}
                 counter={Counter}
+                focus={Focus}
                  /> 
                 </div>
             }
@@ -154,11 +159,17 @@ const StoreManagementRenderer =()=>{
             add={Add}
             change={Change} 
             counter={Counter}
+            focus={Focus}
             /> 
         })
         }
         else
         return <div> nothing to show </div>
+    }
+
+    const Focus=({type, id})=>{
+        setOnFocusId(id);
+        setOnFocuseType(type)
     }
 
     const Counter =(probs)=>{
@@ -220,15 +231,12 @@ const StoreManagementRenderer =()=>{
 
     const onChange=()=>{
         if(dialogValue !== "")
-        {
-          //  console.log(dialogValue)
-          setDialogStatus("loading")
+        {          setDialogStatus("loading")
 
             if(onProcessType === "subcategory")
             {
                 EditSubCatCat({id:onProcessId, catid:dialogValue})
                 .then(e=>{
-                    console.log(e)
 
                     if(e.data.success === "1")
                     {
@@ -248,7 +256,6 @@ const StoreManagementRenderer =()=>{
             {
                 EditProductSubCat({id:onProcessId, subcatid:dialogValue})
                 .then(e=>{
-                    console.log(e)
                     if(e.data.success === "1")
                     {
                         productList.filter(e=>e.id === onProcessId)[0].subcategory_id = dialogValue;
@@ -748,7 +755,7 @@ const StoreManagementRenderer =()=>{
             {CreateExpand()}
 
             <Button 
-            onClick={()=>{setStatus(true)}}
+            onClick={()=>{setStatus(true); Focus({type: "root", id:0})}}
             size="medium" 
             style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box", fontSize:"18px",fontWeight:'bold'}}>
                 All categories
@@ -768,7 +775,7 @@ const StoreManagementRenderer =()=>{
 
 
         <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: '-webkit-inline-box'}}>
-            <Chart />
+            <Chart type={onFocuseType} id={onFocusId} productlist={productList} subcatlist={subCatList} catlist={catList} />
         </div>
 
             

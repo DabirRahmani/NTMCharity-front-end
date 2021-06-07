@@ -9,8 +9,6 @@ import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
 import ReactDom from 'react-dom';
 import Divider from '@material-ui/core/Divider';
-import RequestedList from './requestedList'
-import GetRequestedNeeds from '../../../../../core/NeedReq/getNeedRequested'
 import deleteNeedRequested from '../../../../../core/NeedReq/deleteNeedRequested'
 import NeedForm from './NeedForm'
 
@@ -26,24 +24,7 @@ const NeedReqDialog =(probs)=>
     //این ارایه باید همه چیزا رو داشته باشه ایدی استاتوس لیست مواد توضیحات و همه چیز مربوط به ایونت
     const [requestList, setRequestList]= useState([])
 
-
-    useEffect(()=>
-    {
-        //اطلاعات مورد نیاز برای ریکوئست لیست اینجا باید اپدیت بشن
-        GetRequestedNeeds({token:localStorage.getItem("token")})
-        .then((res)=>{
-            if(res.data.NeedReq_set === undefined)
-            {
-                setRequestList([])
-            }
-            else {
-                let arr = Object.values(res.data.NeedReq_set)
-                setRequestList(arr)
-            }
-
-        })
-    },[reload])
-
+    const [successStatus,setSuccessStatus] = useState(false)
 
 
     const resetStates =()=>{
@@ -61,7 +42,21 @@ const NeedReqDialog =(probs)=>
     }
 
 
-    const createFormRequest =()=>{
+    const createFormRequest =()=>
+    {
+        if(successStatus === true)
+        {
+            return<div>
+                Request created successfully!
+                <Button
+                onClick={()=>{setSuccessStatus(false)}}
+                >
+                    create another request!
+                </Button>
+            </div>
+        }
+        else
+
         return <NeedForm 
         canceledit={resetStates}
         key={formNeedReqId} 
@@ -69,18 +64,14 @@ const NeedReqDialog =(probs)=>
          title={formtitle}
         description={formDescription}
         status={formStatus} 
-        eventId={formNeedReqId} />
+        eventId={formNeedReqId}
+        success={Success} />
     }
 
-    const createRequestedList=()=>{
-
-        return <RequestedList 
-        key="rquestedlist" 
-        id="requestedlist" 
-        listofrequests={requestList} 
-        ondelete={deleteRequestedItem} 
-        onedit={editRequestedItem}/>
+    const Success =()=>{
+        setSuccessStatus(true)
     }
+
 
     const deleteRequestedItem=(needreqid)=>
     {
@@ -112,13 +103,12 @@ const NeedReqDialog =(probs)=>
 
         <Box style={{overflow:'auto'}}>
 
+            
             {createFormRequest()}
 
             
-            {createRequestedList()}
 
         </Box>
-
 
         </Dialog>
     </div>

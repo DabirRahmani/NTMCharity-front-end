@@ -11,7 +11,7 @@ import ListIcon from '@material-ui/icons/List';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SingleItemList from '../../adminPanel/singleItemList'
 import editNeedRequested from '../../../../../core/NeedReq/editNeedRequested'
-import CreateNeedReq from '../../../../../core/NeedReq/createNeedRequest'
+import CreateNeedRequest from '../../../../../core/NeedReq/createNeedRequest'
 
 const NeedForm =(probs)=>
 {
@@ -30,23 +30,6 @@ const NeedForm =(probs)=>
     const [submitButtonStatus, setSubmitButtonStatus] = useState(false);
 
     useEffect(()=>{
-        if(formStatus === "true")
-        {
-            if(formTitle === "Request What you need!")
-            {
-                setFormTitle("Edit NeedReq number "+NeedReqId)
-            }
-        } 
-        else
-        {
-            formTitle.includes("Edit")
-            {
-                setFormTitle("Request What you need!")
-            }
-        }
-    })
-
-    useEffect(()=>{
         
         if(!(/\S/.test(title)))
         {
@@ -59,27 +42,20 @@ const NeedForm =(probs)=>
         {setSubmitButtonStatus(true)}
     },[title, description])
 
-    const SubmitRequest =()=>{
-        if(formStatus === "false")
-        {
-            CreateNeedReq({token:localStorage.getItem("token"),title:title,description:description})
-            .then((res)=>{
-                console.log(res)
-            })
-            .catch((res)=>{console.log(res)})
-            .finally(()=>{cancelEdit();})
-            cancelEdit();
-        }
-        else //باید ایونت قدیمی تغییر کنه
-        {
-            editNeedRequested({token:localStorage.getItem("token"),title:title,description:description})
-            .then((res)=>{
-                console.log(res)
-            })
-            .catch((res)=>{console.log(res)})
-            .finally(()=>{cancelEdit();})
-            cancelEdit();
-        }
+    const SubmitRequest =()=>
+    {
+        console.log("sssssssssss")
+        CreateNeedRequest({token:localStorage.getItem("token"),title:title,description:description})
+        .then((res)=>{
+            if(res.data.success === "1")
+            {
+                probs.success();
+            }
+        })
+        .catch((res)=>{console.log(res)})
+        .finally(()=>{})
+        cancelEdit();
+
     }
 
     const cancelEdit =()=>{
