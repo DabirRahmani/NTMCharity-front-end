@@ -12,7 +12,7 @@ import ReactDom from 'react-dom';
 import Divider from '@material-ui/core/Divider';
 import GetRequestedEvents from '../../../../../core/eventRequests/getRequestedEvents'
 import DeleteRequestedEvent from '../../../../../core/eventRequests/deleteRequestedEvent'
-
+import RequestedList from './requestedList'
 
 const RequestEventDialog =(probs)=>
 {
@@ -77,6 +77,7 @@ const RequestEventDialog =(probs)=>
         eventId={formEventId} 
         moneytarget={formMoneyTarget}/>
     }
+    
 
     const createRequestedList=()=>{
 
