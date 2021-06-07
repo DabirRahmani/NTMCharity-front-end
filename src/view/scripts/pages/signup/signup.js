@@ -25,6 +25,10 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import VerifyEmailRequest from '../../../../core/login-signup/verifyEmailRequest'
 import HomeIcon from '@material-ui/icons/Home';
 import NoEncryptionIcon from '@material-ui/icons/NoEncryption';
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import photo from '../img/signin.png'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -146,39 +150,39 @@ const SignUp = () =>
         switch(status)
         {
             case "1":
-                return <Alert severity="success">Signup Successful! you can sign in now</Alert>
+                return <Alert severity="success" style={{fontFamily:"Mate SC"}}>Signup Successful! you can sign in now</Alert>
             case "0":
-              return <Alert severity="error">Please fill all fields!</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Please fill all fields!</Alert>
 
             case "emailError":
-                return <Alert severity="error">Email already exists!</Alert>
+                return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Email already exists!</Alert>
 
             case "emailUsernameError":
-                 return <Alert severity="error">Email and Username already exist!</Alert>
+                 return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Email and Username already exist!</Alert>
 
             case "usernameError":
-                  return <Alert severity="error">Username already exists!</Alert>
+                  return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Username already exists!</Alert>
 
             case "net":
-            return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
+            return <Alert severity="error" style={{fontFamily:"Mate SC"}}>something went wrong, Check your connection and try again!</Alert>
 
             case "checkPassword":
-              return <Alert severity="error">Password must be at least 6 characters!</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Password must be at least 6 characters!</Alert>
 
             case "checkEmail":
-              return <Alert severity="error">Please enter a valid email!</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Please enter a valid email!</Alert>
 
             case "checkUsername":
-              return <Alert severity="error">Username must be at least 4 characters!</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Username must be at least 4 characters!</Alert>
             
             case "remove":
               return <div></div>
 
             case "confirmPass":
-              return <Alert severity="error">Paswwords don't match</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Paswwords don't match</Alert>
 
             case "invalid type":
-              return <Alert severity="error">Please select your type</Alert>
+              return <Alert severity="error" style={{fontFamily:"Mate SC"}}>Please select your type</Alert>
         }
     }
 
@@ -219,16 +223,40 @@ const SignUp = () =>
         <h3  >you are signed in as</h3>
         <h2 style={{padding:"4px", color:"#e53935"}} >{localStorage.getItem("username")}</h2>
         <h3 style={{paddingRight:"8px"}} >you can  </h3>
-        <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50"}} >  back to home</Button>
+        <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50",fontFamily:"Orelega One"}} >  back to home</Button>
         <h3 style={{padding:"8px"}} >or</h3>
-        <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#ffc107"}}>sign out</Button>
+        <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#ffc107",fontFamily:"Orelega One"}}>sign out</Button>
         <h3 style={{padding:"8px"}} >to continue</h3>
         </div>
     } 
     else
     return( 
-        <Container component="main" maxWidth="xs">
-
+      <div>
+        <div>
+            <AppBar position="static">
+             <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
+                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                 </AllInclusiveIcon>
+                <Typography style={{fontSize:"30px",fontFamily:"Dancing Script"}}>
+                NTM CHARITY!
+                </Typography>
+                </Toolbar>
+             </AppBar>
+        <img src={photo} 
+        style={{
+          position:"absolute",
+          width:"100%",
+          left:"50%",
+          top:"50%",
+          Height:"100%",
+          objectFit:"cover",
+          transform:"translate(-50% , -50%)",
+          zIndex:"-1"
+      }}
+        />
+        
+        </div>
+     <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke"}}>
         <Dialog  style={{backgroundColor: 'transparent', minWidth:"400px"}} open={dianogStatus}>
         <Typography style={{padding:"24px"}} alien="center">an email with verification code sent to {email}</Typography>
         <TextField
@@ -246,17 +274,17 @@ const SignUp = () =>
           color="primary"
           size="small"
           onClick={verifyEmailClicked}
-          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center", width:"90px"}}
+          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center", width:"90px",fontFamily:"Orelega One"}}
           startIcon={<VerifiedUserIcon />}>
             verify
           </Button>
         </Dialog>
-
-        <div className={classes.paper}>
+        
+        <div className={classes.paper} style={{paddingBottom:"10%", marginTop:"6%"}}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" style={{fontFamily:"Sigmar One"}}>
             Sign up
           </Typography>
           <form className={classes.form} noValidate>
@@ -342,12 +370,13 @@ const SignUp = () =>
               variant="contained"
               color="primary"
               className={classes.submit}
+              style={{fontFamily:"Orelega One"}}
             >
               Sign Up
             </Button>
             <Grid container justify="flex-end">
               <Grid item xs={9}>
-                <Link href="/signin"style={{marginLeft: "-2%"}} variant="body2" >
+                <Link href="/signin"style={{marginLeft: "-2%",fontFamily:"Orelega One"}} variant="body2" >
                   Already have an account? Sign in
                 </Link>
               </Grid>
@@ -357,7 +386,9 @@ const SignUp = () =>
         <Box mt={5}>
         </Box>
         {alert()}
+        
       </Container>
+      </div>
     )
     }
 export default SignUp

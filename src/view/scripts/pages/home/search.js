@@ -10,6 +10,7 @@ import react ,{ useState , useEffect} from 'react';
 import ClearlIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import CancelSharpIcon from '@material-ui/icons/CancelSharp';
 
 const Search = (props)=>{
 
@@ -27,16 +28,16 @@ const Search = (props)=>{
     return  <div>
         <Input  
         value={title} 
-        style={{ width: '50%', backgroundColor: "white", paddingLeft:"10px"}} 
+        style={{ width: '50%', backgroundColor: "white", paddingLeft:"10px",fontFamily:"Sigmar One"}} 
         placeholder="search"  
         onChange={(e)=> settitle(e.target.value)}  />
                 
         <IconButton onClick={searchclick}>
-            <SearchIcon/>
+            <SearchIcon style={{color:"#ffc107"}} />
         </IconButton>
         
         <IconButton onClick={cancelclick}>
-            <ClearlIcon/>
+            <CancelSharpIcon style={{color:"#ffc107"}} />
         </IconButton>
      </div>
     }
