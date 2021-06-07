@@ -15,6 +15,8 @@ import EventBusyIcon from '@material-ui/icons/EventBusy';
 import { Typography } from '@material-ui/core';
 import StoreIcon from '@material-ui/icons/Store';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
+
 
 export const mainListItems =(probs) => 
 {
@@ -41,7 +43,7 @@ export const mainListItems =(probs) =>
     <ListItem button onClick={()=>probs.delivery()}>
     <Tooltip title={<Typography fontSize="16">delivery</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
-      <PeopleIcon />
+      <CardGiftcardIcon />
       </ListItemIcon>
       </Tooltip>
     </ListItem>
