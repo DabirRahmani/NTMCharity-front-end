@@ -77,6 +77,7 @@ const Home =()=>
 
     const [NeedReqDialogStatus, setNeedReqDialogStatus]=useState(false);
 
+    const [poductDialogStatus,setPoductDialogStatus] = useState(false);
 
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
@@ -93,10 +94,10 @@ const Home =()=>
 
         GetLastTransactions({count:"10"})
         .then(e=> {
+
             
             if(e.data.success === "1")
             {
-                console.log(lastTransActions)
                 var vv= Object.values(e.data.transaction_set)
                 setLastTransActions(vv.sort((a,b)=>{ if(a.id > b.id) return -1; return 1}))
 
@@ -185,14 +186,15 @@ const Home =()=>
       }
 
       const renderDonateProducrDialog=()=>{
-        if(donateDialogStatus === true)
+        if(poductDialogStatus === true)
         {
-            if(localStorage.getItem("user_type")==="3")
+            if(localStorage.getItem("user_type")!=="4")
             {
                 return <DonateProduct close={ccloseDialog} id="redialog" />
             }
         }
       }
+
 
       const openNeedDialog =()=>
       {
@@ -202,7 +204,7 @@ const Home =()=>
 
       const CreateOpenNeedRequestButton =()=>{
 
-        if(localStorage.getItem("token") !== null)
+        if(localStorage.getItem("user_type") === "4")
         return <Button 
         style={{whiteSpace: 'nowrap',fontFamily:"Orelega One"}}
         variant="contained"
@@ -220,6 +222,7 @@ const Home =()=>
   
     const ccloseDialog=()=>{
         setDonateDialogStatus(false);
+        setPoductDialogStatus(false);
     }
 
     const signupBarAlert =()=>
@@ -270,23 +273,31 @@ const Home =()=>
         }
   
       }
+
+    const openProduct =()=>{
+        setPoductDialogStatus(true)
+    }
+
     const createProductDonateButton=()=>{
 
-        if(localStorage.getItem("user_type")==="3")
+        if(localStorage.getItem("user_type")!=="4")
         {
             return <Button 
-            onClick={oopenDialog}
+            onClick={openProduct}
             variant="contained"
             size="small"
             size="small" 
-            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>Donate Product 
+            style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>Donate Product 
             </Button>
         }
   
       }
 
-    const CreateOpenRequestButton =()=>{
+    const CreateOpenRequestButton =()=>
+    {
+
         if(localStorage.getItem("token") !== null)
+        if(localStorage.getItem("user_type") !== "4")
         return <Button 
         variant="contained"
         size="small"
@@ -295,6 +306,7 @@ const Home =()=>
         style={{fontFamily:"Orelega One"}} >
             Request New Event
        </Button>
+
     }
 
     const goProflie =()=>{
@@ -358,9 +370,9 @@ const Home =()=>
           <TableBody>
             {lastTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                {createtablecellusername({username:item.username})}
                 <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
-                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
+                {createtablecellid({title:item.event_title , id:item.event_id})}
               </TableRow>
             ))}
           </TableBody>
@@ -383,9 +395,9 @@ const Home =()=>
           <TableBody>
             {topTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                {createtablecellusername({username:item.username})}
                 <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
-                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
+                {createtablecellid({title:item.event_title , id:item.event_id})}
               </TableRow>
             ))}
           </TableBody>
@@ -393,19 +405,44 @@ const Home =()=>
       </TableContainer>
     }
 
+    const createtablecellusername =({username})=>{
+        if(username === undefined)
+        return <TableCell style={{fontFamily:"Mate SC"}}>Guess</TableCell>
+
+        if(username === null)
+        return <TableCell style={{fontFamily:"Mate SC"}}>Guess</TableCell>
+
+        return <TableCell style={{fontFamily:"Mate SC"}}>{username}</TableCell>
+
+
+    }
+
+    const createtablecellid =({id, title})=>
+    {
+        if(id === undefined)
+        return <TableCell style={{fontFamily:"Mate SC"}}>General</TableCell>
+
+        if(id === null)
+        return <TableCell style={{fontFamily:"Mate SC"}}>General</TableCell>
+
+
+        return <TableCell style={{fontFamily:"Mate SC"}}>{title} (id:{id})</TableCell>
+
+    }
+
         return(
          <div >
              
           
-                       <img src={photo} 
-   style={{
-    position:"fixed",
-    width:"100%",
-    height:"-webkit-fill-available",
-    objectFit:"cover",
-    zIndex:"-1"
-}}
-    />
+            <img src={photo} 
+            style={{
+             position:"fixed",
+             width:"100%",
+             height:"-webkit-fill-available",
+             objectFit:"cover",
+             zIndex:"-1"
+             }}
+            />
 
             <CssBaseline />
 

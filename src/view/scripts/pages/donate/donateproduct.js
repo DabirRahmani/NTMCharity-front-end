@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React , {useEffect, useState} from "react";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,6 +22,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
+import { GetProductList } from "../../../../core/adminPanel/storeManagement";
 
 const DonateProduct = (props) =>{
 
@@ -29,9 +30,19 @@ const DonateProduct = (props) =>{
     const [product, setProduct] = useState('');
     const [id, setId] = useState(props.id);
     const [status, setStatus] = useState('');
-    const [token, setToken] = useState(localStorage.getItem("token"));
     const [open, setOpen] = React.useState(true);
     const history = useHistory();
+
+    const [arr, setArr]= useState([])
+
+    useEffect(()=>{
+      GetProductList()
+      .then(e=>{
+        setArr(Object.values(e.data.product_set))
+      })
+    },[])
+
+    console.log(arr)
     
     const onDonateSubmit=(p)=>
     {
@@ -45,26 +56,30 @@ const DonateProduct = (props) =>{
           {
               setStatus("3")
           }
-        DonateProducrRequest({token,product,number})
-        .then((resp)=>
-        {
-          console.log(resp);
-          if(resp.data.success === "1")
+          else
           {
-            setStatus("1");
-            props.close()
-            props.number(number)
-            props.product(product)
-          }
-
-        }).catch((p)=> {
-
-          console.log(p);
-            if(!p.status)
+            DonateProducrRequest({token:localStorage.getItem("token"),product,number})
+            .then((resp)=>
             {
-              setStatus("oops");
-            }
-        });
+              console.log(resp);
+              if(resp.data.success === "1")
+              {
+                setStatus("1");
+                props.close()
+                props.number(number)
+                props.product(product)
+              }
+    
+            }).catch((p)=> {
+    
+              console.log(p);
+                if(!p.status)
+                {
+                  setStatus("oops");
+                }
+            });
+          }
+        
 
       }
 
@@ -91,6 +106,10 @@ const DonateProduct = (props) =>{
     }
   }
 
+  const CreateMenuItems = ()=>{
+    return arr.map(e=> <MenuItem value={e.id}>{e.title}</MenuItem> )
+  }
+
     return (
         <Dialog open={open}  aria-labelledby="form-dialog-title" fullWidth>
           <DialogTitle id="form-dialog-title">Donate</DialogTitle>
@@ -106,10 +125,8 @@ const DonateProduct = (props) =>{
                     onChange={(e) => setProduct(e.target.value)}
                     label="Product"
                   >
-                    <MenuItem value={1}>Rob</MenuItem>
-                    <MenuItem value={2}>Rice</MenuItem>
-                    <MenuItem value={3}>Oile</MenuItem>
-                    <MenuItem value={4}>Meat</MenuItem>
+                    {CreateMenuItems()}
+
                    </Select>
                  </FormControl>
                </Grid>

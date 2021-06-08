@@ -195,20 +195,6 @@ const useStyles = makeStyles((theme) => ({
   return (
       <div id="admin-panel" className={classes.root}>
 
-             <img src={photo} 
-                style={{
-                  position:"absolute",
-                  width:"100%",
-                  left:"50%",
-                  top:"50%",
-                  Height:"100%",
-                  objectFit:"cover",
-                  transform:"translate(-50% , -50%)",
-                  zIndex:"-1"
-                }}
-             />
-
-
 
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>

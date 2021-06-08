@@ -20,18 +20,10 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 const GDonatelogedin = (props) =>{
 
     const [donatemount, setDonatemount] = useState('');
-    const [id, setId] = useState(props.id);
     const [status, setStatus] = useState('');
-    const [unknown, setUnknown] = useState('');
-    const [token, setToken] = useState(localStorage.getItem("token"));
-    const [open, setOpen] = React.useState(true);
 
     const [state , setState] = useState(true);
-    
-      const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-      };
-    
+
 
     const onDonateSubmit=(p)=>
     {
@@ -41,15 +33,13 @@ const GDonatelogedin = (props) =>{
       }
       else
       {
-      GDonateRequestLogedin({donatemount, state})
+        GDonateRequestLogedin({donatemount, state, token:localStorage.getItem("token")})
         .then((resp)=>
         {
           console.log(resp);
           if(resp.data.success === "1")
           {
-            setStatus("1");
             props.close()
-            props.donatemount(donatemount)
           }
 
         }).catch((p)=> {
@@ -67,8 +57,6 @@ const GDonatelogedin = (props) =>{
     const alert = () => {
 
       switch(status){
-        case "1":
-          return <Alert severity="success">Profile Edited Successfully!</Alert>
 
         case "2":
           return <Alert severity="error">Dont You Donate?!</Alert>
@@ -83,7 +71,7 @@ const GDonatelogedin = (props) =>{
   }
 
     return (
-        <Dialog open={open}  aria-labelledby="form-dialog-title" fullWidth>
+        <Dialog open={true}  aria-labelledby="form-dialog-title" fullWidth>
           <DialogTitle id="form-dialog-title">Donate</DialogTitle>
           <DialogContent>
             <DialogContentText>

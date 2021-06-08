@@ -4,6 +4,7 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 const Chart =(probs)=>{
 
+
     const [text,settext] = useState("")
 
 
@@ -29,6 +30,8 @@ const Chart =(probs)=>{
         { 
             if(probs.dataAnalysis !== undefined)
             {
+                console.log(probs)
+
 
                 var v = probs.subcatlist.filter(e=>e.category_id == probs.id);
 
@@ -148,7 +151,9 @@ const Chart =(probs)=>{
         </div>
 
         <PieChart
-            label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+            labelPosition="80"
+            labelStyle={{fontSize:"7px", fontWeight:"bold"}}
+            label={({ dataEntry }) => `${Math.round(dataEntry.percentage)}%`}
             onMouseOver={(e) => settext(e.target.innerHTML.replace(/<\/?title>/g,''))}
             onMouseOut={e=> settext("")}
             animate={true}
