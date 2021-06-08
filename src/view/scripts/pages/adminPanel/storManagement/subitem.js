@@ -24,7 +24,6 @@ const SignleSubItem =(probs)=>
     {
         if(status === true)
         {
-            console.log(productList)
             if(productList.length > 0)
             {
                 return productList.map( e=> {
@@ -89,7 +88,7 @@ const SignleSubItem =(probs)=>
 
     const CreateTitleButton =()=>{
         return <Button 
-        onClick={()=>{setStatus(true)}}
+        onClick={()=>{setStatus(true); probs.focus({id:probs.id, type:"sub"})}}
         size="medium" 
         style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box",fontWeight:'bold'}}>
             {probs.title}
