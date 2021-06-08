@@ -48,6 +48,9 @@ import NeedReqDialog from './needRequest/NeedReqDialog';
 import DonateProduct from '../donate/donateproduct';
 import photo from '../img/signin.png'
 
+
+import requestedlist from './rquestEvent/requestedList'
+
 const Home =()=>
 {
     const [eventList,seteventList]=useState([]);
@@ -201,12 +204,12 @@ const Home =()=>
 
         if(localStorage.getItem("token") !== null)
         return <Button 
-        style={{whiteSpace: 'nowrap'}}
+        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One"}}
         variant="contained"
         size="small"
         onClick={openNeedDialog} 
         size="small"  >
-            New Need Request!
+            New Need Req
        </Button>
     }
 
@@ -233,7 +236,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signup"
         >
             signup
@@ -243,7 +246,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signin"
         >
             signin
@@ -262,7 +265,7 @@ const Home =()=>
             variant="contained"
             size="small"
             size="small" 
-            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>General Donate 
+            style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>General Donate 
             </Button>
         }
   
@@ -310,13 +313,13 @@ const Home =()=>
         if(localStorage.getItem("token") !== null)
         return <div>
           <IconButton onClick={goProflie} >
-             <AccountCircleIcon    style={{color:"#ffc107"}}/>
+             <AccountCircleIcon/>
           </IconButton>
 
           {showadminpanelButton()}
 
           <IconButton onClick={signOut} >
-             <PowerSettingsNewIcon    style={{color:"#ffc107"}}/>
+             <PowerSettingsNewIcon/>
           </IconButton>
 
           
@@ -326,7 +329,7 @@ const Home =()=>
     const showadminpanelButton =()=>{
         if(localStorage.getItem("user_type") === "1")
         return <IconButton onClick={goAdminPanel}>
-            <SettingsIcon    style={{color:"#ffc107"}}/>
+            <SettingsIcon/>
             </IconButton>
     }
 
@@ -347,17 +350,17 @@ const Home =()=>
         <Table size="small" >
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell >Amount</TableCell>
-              <TableCell >Event ID</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Username</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Amount</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Event ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {lastTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell >{item.username}</TableCell>
-                <TableCell >{item.amount}</TableCell>
-                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -372,17 +375,17 @@ const Home =()=>
         <Table size="small" >
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell >Amount</TableCell>
-              <TableCell >Event ID</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Username</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Amount</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Event ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {topTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell >{item.username}</TableCell>
-                <TableCell >{item.amount}</TableCell>
-                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -390,22 +393,20 @@ const Home =()=>
       </TableContainer>
     }
 
-
         return(
          <div >
              
-             <img src={photo} 
-                style={{
-                  position:"absolute",
-                  width:"100%",
-                  left:"50%",
-                  top:"50%",
-                  Height:"100%",
-                  objectFit:"cover",
-                  transform:"translate(-50% , -50%)",
-                  zIndex:"-1"
-                }}
-             />
+          
+                       <img src={photo} 
+   style={{
+    position:"fixed",
+    width:"100%",
+    height:"-webkit-fill-available",
+    objectFit:"cover",
+    zIndex:"-1"
+}}
+    />
+
             <CssBaseline />
 
              <AppBar position="static">
@@ -469,9 +470,9 @@ const Home =()=>
 
             
             <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px"}}>
-                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold"}}> Latest transitions</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Latest transitions</div>
                 {CreateTable()}
-                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold"}}> Top transaction amouts</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Top transaction amouts</div>
                 {CreateTable02()}
             </Paper>
 

@@ -278,7 +278,7 @@ const SignUp = () =>
         </Dialog>
         
         <div className={classes.paper} style={{paddingBottom:"10%", marginTop:"6%"}}>
-          <Avatar className={classes.avatar}>
+          <Avatar size="small" style={{marginTop:"8px"}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" style={{fontFamily:"Sigmar One"}}>

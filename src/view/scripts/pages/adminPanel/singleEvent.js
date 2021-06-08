@@ -439,7 +439,7 @@ const SingleEvent = (probs)=> {
              color="primary"
              size="small"
              variant="contained"
-             style= {{paddingRight:16,paddingLeft:16, display:inDeleteOrConfirm, backgroundColor:"#ffc107"}}
+             style= {{paddingRight:16,paddingLeft:16, display:inDeleteOrConfirm, backgroundColor:"#e7ea84"}}
              startIcon={<CancelIcon/>}
              onClick={onCancelClicked}
              >
