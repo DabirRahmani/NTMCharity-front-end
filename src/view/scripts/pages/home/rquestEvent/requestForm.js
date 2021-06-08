@@ -133,7 +133,7 @@ const RequestForm =(probs)=>
                 variant="contained"
                 size="small" 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px"}}
+                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px",fontFamily:"Orelega One"}}
                 onClick={cancelEdit}>
                     cancel
                 </Button>
@@ -144,7 +144,7 @@ const RequestForm =(probs)=>
                 disabled={!submitButtonStatus}
 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#4caf50 "}}
+                style={{marginBottom:"-20px",background:"#4caf50 ",fontFamily:"Orelega One"}}
                 onClick={SubmitRequest}>
                     submit edit
                 </Button>
@@ -157,10 +157,10 @@ const RequestForm =(probs)=>
 
             <Button
             variant="contained"
-            size="small" 
+            size="small"
             color="primary"
             disabled={!submitButtonStatus}
-            style={{marginBottom:"-20px",background:"#4caf50 "}}
+            style={{marginBottom:"-20px",backgroundColor:"#1890ff",fontFamily:"Orelega One",textEmphasisColor:"black"}}
             onClick={SubmitRequest}>
                 submit
             </Button>
@@ -171,12 +171,12 @@ const RequestForm =(probs)=>
 
         <div style={{margin:"24px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px"}}>
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography>{formTitle}</Typography>
+            <Typography style={{fontFamily:"Sigmar One"}}>{formTitle}</Typography>
         </div>
 
         <div style={{display:"flex"}}>
         <TextField 
-        style={{maxWidth:"40%",display: 'inline-block', marginLeft:"8px"}} 
+        style={{maxWidth:"40%",display: 'inline-block', marginLeft:"8px",fontFamily:"Mate SC"}} 
         fullWidth 
         placeholder="please write a title" 
         label="title" 
@@ -184,7 +184,7 @@ const RequestForm =(probs)=>
         onChange={(e)=>setTitle(e.target.value)}/>
 
         <TextField 
-        style={{maxWidth:"15%",display: 'inline-block', marginLeft:"40%"}} 
+        style={{maxWidth:"15%",display: 'inline-block', marginLeft:"40%",fontFamily:"Mate SC"}} 
         fullWidth 
         label="$ requested" 
         type="number"
@@ -195,7 +195,7 @@ const RequestForm =(probs)=>
 
         <div style={{marginRight:"24px"}}>
         <TextField 
-        style={{display: 'block', marginLeft:"8px"}} 
+        style={{display: 'block', marginLeft:"8px",fontFamily:"Mate SC"}} 
         multiline 
         fullWidth 
         placeholder="please write a description" 
@@ -206,7 +206,7 @@ const RequestForm =(probs)=>
 
         <div style={{display: 'block', marginLeft:"8px"}}>
         <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
-        <Typography style={{display: 'inline-block'}} >List of needs</Typography>
+        <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
         </div>
 
         <div style={{display: 'block', marginLeft:"8px"}}>
@@ -227,7 +227,7 @@ const RequestForm =(probs)=>
             value={newItem}
             onChange={(e)=>{setNewItem(e.target.value)}}
         />
-        <Typography style={{display:"inline-block", color:"#e53935"}}>{itemListError}</Typography>
+        <Typography style={{display:"inline-block", color:"#e53935",fontFamily:"Mate SC"}}>{itemListError}</Typography>
 
         {submitText()}
 

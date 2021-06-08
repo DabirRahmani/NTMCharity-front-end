@@ -33,6 +33,7 @@ import { useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home';
 import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
+import photo from '../img/signin.png'
 
 const drawerWidth = 240;
 
@@ -193,6 +194,19 @@ const useStyles = makeStyles((theme) => ({
   else
   return (
       <div id="admin-panel" className={classes.root}>
+
+             <img src={photo} 
+                style={{
+                  position:"absolute",
+                  width:"100%",
+                  left:"50%",
+                  top:"50%",
+                  Height:"100%",
+                  objectFit:"cover",
+                  transform:"translate(-50% , -50%)",
+                  zIndex:"-1"
+                }}
+             />
 
 
 

@@ -89,7 +89,9 @@ const SignleSubItem =(probs)=>
     const CreateTitleButton =()=>{
         return <Button 
         onClick={()=>{setStatus(true); probs.focus({id:probs.id, type:"sub"})}}
+
         size="medium" 
+
         style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box",fontWeight:'bold'}}>
             {probs.title}
         </Button>

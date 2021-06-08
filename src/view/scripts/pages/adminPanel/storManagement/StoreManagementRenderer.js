@@ -64,6 +64,7 @@ const StoreManagementRenderer =()=>{
 
     const [dataAnalysis, setDataAnalysis]= useState();
 
+
     useEffect(()=>{
         GetCatList().then((res)=>{
             if(res.data.empty !== "0")
@@ -244,6 +245,7 @@ const StoreManagementRenderer =()=>{
         if(dialogValue !== "")
         {
           setDialogStatus("loading")
+
 
             if(onProcessType === "subcategory")
             {
@@ -776,6 +778,7 @@ const StoreManagementRenderer =()=>{
 
             <Button 
             onClick={()=>{setStatus(true); Focus({id:0, type:"root"})}}
+
             size="medium" 
             style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box", fontSize:"18px",fontWeight:'bold'}}>
                 All categories
@@ -806,6 +809,7 @@ const StoreManagementRenderer =()=>{
                 type={focusType} 
                 dataAnalysis={dataAnalysis} 
             />
+
         </div>
 
             

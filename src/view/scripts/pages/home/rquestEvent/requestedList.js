@@ -35,13 +35,13 @@ const RequestedList =(probs)=>
     style={{margin:"24px",marginTop:"48px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px", paddingBottom:"8px"}}>
         
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography>Your Requests</Typography>
+            <Typography style={{fontFamily:"Sigmar One"}}>Your Requests</Typography>
         </div>
 
         <div>
-            <Typography style={{width:"30%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word"}}>title</Typography>
-            <Typography style={{width:"50%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word"}}>feedback</Typography>
-            <Typography style={{display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word"}}>status</Typography>
+            <Typography style={{width:"30%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word",fontFamily:"Mate SC"}}>title</Typography>
+            <Typography style={{width:"50%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word",fontFamily:"Mate SC"}}>feedback</Typography>
+            <Typography style={{display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word",fontFamily:"Mate SC"}}>status</Typography>
 
         </div>
 

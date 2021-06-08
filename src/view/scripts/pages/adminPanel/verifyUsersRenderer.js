@@ -26,13 +26,18 @@ const VerifyUsersRenderer=()=>
         GetNotVerifiedUsers({admintoken:localStorage.getItem("token")})
         .then((res)=>{
             
-            let arr = Object.values(res.data.donator_set)
-            setUsersDonatorList(arr)
+            if(res.data.donator_set !== undefined)
+            {
+                let arr = Object.values(res.data.donator_set)
+                setUsersDonatorList(arr)
+            }
 
+            if(res.data.needy_set !== undefined)
+            {
             let arr2 = Object.values(res.data.needy_set)
             setUsersNeedyList(arr2)
+            }
 
-            console.log(arr)
 
         })
     
