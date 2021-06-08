@@ -21,21 +21,9 @@ const Mainpage =()=>
       }
     return(
         <dive>
-            <img src={photo}
-            style={{
-                position:"absolute",
-                width:"100%",
-                left:"50%",
-                top:"50%",
-                Height:"100%",
-                objectFit:"cover",
-                transform:"translate(-50% , -50%)",
-                zIndex:"-1"
-            }}
             
-            
-            />
             <div>
+                
             <AppBar position="static">
              <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
@@ -43,12 +31,12 @@ const Mainpage =()=>
                 <Typography style={{fontSize:"30px",fontFamily:"Dancing Script"}}>
                 NTM CHARITY!
                 </Typography>
-                <button style={{marginLeft:"68%", backgroundColor: "salmon",fontFamily:"Orelega One"}}
+                <button style={{marginLeft:"68%", backgroundColor: "#1890ff",fontFamily:"Orelega One"}}
                  onClick={goHome}
                  >
                  GoHome
                  </button>
-                 <HomeIcon style={{fontSize: "10vh", color: "salmon", marginLeft: "1.5%"}}/>
+                 <HomeIcon style={{fontSize: "10vh", color: "#9dbfde", marginLeft: "1.5%"}}/>
                 </Toolbar>
              </AppBar>
             </div>
@@ -68,7 +56,7 @@ In our site every needy people can whatch the store list of things that donators
                 </p>
             </div>
             
-            <div style={{paddingTop: "2%", backgroundColor: "#ffc5c5",direction: "ltr",fontfamily: "serif", paddingBottom: "1%"}}>
+            <div style={{paddingTop: "2%", backgroundColor: "#72b3ef",direction: "ltr",fontfamily: "serif", paddingBottom: "1%"}}>
             <h1 style={{paddingTop: "1%" , whiteSpace: "nowrap", marginLeft: "6%", fontSize: "4.5vh", fontWeight: "bold",fontFamily:"Sigmar One"}}>
             About us:
             <AllInclusiveIcon style={{color: "#da0a6bf0", fontSize: "10vh", marginLeft: "77%"}}/>
@@ -95,13 +83,15 @@ In our site every needy people can whatch the store list of things that donators
                 </h1> 
                 <p style={{direction:"ltr", fontSize: "3vh", marginRight: "7%", whiteSpace: "normal",marginLeft: "7%",fontFamily: "Mate SC"}}>
                 You can actually find us in the computer faculty in IUST. 
-                <div style={{marginLeft:"87%", color: "#3d064af0"}}>
-                <PhoneIcon style={{ fontSize: "5vh"}}/>
-                <EmailIcon style={{ fontSize: "5vh"}}/>
-                <TelegramIcon style={{ fontSize: "5vh"}}/>
-                <TwitterIcon style={{fontSize: "5vh"}}/>
-                <InstagramIcon style={{ fontSize: "5vh"}}/>
-                </div>
+                <br/>
+                <PhoneIcon/>
+                 :
+                <li style={{marginLeft:"20px"}}>
+                    223334455
+                </li>
+                <li style={{marginLeft:"20px"}}>
+                    223334455
+                </li>
                 </p>
 
             </div>

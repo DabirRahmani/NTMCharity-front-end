@@ -45,6 +45,10 @@ import {GetLastTransactions} from '../../../../core/home/trnasaction'
 import {GetTopTransactions} from '../../../../core/home/trnasaction'
 
 import NeedReqDialog from './needRequest/NeedReqDialog';
+import photo from '../img/signin.png'
+
+
+import requestedlist from './rquestEvent/requestedList'
 
 const Home =()=>
 {
@@ -189,12 +193,12 @@ const Home =()=>
 
         if(localStorage.getItem("token") !== null)
         return <Button 
-        style={{whiteSpace: 'nowrap'}}
+        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One"}}
         variant="contained"
         size="small"
         onClick={openNeedDialog} 
         size="small"  >
-            New Need Request!
+            New Need Req
        </Button>
     }
 
@@ -221,7 +225,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signup"
         >
             signup
@@ -231,7 +235,7 @@ const Home =()=>
         variant="contained"
         size="small" 
         color="primary"
-        style={{background:"#ffc107", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signin"
         >
             signin
@@ -250,7 +254,7 @@ const Home =()=>
             variant="contained"
             size="small"
             size="small" 
-            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>General Donate 
+            style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>General Donate 
             </Button>
         }
   
@@ -284,13 +288,13 @@ const Home =()=>
         if(localStorage.getItem("token") !== null)
         return <div>
           <IconButton onClick={goProflie} >
-             <AccountCircleIcon    style={{color:"#ffc107"}}/>
+             <AccountCircleIcon/>
           </IconButton>
 
           {showadminpanelButton()}
 
           <IconButton onClick={signOut} >
-             <PowerSettingsNewIcon    style={{color:"#ffc107"}}/>
+             <PowerSettingsNewIcon/>
           </IconButton>
 
           
@@ -300,7 +304,7 @@ const Home =()=>
     const showadminpanelButton =()=>{
         if(localStorage.getItem("user_type") === "1")
         return <IconButton onClick={goAdminPanel}>
-            <SettingsIcon    style={{color:"#ffc107"}}/>
+            <SettingsIcon/>
             </IconButton>
     }
 
@@ -321,17 +325,17 @@ const Home =()=>
         <Table size="small" >
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell >Amount</TableCell>
-              <TableCell >Event ID</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Username</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Amount</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Event ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {lastTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell >{item.username}</TableCell>
-                <TableCell >{item.amount}</TableCell>
-                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -346,17 +350,17 @@ const Home =()=>
         <Table size="small" >
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell >Amount</TableCell>
-              <TableCell >Event ID</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Username</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Amount</TableCell>
+              <TableCell style={{fontFamily:"Mate SC"}}>Event ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {topTransActions.map((item) => (
               <TableRow key={item.id + "tr"}>
-                <TableCell >{item.username}</TableCell>
-                <TableCell >{item.amount}</TableCell>
-                <TableCell >{item.event_title} (id:{item.event_id})</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.username}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.amount}</TableCell>
+                <TableCell style={{fontFamily:"Mate SC"}}>{item.event_title} (id:{item.event_id})</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -364,21 +368,18 @@ const Home =()=>
       </TableContainer>
     }
 
-
         return(
          <div >
              
-             <video autoPlay loop muted 
-             style={{
-                 position:"fixed",
-                 width:"100%",
-                 height:"-webkit-fill-available",
-                 objectFit:"cover",
-                 zIndex:"-1"
-             }}
-             >
-             <source src="https://aspb14.cdn.asset.aparat.com/aparat-video/2ea268816548e03a178d3c7d3cb2939116315664-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImEwNmQ5MDEyZTg3M2ExN2E0M2NlZWY5YjY4NDk0OWVkIiwiZXhwIjoxNjIyODk5MDE1LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.YT4VEhQ7WbRxHzffdE0XWkQrOlxpfCj3Au_0m6vJ9fU"/>
-             </video>
+             <img src={photo} 
+   style={{
+    position:"fixed",
+    width:"100%",
+    height:"-webkit-fill-available",
+    objectFit:"cover",
+    zIndex:"-1"
+}}
+    />
             <CssBaseline />
 
              <AppBar position="static">
@@ -443,9 +444,9 @@ const Home =()=>
 
             
             <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px"}}>
-                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold"}}> Latest transitions</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Latest transitions</div>
                 {CreateTable()}
-                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold"}}> Top transaction amouts</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Top transaction amouts</div>
                 {CreateTable02()}
             </Paper>
 

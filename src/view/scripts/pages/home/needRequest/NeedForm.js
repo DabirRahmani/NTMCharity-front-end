@@ -44,7 +44,6 @@ const NeedForm =(probs)=>
 
     const SubmitRequest =()=>
     {
-        console.log("sssssssssss")
         CreateNeedRequest({token:localStorage.getItem("token"),title:title,description:description})
         .then((res)=>{
             if(res.data.success === "1")
@@ -72,7 +71,7 @@ const NeedForm =(probs)=>
                 variant="contained"
                 size="small" 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px"}}
+                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px",fontFamily:"Orelega One"}}
                 onClick={cancelEdit}>
                     cancel
                 </Button>
@@ -83,7 +82,7 @@ const NeedForm =(probs)=>
                 disabled={!submitButtonStatus}
 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#4caf50 "}}
+                style={{marginBottom:"-20px",background:"#4caf50 ",fontFamily:"Orelega One"}}
                 onClick={SubmitRequest}>
                     submit edit
                 </Button>
@@ -99,7 +98,7 @@ const NeedForm =(probs)=>
             size="small" 
             color="primary"
             disabled={!submitButtonStatus}
-            style={{marginBottom:"-20px",background:"#4caf50 "}}
+            style={{marginBottom:"-20px",background:"#1890ff",fontFamily:"Orelega One"}}
             onClick={SubmitRequest}>
                 submit
             </Button>
@@ -110,12 +109,12 @@ const NeedForm =(probs)=>
 
         <div style={{margin:"24px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px" , height: '28vh'}}>
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography>{formTitle}</Typography>
+            <Typography style={{fontFamily:"Sigmar One"}}>{formTitle}</Typography>
         </div>
 
         <div style={{display:"flex"}}>
         <TextField 
-        style={{maxWidth:"97%",display: 'inline-block', marginLeft:"8px"}} 
+        style={{maxWidth:"97%",display: 'inline-block', marginLeft:"8px",fontFamily:"Mate SC"}} 
         fullWidth 
         placeholder="please write a title" 
         label="title" 
@@ -125,7 +124,7 @@ const NeedForm =(probs)=>
 
         <div style={{marginRight:"24px"}}>
         <TextField 
-        style={{display: 'block', marginLeft:"8px"}} 
+        style={{display: 'block', marginLeft:"8px",fontFamily:"Mate SC"}} 
         multiline 
         fullWidth 
         placeholder="please write a description" 
