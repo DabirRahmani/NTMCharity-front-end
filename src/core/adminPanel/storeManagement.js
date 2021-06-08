@@ -74,6 +74,11 @@ const DeleteProduct =(probs)=>
     return axios.create({baseURL: BackendUrl()}).post( '/DeleteProduct',{id:probs.id})
 }
 
+const GetDataAnalysis =(probs)=> 
+{
+    return axios.create({baseURL: BackendUrl()}).post( '/DataAnalyze',{})
+}
 
 
-export {EditProductCount,DeleteCat,DeleteSubCat,DeleteProduct,GetCatList,GetSubCatList,GetProductList,CreateSubCat,CreateProduct,CreateCat,EditCat,EditSubCatTitle,EditSubCatCat,EditProductTitle,EditProductSubCat}
+
+export {EditProductCount,DeleteCat,DeleteSubCat,DeleteProduct,GetCatList,GetSubCatList,GetProductList,CreateSubCat,CreateProduct,CreateCat,EditCat,EditSubCatTitle,EditSubCatCat,EditProductTitle,EditProductSubCat,GetDataAnalysis}
