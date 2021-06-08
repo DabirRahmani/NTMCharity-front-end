@@ -41,7 +41,7 @@ const SignleRequestListItem =(probs)=>
                 return <div 
                 style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block"}}>
                     <Typography 
-                    style={{color:"#e53935",display:"inline-block",paddingLeft:"4px",verticalAlign:"top"}}>
+                    style={{color:"#e53935",display:"inline-block",paddingLeft:"4px",verticalAlign:"top",fontFamily:"Mate SC"}}>
                         rejected
                     </Typography>
                 </div>
@@ -51,7 +51,7 @@ const SignleRequestListItem =(probs)=>
                  return <div 
                 style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block"}}>
                     <Typography 
-                        style={{color:"#4caf50",display:"inline-block",paddingLeft:"4px",verticalAlign:"top"}}>
+                        style={{color:"#4caf50",display:"inline-block",paddingLeft:"4px",verticalAlign:"top",fontFamily:"Mate SC"}}>
                         accepted
                     </Typography>
                 </div>
@@ -62,7 +62,7 @@ const SignleRequestListItem =(probs)=>
                 if((probs.feedback === null) || (probs.feedback === undefined) || (probs.feedback=== ""))
                 {
                     return <div 
-                    style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block"}}>
+                    style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block",fontFamily:"Orelega One"}}>
                         <Button
                         variant="contained"
                         size="small" 
@@ -77,7 +77,7 @@ const SignleRequestListItem =(probs)=>
                 else
                 {
                     return <div 
-                    style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block"}}>
+                    style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block",fontFamily:"Orelega One"}}>
                         <Button
                         variant="contained"
                         size="small" 
@@ -101,12 +101,12 @@ const SignleRequestListItem =(probs)=>
         <div >
 
             <Typography 
-            style={{verticalAlign:"middle",width:"30%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word"}}>
+            style={{verticalAlign:"middle",width:"30%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word",fontFamily:"Mate SC"}}>
                 {probs.title}
             </Typography>
 
             <Typography 
-            style={{verticalAlign:"middle",width:"50%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word"}}>
+            style={{verticalAlign:"middle",width:"50%", display:"inline-block",paddingLeft:"8px", overflowWrap:"break-word",fontFamily:"Mate SC"}}>
                 {probs.feedback}
             </Typography>
 

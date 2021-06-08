@@ -461,8 +461,8 @@ const Login = () => {
 
         <div className={classes.paper}>
 
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+          <Avatar size="small" style={{marginTop:"8px"}}>
+            <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5" style={{fontFamily:"Sigmar One"}}>
             Sign in

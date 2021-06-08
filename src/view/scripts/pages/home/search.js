@@ -64,16 +64,17 @@ const Search = (props)=>{
         minWidth:'248px',
         width: '180px',
         paddingLeft:"10px",
-        marginLeft:"12px",
+        marginLeft:"55px",
         backgroundColor: inputBackGround,
         borderRadius:"4px",
-        fontFamily:"Sigmar One"
+        fontFamily:"Sigmar One",
     }}
     >
         <InputBase  
         style={{ 
         width: '180px',
-        minWidth:'180px'
+        minWidth:'180px',
+        marginLeft:"5px"
 
         }}
         value={title} 
@@ -87,6 +88,7 @@ const Search = (props)=>{
         <IconButton 
         style={{ 
             minWidth:"24px",
+            marginLeft:"-7px"
         }}  
         size="small" 
         onClick={searchclick}>

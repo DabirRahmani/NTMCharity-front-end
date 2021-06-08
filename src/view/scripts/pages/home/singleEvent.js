@@ -79,8 +79,7 @@ const SingleEvent = (probs)=> {
       onClick={()=>{setOpenDialog(true)}}
       variant="contained"
       size="small"
-      size="small" 
-      style={{background:"#4caf50",fontFamily:"Orelega One"}}>Donate 
+      style={{background:"#8db1f3",fontFamily:"Orelega One"}}>Donate 
       </Button>
 
     }
@@ -99,8 +98,8 @@ const SingleEvent = (probs)=> {
             aria-controls="panel1c-content"
             id="panel1c-header">
   
-            <div style={{flexBasis: '33.33%',marginRight: '30px',fontFamily:"Orelega One"}} >
-              <Typography style={{fontSize:15, display:onCacellModify}} >{probs.title}</Typography>
+            <div style={{flexBasis: '33.33%',marginRight: '30px'}} >
+              <Typography style={{fontSize:15, display:onCacellModify,fontFamily:"Orelega One"}} >{probs.title}</Typography>
               <div style={{display: inModify, width:'100%'}}></div>
             </div>
 
@@ -130,7 +129,7 @@ const SingleEvent = (probs)=> {
 
                 <div style={{display: 'block', marginLeft:"8px"}}>
                 <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
-                <Typography style={{display: 'inline-block'}} >List of needs</Typography>
+                <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
                 </div>
 
                 <div style={{marginLeft:"16px",fontFamily:"Orelega One"}}>
