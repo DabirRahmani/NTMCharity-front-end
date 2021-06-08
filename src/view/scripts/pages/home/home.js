@@ -45,6 +45,7 @@ import {GetLastTransactions} from '../../../../core/home/trnasaction'
 import {GetTopTransactions} from '../../../../core/home/trnasaction'
 
 import NeedReqDialog from './needRequest/NeedReqDialog';
+import DonateProduct from '../donate/donateproduct';
 import photo from '../img/signin.png'
 
 
@@ -183,6 +184,16 @@ const Home =()=>
         }
       }
 
+      const renderDonateProducrDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("user_type")==="3")
+            {
+                return <DonateProduct close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
+
       const openNeedDialog =()=>
       {
           setNeedReqDialogStatus(true);
@@ -255,6 +266,20 @@ const Home =()=>
             size="small"
             size="small" 
             style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>General Donate 
+            </Button>
+        }
+  
+      }
+    const createProductDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")==="3")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>Donate Product 
             </Button>
         }
   
@@ -371,7 +396,8 @@ const Home =()=>
         return(
          <div >
              
-             <img src={photo} 
+          
+                       <img src={photo} 
    style={{
     position:"fixed",
     width:"100%",
@@ -380,6 +406,7 @@ const Home =()=>
     zIndex:"-1"
 }}
     />
+
             <CssBaseline />
 
              <AppBar position="static">
@@ -425,12 +452,11 @@ const Home =()=>
             <div style={{minWidth:"550px",maxWidth:"50%"}}>
 
                 <div style={{display:"-webkit-box"}} >
-                <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
+                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
                 {CreateOpenRequestButton()}
-
                 {createDonateButton()}
-
+                {createProductDonateButton()}
                 {CreateOpenNeedRequestButton()}
 
                 </div>
@@ -468,6 +494,7 @@ const Home =()=>
 
 
             {renderDonateDialog()}
+            {renderDonateProducrDialog()}
             {NeedReqDialogRenderer()}
 
         </div>

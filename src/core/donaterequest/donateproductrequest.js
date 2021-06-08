@@ -4,7 +4,7 @@ import BackendUrl from '../backendUrl'
 const DonateProducrRequest =({token , product, number})=>
 {
     return axios.create({baseURL: BackendUrl()}).post('/GeneralDonate', {
-     TOKEN_ID:token ,product_id:product, quantity:number})
+     TOKEN_ID:token ,product_id:product, quantity:number , known:true})
 }
 
 export default DonateProducrRequest
