@@ -74,7 +74,7 @@ const DeliveryRenderer=()=>
           </IconButton>
         </Box>
 
-        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"24px"}}>list of products</div>
+        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"24px", fontFamily:"Orelega One"}}>list of products</div>
 
         <div style={{display:"inline-flex", flexWrap:"wrap"}}>
         {CreateProductsList()}

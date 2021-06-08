@@ -41,7 +41,7 @@ const GDonatelogedin = (props) =>{
       }
       else
       {
-      GDonateRequestLogedin({donatemount})
+      GDonateRequestLogedin({donatemount, state})
         .then((resp)=>
         {
           console.log(resp);

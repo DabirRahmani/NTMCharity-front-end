@@ -45,6 +45,8 @@ import {GetLastTransactions} from '../../../../core/home/trnasaction'
 import {GetTopTransactions} from '../../../../core/home/trnasaction'
 
 import NeedReqDialog from './needRequest/NeedReqDialog';
+import DonateProduct from '../donate/donateproduct';
+import photo from '../img/signin.png'
 
 const Home =()=>
 {
@@ -179,6 +181,16 @@ const Home =()=>
         }
       }
 
+      const renderDonateProducrDialog=()=>{
+        if(donateDialogStatus === true)
+        {
+            if(localStorage.getItem("user_type")==="3")
+            {
+                return <DonateProduct close={ccloseDialog} id="redialog" />
+            }
+        }
+      }
+
       const openNeedDialog =()=>
       {
           setNeedReqDialogStatus(true);
@@ -251,6 +263,20 @@ const Home =()=>
             size="small"
             size="small" 
             style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>General Donate 
+            </Button>
+        }
+  
+      }
+    const createProductDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")==="3")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{background:"#4caf50",marginLeft:"16px",marginRight:"16px"}}>Donate Product 
             </Button>
         }
   
@@ -368,17 +394,18 @@ const Home =()=>
         return(
          <div >
              
-             <video autoPlay loop muted 
-             style={{
-                 position:"fixed",
-                 width:"100%",
-                 height:"-webkit-fill-available",
-                 objectFit:"cover",
-                 zIndex:"-1"
-             }}
-             >
-             <source src="https://aspb14.cdn.asset.aparat.com/aparat-video/2ea268816548e03a178d3c7d3cb2939116315664-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImEwNmQ5MDEyZTg3M2ExN2E0M2NlZWY5YjY4NDk0OWVkIiwiZXhwIjoxNjIyODk5MDE1LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.YT4VEhQ7WbRxHzffdE0XWkQrOlxpfCj3Au_0m6vJ9fU"/>
-             </video>
+             <img src={photo} 
+                style={{
+                  position:"absolute",
+                  width:"100%",
+                  left:"50%",
+                  top:"50%",
+                  Height:"100%",
+                  objectFit:"cover",
+                  transform:"translate(-50% , -50%)",
+                  zIndex:"-1"
+                }}
+             />
             <CssBaseline />
 
              <AppBar position="static">
@@ -424,12 +451,11 @@ const Home =()=>
             <div style={{minWidth:"550px",maxWidth:"50%"}}>
 
                 <div style={{display:"-webkit-box"}} >
-                <div style={{marginBottom:"8px",marginLeft:"16px",marginRight:"16px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
+                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
                 {CreateOpenRequestButton()}
-
                 {createDonateButton()}
-
+                {createProductDonateButton()}
                 {CreateOpenNeedRequestButton()}
 
                 </div>
@@ -467,6 +493,7 @@ const Home =()=>
 
 
             {renderDonateDialog()}
+            {renderDonateProducrDialog()}
             {NeedReqDialogRenderer()}
 
         </div>

@@ -18,6 +18,11 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Alert from '@material-ui/lab/Alert';
 import {useHistory} from 'react-router-dom';
+import photo from '../img/signin.png'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+
 
 
 const EditProfile =() =>
@@ -169,15 +174,16 @@ const EditProfile =() =>
       form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
+        fontFamily:"Orelega One",
       },
       submit: {
         margin: theme.spacing(3, 0, 2),
       },
       formControl: {
-        width: '100%'
+        width: '100%',
       },
       margiiin:{
-        margin: '12px'
+        margin: '12px',
       }
     }));
     const classes = useStyles();
@@ -190,12 +196,37 @@ const EditProfile =() =>
 
       <Container component="main" maxWidth="xs">
 
+        <AppBar position="static" width="100%">
+             <Toolbar style={{whiteSpace: "nowrap"}}>
+               
+                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                 </AllInclusiveIcon>
+                <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
+                NTM CHARITY!
+                </Typography>
+            </Toolbar>
+        </AppBar>
+
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One"}}>
             Edit Profile
           </Typography>
+
+          <img src={photo} 
+                style={{
+                  position:"absolute",
+                  width:"100%",
+                  left:"50%",
+                  top:"50%",
+                  Height:"100%",
+                  objectFit:"cover",
+                  transform:"translate(-50% , -50%)",
+                  zIndex:"-1"
+                }}
+             />
+             
           <form className={classes.form} noValidate>
-            <Grid container spacing={20}>
+            <Grid container spacing={20} >
                <Grid item xs={12} className={classes.margiiin}>
                  <TextField
                  disabled={disableViews}
@@ -205,7 +236,7 @@ const EditProfile =() =>
                  label="FirstName"
                  //defaultValue={firstname}
                  required
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                />
                </Grid>
@@ -218,7 +249,7 @@ const EditProfile =() =>
                  label="LastName"
                  //defaultValue={lastname}
                  required
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                  fullWidth
                 />
@@ -231,6 +262,7 @@ const EditProfile =() =>
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                     label="Gender"
+                    variant="filled"
                   >
                     <MenuItem value={0}>Male</MenuItem>
                     <MenuItem value={1}>Female</MenuItem>
@@ -245,7 +277,7 @@ const EditProfile =() =>
                  value={codemelli}
                  label="MelliCode"
                  //defaultValue={codemelli}
-                 variant="outlined"
+                 variant="filled"
                  type="number"
                  required
                  style={{ width:'100%'}}
@@ -260,7 +292,7 @@ const EditProfile =() =>
                  value={job}
                  label="Job"
                  //defaultValue={job}
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                  />
                </Grid>
@@ -274,7 +306,7 @@ const EditProfile =() =>
                    type="number"
                    //defaultValue={mobilenumber}
                    required
-                   variant="outlined"
+                   variant="filled"
                    style={{ width:'100%'}}
                    />
                    
@@ -288,7 +320,7 @@ const EditProfile =() =>
                      label="HousePhone"
                      type="number"
                      //defaultValue={housephone}
-                     variant="outlined"
+                     variant="filled"
                      style={{ width:'100%'}}
                    />
                    </Grid>
@@ -301,7 +333,7 @@ const EditProfile =() =>
                      label="WorkplacePhone"
                      type="number"
                      //defaultValue={workplacephone}
-                     variant="outlined"
+                     variant="filled"
                      style={{ width:'100%'}}
                    />
                </Grid>
@@ -313,14 +345,14 @@ const EditProfile =() =>
                     value={address}
                     label="Address"
                     //defaultValue={address}
-                    variant="outlined"
+                    variant="filled"
                     style={{ width:'100%' , height:'20%'}}
                   />
                </Grid>
                <Button
                   className={classes.margiiin}
                   variant="contained"
-                  style={{display:"inline-block"}}
+                  style={{display:"inline-block" , fontFamily:"Orelega One"}}
                   onClick={goprofile}
                   //size="small"
                   style= {{
@@ -340,7 +372,7 @@ const EditProfile =() =>
                <Button
                   className={classes.margiiin}
                   variant="contained"
-                  style={{display:"inline-block"}}
+                  style={{display:"inline-block",fontFamily:"Orelega One"}}
                   onClick={onEditprofileSubmit}
                   //size="small"
                   style= {{
