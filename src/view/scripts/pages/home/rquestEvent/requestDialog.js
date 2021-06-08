@@ -78,6 +78,7 @@ const RequestEventDialog =(probs)=>
         eventId={formEventId} 
         moneytarget={formMoneyTarget}/>
     }
+    
 
     const createRequestedList=()=>{
 
