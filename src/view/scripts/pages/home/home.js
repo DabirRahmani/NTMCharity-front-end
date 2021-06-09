@@ -262,7 +262,7 @@ const Home =()=>
 
     const createDonateButton=()=>{
 
-        if(localStorage.getItem("user_type")!="4")
+        if(localStorage.getItem("user_type")!=="4")
         {
             return <Button 
             onClick={oopenDialog}
@@ -340,7 +340,7 @@ const Home =()=>
     }
 
     const showadminpanelButton =()=>{
-        if(localStorage.getItem("user_type") === "1")
+        if((localStorage.getItem("user_type") === "1") || (localStorage.getItem("user_type") === "2"))
         return <IconButton onClick={goAdminPanel}>
             <SettingsIcon/>
             </IconButton>
