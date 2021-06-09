@@ -16,6 +16,10 @@ import Grid from '@material-ui/core/Grid';
 import HomeIcon from '@material-ui/icons/Home';
 
 import { Container } from '@material-ui/core';
+import photo from '../img/signin.png';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 
 
 const Profile =() =>{
@@ -138,11 +142,35 @@ const Profile =() =>{
             }}>
                 
                 <Container component="main" maxWidth="xs">
+                <AppBar position="static" width="100%">
+             <Toolbar style={{whiteSpace: "nowrap"}}>
+               
+                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                 </AllInclusiveIcon>
+                <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
+                NTM CHARITY!
+                </Typography>
+            </Toolbar>
+        </AppBar>
 
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One"}}>
             {usernamee} Profile
           </Typography>
+
+          <img src={photo} 
+                style={{
+                  position:"absolute",
+                  width:"100%",
+                  left:"50%",
+                  top:"50%",
+                  Height:"100%",
+                  objectFit:"cover",
+                  transform:"translate(-50% , -50%)",
+                  zIndex:"-1"
+                }}
+             />
+             
           <form className={classes.form} noValidate>
             <Grid container>
                <Grid item xs={12} className={classes.margiiin}>
@@ -152,7 +180,7 @@ const Profile =() =>{
                  label="FirstName"
                  value={firstname}
                  required
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                />
                </Grid>
@@ -163,7 +191,7 @@ const Profile =() =>{
                  label="LastName"
                  value={lastname}
                  required
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                  fullWidth
                 />
@@ -175,6 +203,7 @@ const Profile =() =>{
                   <Select
                     value={gender}
                     label="Gender"
+                    variant="filled"
                   >
                     <MenuItem value={0}>Male</MenuItem>
                     <MenuItem value={1}>Female</MenuItem>
@@ -187,7 +216,7 @@ const Profile =() =>{
                  id="mc"
                  label="MelliCode"
                  value={codemelli}
-                 variant="outlined"
+                 variant="filled"
                  required
                  style={{ width:'100%'}}
                  />
@@ -199,7 +228,7 @@ const Profile =() =>{
                  id="j"
                  label="Job"
                  value={job}
-                 variant="outlined"
+                 variant="filled"
                  style={{ width:'100%'}}
                  />
                </Grid>
@@ -210,7 +239,7 @@ const Profile =() =>{
                    label="MobileNumber"
                    value={mobilenumber}
                    required
-                   variant="outlined"
+                   variant="filled"
                    style={{ width:'100%'}}
                    />
                    
@@ -221,7 +250,7 @@ const Profile =() =>{
                      id="hp"
                      label="HousePhone"
                      value={housephone}
-                     variant="outlined"
+                     variant="filled"
                      style={{ width:'100%'}}
                    />
                    </Grid>
@@ -231,7 +260,7 @@ const Profile =() =>{
                      id="wp"
                      label="WorkplacePhone"
                      value={workplacephone}
-                     variant="outlined"
+                     variant="filled"
                      style={{ width:'100%'}}
                    />
                </Grid>
@@ -242,14 +271,14 @@ const Profile =() =>{
                     value={address}
                     label="Address"
                     //defaultValue={address}
-                    variant="outlined"
+                    variant="filled"
                     style={{ width:'100%' , height:'20%'}}
                   />
                </Grid>
                <Button
                   className={classes.margiiin}
                   variant="contained"
-                  style={{ width:'50%', display:"inline-block"}}
+                  style={{ width:'50%', display:"inline-block" , fontFamily:"Sigmar One"}}
                   onClick={goeditprofile}
                   //size="small"
                   style= {{
@@ -269,7 +298,7 @@ const Profile =() =>{
                <Button
                   className={classes.margiiin}
                   variant="contained"
-                  style={{ width:'50%', display:"inline-block"}}
+                  style={{ width:'50%', display:"inline-block" , fontFamily:"Orelega One"}}
                   onClick={goHome}
                   //size="small"
                   style= {{

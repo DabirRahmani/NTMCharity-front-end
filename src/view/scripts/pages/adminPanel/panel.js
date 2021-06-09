@@ -33,6 +33,7 @@ import { useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home';
 import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
+import photo from '../img/signin.png'
 
 const drawerWidth = 240;
 
@@ -186,14 +187,13 @@ const useStyles = makeStyles((theme) => ({
     "adminmanagement":adminmanagement});
   }
 
-  if(localStorage.getItem("user_type")!== "1")
+  if(localStorage.getItem("user_type")!== "1" && localStorage.getItem("user_type") !== "2")
   {
     return <div style={{padding:"24px"}}>404 page not found</div>
   }
   else
   return (
       <div id="admin-panel" className={classes.root}>
-
 
 
       <CssBaseline />

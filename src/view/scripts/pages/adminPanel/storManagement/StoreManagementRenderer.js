@@ -14,6 +14,7 @@ import {DeleteProduct} from '../../../../../core/adminPanel/storeManagement'
 import {EditProductSubCat} from '../../../../../core/adminPanel/storeManagement'
 import {EditSubCatCat} from '../../../../../core/adminPanel/storeManagement'
 import {EditProductCount} from '../../../../../core/adminPanel/storeManagement'
+import {GetDataAnalysis} from '../../../../../core/adminPanel/storeManagement'
 import Dialog from '@material-ui/core/Dialog';
 import SignleItem from './item'
 import Divider from '@material-ui/core/Divider';
@@ -57,6 +58,13 @@ const StoreManagementRenderer =()=>{
 
     const [status, setStatus]= useState(false)
 
+    const [focusId, setFocusid]= useState(0)
+
+    const [focusType, setFocustype]= useState("root")
+
+    const [dataAnalysis, setDataAnalysis]= useState();
+
+
     useEffect(()=>{
         GetCatList().then((res)=>{
             if(res.data.empty !== "0")
@@ -80,7 +88,14 @@ const StoreManagementRenderer =()=>{
                 })
             }
         })
+
+
     },[reload])
+
+    useEffect(()=>{
+        GetDataAnalysis()
+        .then((e)=>{setDataAnalysis(e.data)})
+    },[catList,reload,productList,subCatList])
 
     useEffect(()=>{
         if(dialogStatus === "counter")
@@ -139,6 +154,7 @@ const StoreManagementRenderer =()=>{
                 add={Add}
                 change={Change}
                 counter={Counter}
+                focus={Focus}
                  /> 
                 </div>
             }
@@ -154,12 +170,19 @@ const StoreManagementRenderer =()=>{
             add={Add}
             change={Change} 
             counter={Counter}
+            focus={Focus}
             /> 
         })
         }
         else
         return <div> nothing to show </div>
     }
+
+    const Focus=({id,type})=>{
+        setFocusid(id);
+        setFocustype(type);
+    }
+
 
     const Counter =(probs)=>{
         setDialogStatus("counter");
@@ -221,14 +244,13 @@ const StoreManagementRenderer =()=>{
     const onChange=()=>{
         if(dialogValue !== "")
         {
-          //  console.log(dialogValue)
           setDialogStatus("loading")
+
 
             if(onProcessType === "subcategory")
             {
                 EditSubCatCat({id:onProcessId, catid:dialogValue})
                 .then(e=>{
-                    console.log(e)
 
                     if(e.data.success === "1")
                     {
@@ -248,7 +270,6 @@ const StoreManagementRenderer =()=>{
             {
                 EditProductSubCat({id:onProcessId, subcatid:dialogValue})
                 .then(e=>{
-                    console.log(e)
                     if(e.data.success === "1")
                     {
                         productList.filter(e=>e.id === onProcessId)[0].subcategory_id = dialogValue;
@@ -737,6 +758,14 @@ const StoreManagementRenderer =()=>{
         </div>
     }
 
+    const CreateDataAnalysisItems = ()=>{
+        if(dataAnalysis !== undefined) 
+        return <div>
+        <div style={{display:"block"}}>Categories:{dataAnalysis.category_number}</div>
+        <div style={{display:"block"}}>Sub Categories:{dataAnalysis.subcategory_number}</div>
+        <div style={{display:"block"}}>Products:{productList.length}</div>
+        </div>
+    }
 
     return <div style={{display: 'grid'}}>
 
@@ -748,7 +777,8 @@ const StoreManagementRenderer =()=>{
             {CreateExpand()}
 
             <Button 
-            onClick={()=>{setStatus(true)}}
+            onClick={()=>{setStatus(true); Focus({id:0, type:"root"})}}
+
             size="medium" 
             style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box", fontSize:"18px",fontWeight:'bold'}}>
                 All categories
@@ -767,8 +797,19 @@ const StoreManagementRenderer =()=>{
 
 
 
-        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: '-webkit-inline-box'}}>
-            <Chart />
+        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: 'block'}}>
+
+            {CreateDataAnalysisItems()}
+
+            <Chart 
+                catlist={catList} 
+                subcatlist={subCatList} 
+                productlist={productList} 
+                id={focusId} 
+                type={focusType} 
+                dataAnalysis={dataAnalysis} 
+            />
+
         </div>
 
             
