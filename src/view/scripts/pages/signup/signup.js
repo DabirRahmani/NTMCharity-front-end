@@ -202,7 +202,7 @@ const SignUp = () =>
     }
 
     const goHome =()=>{
-      history.push("/")
+      history.push("/home")
     }
 
     const signOut=()=>{

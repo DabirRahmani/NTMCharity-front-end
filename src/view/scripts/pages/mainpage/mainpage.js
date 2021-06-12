@@ -17,7 +17,7 @@ const Mainpage =()=>
 {
     const history = useHistory();
     const goHome =()=>{
-        history.push("/")
+        history.push("/home")
       }
     return(
         <dive>
