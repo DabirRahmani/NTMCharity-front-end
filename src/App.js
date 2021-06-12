@@ -27,7 +27,7 @@ const App =() =>
                 <Route path="/main-page" component={mainpage}/>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/MainPage" component={mainpage}/>
-                <Route component={UploadImage}/>
+                <Route component={Err404}/>
             </Switch>
             
         </div>

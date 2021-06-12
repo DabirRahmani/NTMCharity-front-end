@@ -329,6 +329,7 @@ const SingleEvent = (probs)=> {
 
     const handleImage =(prob)=>
     {
+      setsubmitImage(false)
       if(prob.changed === true)
       {
         UploadImageRequest(prob)
