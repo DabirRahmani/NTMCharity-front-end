@@ -12,6 +12,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import SingleItemList from '../../adminPanel/singleItemList'
 import CreateEventRequest from '../../../../../core/eventRequests/createEventRequest'
 import EditRequestedEvent from '../../../../../core/eventRequests/editRequestedEvent'
+import UploadImage from '../../uploadImage/UploadImage';
+import axios from 'axios';
+import UploadImageRequest from '../../../../../core/uploadImage';
 
 const RequestForm =(probs)=>
 {
@@ -19,6 +22,7 @@ const RequestForm =(probs)=>
     const [description, setDescription]= useState(probs.description)
     const [moneyTarget, setMoneyTarget]= useState("")
     const [listOfNeeds, setListOfNeeds]= useState(probs.listofneeds)
+    const [image, setImage] = useState(probs.image)
     const [newItem, setNewItem]= useState("")
     const [formStatus, setFormStatus] = useState(probs.status)//اگر فالس باشه یعنی فرم اصلی باشه
     //برای ساخت ایونت جدید
@@ -30,6 +34,11 @@ const RequestForm =(probs)=>
     const [formTitle, setFormTitle] = useState("Request new Event")
 
     const [submitButtonStatus, setSubmitButtonStatus] = useState(false);
+
+    const [submitImage, setsubmitImage]= useState(false)
+
+    const [newImage, setnewimage] = useState("")
+
 
     useEffect(()=>{
         if(formStatus === "true")
@@ -94,12 +103,36 @@ const RequestForm =(probs)=>
         }
     }
 
-    const SubmitRequest =()=>{
+    const handleImage =(probs)=>
+    {
+        setsubmitImage(false)
+        if(probs.changed === true)
+        {
+
+            UploadImageRequest(probs)
+            .then(res => 
+            {
+              postEventRequest({new:true, image:res.data.image_url})
+            })
+            .catch(err => console.log(err))
+        } 
+        else
+        {
+            postEventRequest({new:false, image:probs.src})
+        }
+
+        
+
+    }
+
+    console.log(image)
+
+
+    const postEventRequest= (probs)=>{
         if(formStatus === "false")
         {
-            CreateEventRequest({token:localStorage.getItem("token"),title:title,description:description,listofneeds:listOfNeeds, imageurl:"", moneytarget:moneyTarget})
+            CreateEventRequest({token:localStorage.getItem("token"),title:title,description:description,listofneeds:listOfNeeds, imageurl:probs.image, moneytarget:moneyTarget})
             .then((res)=>{
-                console.log(res)
             })
             .catch((res)=>{console.log(res)})
             .finally(()=>{cancelEdit();})
@@ -107,16 +140,20 @@ const RequestForm =(probs)=>
         }
         else //باید ایونت قدیمی تغییر کنه
         {
-            EditRequestedEvent({token:localStorage.getItem("token"),eventid:eventId,title:title,description:description,listofneeds:listOfNeeds, imageurl:"",moneytarget:moneyTarget})
+            EditRequestedEvent({token:localStorage.getItem("token"),eventid:eventId,title:title,description:description,listofneeds:listOfNeeds, imageurl:probs.image,moneytarget:moneyTarget})
             .then((res)=>{
-                console.log(res)
             })
             .catch((res)=>{console.log(res)})
             .finally(()=>{cancelEdit();})
             cancelEdit();
         }
         setListOfNeeds(listOfNeeds.filter(e=> e === ""))
+    }
 
+    const SubmitRequest =()=>
+    {
+        setsubmitImage(true)
+        
     }
 
     const cancelEdit =()=>{
@@ -176,7 +213,7 @@ const RequestForm =(probs)=>
 
         <div style={{display:"flex"}}>
         <TextField 
-        style={{maxWidth:"40%",display: 'inline-block', marginLeft:"8px",fontFamily:"Mate SC"}} 
+        style={{maxWidth:"25%",display: 'inline-block', marginLeft:"8px",fontFamily:"Mate SC"}} 
         fullWidth 
         placeholder="please write a title" 
         label="title" 
@@ -184,27 +221,39 @@ const RequestForm =(probs)=>
         onChange={(e)=>setTitle(e.target.value)}/>
 
         <TextField 
-        style={{maxWidth:"15%",display: 'inline-block', marginLeft:"40%",fontFamily:"Mate SC"}} 
+        style={{maxWidth:"15%",display: 'inline-block', marginLeft:"5%",fontFamily:"Mate SC"}} 
         fullWidth 
         label="$ requested" 
         type="number"
         value={moneyTarget} 
         onChange={(e)=>setMoneyTarget(e.target.value)}/>
 
+
+
         </div>
 
-        <div style={{marginRight:"24px"}}>
+
+        <div style={{display: 'flex', flexDirection: 'row', flexWrap:'wrap',justifyContent: 'space-between'}}>
+            
         <TextField 
-        style={{display: 'block', marginLeft:"8px",fontFamily:"Mate SC"}} 
-        multiline 
-        fullWidth 
-        placeholder="please write a description" 
-        label="description" 
-        value={description}
-        onChange={(e)=>setDescription(e.target.value)}/>
+            style={{display: 'inline-block', marginLeft:"8px",fontFamily:"Mate SC", maxWidth:"70%", minWidth:"70%", marginBottom:"8px"}} 
+            multiline 
+            fullWidth 
+            placeholder="please write a description" 
+            label="description" 
+            value={description}
+            onChange={(e)=>setDescription(e.target.value)}
+        />
+
+        <div
+            style={{display: 'inline-block',fontFamily:"Mate SC", maxWidth:"25%", minWidth:"200px", marginLeft:"8px", marginRight:"8px"}} > 
+            <UploadImage image={image} onsubmit={submitImage} handleImage={handleImage}/> 
+        </div>
+
         </div>
 
         <div style={{display: 'block', marginLeft:"8px"}}>
+
         <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
         <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
         </div>

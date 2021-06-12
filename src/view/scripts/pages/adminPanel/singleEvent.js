@@ -34,7 +34,8 @@ import SingleItemList from './singleItemList'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
-
+import UploadImage from '../../../../view/scripts/pages/uploadImage/UploadImage'
+import UploadImageRequest from '../../../../core/uploadImage';
 
 
 
@@ -101,6 +102,8 @@ const SingleEvent = (probs)=> {
     const [disableConfrimModifyButton,setDisableConfrimModifyButton] = useState(true)
 
     const [torenderUseEffect, setrenderer] = useState(true)
+
+    const [submitImage, setsubmitImage] = useState(false)
 
     //prevent to get null object from list of needs
     useEffect(()=>{
@@ -201,6 +204,7 @@ const SingleEvent = (probs)=> {
         }
       }
 
+
       const onRequestEditClicked=()=>{
         if(inDeleteOrConfirm === "none")
         {
@@ -266,7 +270,7 @@ const SingleEvent = (probs)=> {
 
       const onConfirmModifyClicked=()=>
       {
-        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:imageurl, username:username,moneytarget:modifiedMoneyTarget});
+        setsubmitImage(true)
       }
 
     
@@ -313,6 +317,34 @@ const SingleEvent = (probs)=> {
         setNewItemListError("this item exists in list")
       }
     }
+
+
+    const CreateImageView =()=>{
+
+      if(inModify === "none")
+      return <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={imageurl} />
+
+      return <UploadImage image={imageurl} onsubmit={submitImage} handleImage={handleImage}/>
+    }
+
+    const handleImage =(prob)=>
+    {
+      if(prob.changed === true)
+      {
+        UploadImageRequest(prob)
+        .then(res=>{
+            probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:res.data.image_url, username:username,moneytarget:modifiedMoneyTarget});
+
+        })
+      }
+      else
+      {
+        probs.onconfrimmodify({eventid:eventid, feedback:feedback,title:modifiedTitle, description:modifiedDescription, listofneeds:modifiedListOfNeeds,imageurl:prob.src, username:username,moneytarget:modifiedMoneyTarget});
+      }
+    }
+
+    console.log(imageurl)
+
 
     return(
 
@@ -388,6 +420,7 @@ const SingleEvent = (probs)=> {
                 />
 
 
+
               {CreatelistOfNeeds()}
 
               <IconButton style={{display: newItemDisplay}} edge="start" onClick={AddItemToModifiedListOfNeeds}>
@@ -413,7 +446,8 @@ const SingleEvent = (probs)=> {
 
 
             <div style={{alignItems: 'center'}} >
-              <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={imageurl} />
+
+              {CreateImageView()}
     
               </div>
   

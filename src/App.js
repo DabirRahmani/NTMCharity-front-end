@@ -10,6 +10,7 @@ import Home from './view/scripts/pages/home/home'
 import Err404 from './view/scripts/pages/404'
 import Donate from './view/scripts/pages/donate/donate';
 import mainpage from './view/scripts/pages/mainpage/mainpage';
+import UploadImage from './view/scripts/pages/uploadImage/UploadImage';
 
 const App =() =>
 {
@@ -26,7 +27,7 @@ const App =() =>
                 <Route path="/main-page" component={mainpage}/>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/MainPage" component={mainpage}/>
-                <Route component={Err404}/>
+                <Route component={UploadImage}/>
             </Switch>
             
         </div>
