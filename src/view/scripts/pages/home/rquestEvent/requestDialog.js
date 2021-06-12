@@ -24,6 +24,7 @@ const RequestEventDialog =(probs)=>
     const [formEventId, setFormEventId]= useState("0");
     const [formListOfNeeds, setFormListOfNeeds]= useState([]);
     const [formMoneyTarget, setFormMoneyTarget]= useState("");
+    const [formImage, setFormImage]= useState("")
 
     //این ارایه باید همه چیزا رو داشته باشه ایدی استاتوس لیست مواد توضیحات و همه چیز مربوط به ایونت
     const [requestList, setRequestList]= useState([])
@@ -52,6 +53,7 @@ const RequestEventDialog =(probs)=>
         //اینجا استیت هایی که برای فرم رکوئست داریم باید ریست بشن تا فرم رکوئست کاملا خالی بشه
         setFormTitle("");
         setFormDescription("");
+        setFormImage("")
         if(formEventId === "0")
         {
             setFormEventId("-1");
@@ -76,6 +78,7 @@ const RequestEventDialog =(probs)=>
         title={formTite} 
         status={formStatus} 
         eventId={formEventId} 
+        image={formImage}
         moneytarget={formMoneyTarget}/>
     }
     
@@ -101,6 +104,7 @@ const RequestEventDialog =(probs)=>
 
     const editRequestedItem =(eventid)=>{
         let item = requestList.find(e=> e.id === eventid)
+        setFormImage(item.image_url)
         setFormDescription(item.description)
         setFormTitle(item.title);
         setFormListOfNeeds(Object.values(item.list_of_needs))

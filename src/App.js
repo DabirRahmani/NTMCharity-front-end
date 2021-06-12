@@ -10,6 +10,7 @@ import Home from './view/scripts/pages/home/home'
 import Err404 from './view/scripts/pages/404'
 import Donate from './view/scripts/pages/donate/donate';
 import mainpage from './view/scripts/pages/mainpage/mainpage';
+import UploadImage from './view/scripts/pages/uploadImage/UploadImage';
 
 const App =() =>
 {

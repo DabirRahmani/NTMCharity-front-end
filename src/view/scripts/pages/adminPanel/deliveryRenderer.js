@@ -76,7 +76,7 @@ const DeliveryRenderer=()=>
 
         <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"24px", fontFamily:"Orelega One"}}>list of products</div>
 
-        <div style={{display:"inline-flex", flexWrap:"wrap"}}>
+        <div style={{display:"inline-flex", flexWrap:"wrap", width:"100%"}}>
         {CreateProductsList()}
 
         </div>
