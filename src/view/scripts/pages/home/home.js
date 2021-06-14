@@ -212,19 +212,7 @@ const Home =()=>
       }
       
 
-      const CreateOpenNeedRequestButton =()=>{
 
-        if(localStorage.getItem("user_type") === "4")
-        return <Button 
-        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One"}}
-        variant="contained"
-        size="small"
-        onClick={openNeedDialog} 
-        size="small"  >
-            New Need Req
-            
-       </Button>
-    }
 
     const oopenDialog =()=>
     {
@@ -270,39 +258,10 @@ const Home =()=>
 
     }
 
-    const createDonateButton=()=>{
-
-        if(localStorage.getItem("user_type")!=="4")
-        {
-            return <Button 
-            onClick={oopenDialog}
-            variant="contained"
-            size="small"
-            size="small" 
-            style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>General Donate 
-            </Button>
-        }
-  
-      }
-
+    
     const openProduct =()=>{
         setPoductDialogStatus(true)
     }
-
-    const createProductDonateButton=()=>{
-
-        if(localStorage.getItem("user_type")!=="4")
-        {
-            return <Button 
-            onClick={openProduct}
-            variant="contained"
-            size="small"
-            size="small" 
-            style={{marginLeft:"16px",marginRight:"16px",fontFamily:"Orelega One"}}>Donate Product 
-            </Button>
-        }
-  
-      }
 
     const CreateOpenRequestButton =()=>
     {
@@ -314,11 +273,58 @@ const Home =()=>
         size="small"
         onClick={openDialog} 
         size="small" 
-        style={{fontFamily:"Orelega One"}} >
+        style={{fontFamily:"Orelega One", marginRight:"8px"}} >
             Request New Event
        </Button>
 
     }
+
+    const createDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")!=="4")
+        {
+            return <Button 
+            onClick={oopenDialog}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{fontFamily:"Orelega One", marginRight:"8px"}}>General Donate 
+            </Button>
+        }
+  
+      }
+
+
+    const createProductDonateButton=()=>{
+
+        if(localStorage.getItem("user_type")!=="4")
+        {
+            return <Button 
+            onClick={openProduct}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{fontFamily:"Orelega One", marginRight:"8px"}}>Donate Product 
+            </Button>
+        }
+  
+      }
+
+
+
+    const CreateOpenNeedRequestButton =()=>{
+
+        if(localStorage.getItem("user_type") === "4")
+        return <Button 
+        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One", marginRight:"8px"}}
+        variant="contained"
+        size="small"
+        onClick={openNeedDialog} 
+        size="small"  >
+            New Need Req
+            
+       </Button>
+        }
 
     const goProflie =()=>{
         history.push('./profile')
@@ -497,10 +503,9 @@ const Home =()=>
         <div style={{display: "inline-flex",flexWrap:"wrap", flexDirection: "row", alignItems:"flex-start", justifyContent:"space-evenly", width:"100%"}}>
 
 
-            <div style={{minWidth:"550px",maxWidth:"50%"}}>
+            <div style={{minWidth:"550px",width:"55%",maxWidth:"50%"}}>
 
-                <div style={{display:"-webkit-box"}} >
-                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
+                <div style={{display:"flex", marginBottom:"8px"}} >
 
                 {CreateOpenRequestButton()}
                 {createDonateButton()}
@@ -508,6 +513,9 @@ const Home =()=>
                 {CreateOpenNeedRequestButton()}
 
                 </div>
+
+                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
+
 
                 <EventRenderer eventList={eventList}/>
 
