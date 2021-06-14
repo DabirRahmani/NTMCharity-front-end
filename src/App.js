@@ -24,9 +24,8 @@ const App =() =>
                 <Route path="/Donate" component={Donate}/>
                 <Route path="/editprofile" component={EditProfile}/>
                 <Route path="/admin-panel" component={AdminPanel}/>
-                <Route path="/main-page" component={mainpage}/>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/MainPage" component={mainpage}/>
+                <Route path="/home" component={Home}/>
+                <Route exact path="/" component={mainpage}/>
                 <Route component={Err404}/>
             </Switch>
             

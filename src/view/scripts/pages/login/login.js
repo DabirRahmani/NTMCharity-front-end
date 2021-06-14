@@ -165,7 +165,7 @@ const Login = () => {
           localStorage.setItem("user_type",Response.data.user_type)
           if(localStorage.getItem("user_type") === "1"){ history.push("/admin-panel")}
           if(localStorage.getItem("user_type") === "2"){ history.push("/admin-panel")}
-          if(localStorage.getItem("user_type") !== null){history.push("/")}
+          if(localStorage.getItem("user_type") !== null){history.push("/home")}
         } 
         else if(Response.data.success === "0")
         {
@@ -202,7 +202,7 @@ const Login = () => {
   };
 
   const goHome =()=>{
-    history.push("/")
+    history.push("/home")
   }
 
   const signOut=()=>{

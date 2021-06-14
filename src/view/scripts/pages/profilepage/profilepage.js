@@ -33,17 +33,8 @@ const Profile =() =>{
     const [email , setEmail] = useState('');
     const [usertype , setUsertype] = useState('');
     const [codemelli , setCodemelli] = useState('');
-    const [job , setJob] = useState('');
-    const [address , setAddress] = useState('');
-    const [mobilenumber , setMobilenumber] = useState('');
-    const [housephone , setHousephone] = useState('');
-    const [workplacephone , setWorkplacephone] = useState('');
     const [gender , setGender] = useState('');
-    const [married , setMarreid] = useState('');
-    const [birthdate , setBirthdate] = useState('');
-    const [isprofilecompleted , setIsprofilecompleted] = useState('');
-    const [ismobilevarified , setIsmobilevarified] = useState('');
-    const [isemailvarified , setIsemailvarified] = useState('');
+
     
     //useEffect(()=>{setFirstname("amin")} , []);
 
@@ -62,22 +53,12 @@ const Profile =() =>{
             setEmail(res.data.email)
             setUsertype(res.data.user_type)
             setCodemelli(res.data.melli_code)
-            setJob(res.data.job)
-            setAddress(res.data.address)
-            setMobilenumber(res.data.mobile_number)
-            setHousephone(res.data.house_phone)
-            setWorkplacephone(res.data.workplace_phone)
             if(res.data.gender){
               setGender("1")
             }
             else{
               setGender("0")
             }
-            setMarreid(res.data.married)
-            setBirthdate(res.data.birth_date)
-            setIsprofilecompleted(res.data.is_profile_completed)
-            setIsmobilevarified(res.data.verified_mobile)
-            setIsemailvarified(res.data.verified_email)
         }
         else if(res.data.success === "0")
         {
@@ -90,14 +71,14 @@ const Profile =() =>{
                 setStatus("DoesNotExist");
             }
         }
-    }).catch((er)=>{console.log(er)});
+    })
     
   },[])
 
 
 
   const goHome=()=>{
-    history.push("/")
+    history.push("/home")
 
   }
 
@@ -134,42 +115,73 @@ const Profile =() =>{
         return <div style={{padding:"24px"}}>404 page not found</div>
       }
     return(
-        <div>
-            <div style={{
-                display:"flow-root",
-                justifyContent:"space-around",
-                margin:"20px 0px",
-            }}>
-                
-                <Container component="main" maxWidth="xs">
-                <AppBar position="static" width="100%">
-             <Toolbar style={{whiteSpace: "nowrap"}}>
-               
-                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
-                 </AllInclusiveIcon>
-                <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
-                NTM CHARITY!
-                </Typography>
-            </Toolbar>
-        </AppBar>
+        <div >
 
-        <div className={classes.paper}>
-          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One"}}>
+
+
+          <img src={photo} 
+            style={{
+             position:"fixed",
+             width:"100%",
+             height:"-webkit-fill-available",
+             objectFit:"cover",
+             zIndex:"-1"
+             }}
+            />
+
+          <div style={{paddingTop:"50px"}}></div>
+
+
+          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
+
+
+
+            <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
+              
+                <Button
+                  variant="contained"
+                  onClick={goeditprofile}
+                  style= {{
+                  backgroundColor: "#4caf50",
+                  paddingRight:24,
+                  paddingLeft:24,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  variant="contained"
+                  color="primary"       
+                  startIcon={<CheckCircleOutlineIcon />}
+                  >
+                    Edit Profile
+               </Button>
+
+               <Button
+                  variant="contained"
+                  onClick={goHome}
+                  style= {{
+                  backgroundColor: "#ffc107",
+                  paddingRight:24,
+                  paddingLeft:24,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  variant="contained"
+                  color="primary"       
+                  startIcon={<HomeIcon />}
+                  >
+                    home
+               </Button>
+            </div>
+
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One", textAlign:'-webkit-center'}}>
             {usernamee} Profile
           </Typography>
 
-          <img src={photo} 
-                style={{
-                  position:"absolute",
-                  width:"100%",
-                  left:"50%",
-                  top:"50%",
-                  Height:"100%",
-                  objectFit:"cover",
-                  transform:"translate(-50% , -50%)",
-                  zIndex:"-1"
-                }}
-             />
+          <div style={{width:'100%',textAlign:'-webkit-center'}}>
+          <Avatar alt="Remy Sharp" src="https://s19.picofile.com/file/8436319426/download.jpg" style={{width:"200px", height:"200px"}} />
+          </div>
+
+
+
+
              
           <form className={classes.form} noValidate>
             <Grid container>
@@ -199,7 +211,7 @@ const Profile =() =>{
                </Grid>
                <Grid item xs={12} className={classes.margiiin}>
                 <FormControl variant="outlined" style={{ width:'100%'} } disabled={disableViews}>
-                  <InputLabel  id="demo-simple-select-outlined-label">Gender</InputLabel>
+                  <InputLabel  id="demo-simple-select-outlined-label" style={{marginTop:"12px"}}>Gender</InputLabel>
                   <Select
                     value={gender}
                     label="Gender"
@@ -222,103 +234,12 @@ const Profile =() =>{
                  />
                  
                </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                 <TextField
-                 disabled={disableViews}
-                 id="j"
-                 label="Job"
-                 value={job}
-                 variant="filled"
-                 style={{ width:'100%'}}
-                 />
-               </Grid>
-                 <Grid item xs={12} className={classes.margiiin}> 
-                   <TextField
-                   disabled={disableViews}
-                   id="mb"
-                   label="MobileNumber"
-                   value={mobilenumber}
-                   required
-                   variant="filled"
-                   style={{ width:'100%'}}
-                   />
-                   
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                   <TextField
-                   disabled={disableViews}
-                     id="hp"
-                     label="HousePhone"
-                     value={housephone}
-                     variant="filled"
-                     style={{ width:'100%'}}
-                   />
-                   </Grid>
-                   <Grid item xs={12} className={classes.margiiin}>
-                   <TextField
-                   disabled={disableViews}
-                     id="wp"
-                     label="WorkplacePhone"
-                     value={workplacephone}
-                     variant="filled"
-                     style={{ width:'100%'}}
-                   />
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                  <TextField
-                  disabled={disableViews}
-                    id="a"
-                    value={address}
-                    label="Address"
-                    //defaultValue={address}
-                    variant="filled"
-                    style={{ width:'100%' , height:'20%'}}
-                  />
-               </Grid>
-               <Button
-                  className={classes.margiiin}
-                  variant="contained"
-                  style={{ width:'50%', display:"inline-block" , fontFamily:"Sigmar One"}}
-                  onClick={goeditprofile}
-                  //size="small"
-                  style= {{
-                  backgroundColor: "#4caf50",
-                  paddingRight:24,
-                  paddingLeft:24,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  //fullWidth
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<CheckCircleOutlineIcon />}
-                  >
-                    Edit Profile
-               </Button>
 
-               <Button
-                  className={classes.margiiin}
-                  variant="contained"
-                  style={{ width:'50%', display:"inline-block" , fontFamily:"Orelega One"}}
-                  onClick={goHome}
-                  //size="small"
-                  style= {{
-                  backgroundColor: "#ffc107",
-                  paddingRight:24,
-                  paddingLeft:24,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<HomeIcon />}
-                  >
-                    home
-               </Button>
+
                </Grid>
             
           </form>
-        </div>
       </Container>
-            </div>
         </div>
         
     )

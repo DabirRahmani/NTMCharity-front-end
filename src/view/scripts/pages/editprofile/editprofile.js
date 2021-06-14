@@ -192,165 +192,45 @@ const EditProfile =() =>
     {
       return <div style={{padding:"24px"}}>404 page not found</div>
     }
-    return(
-
-      <Container component="main" maxWidth="xs">
-
-        <AppBar position="static" width="100%">
-             <Toolbar style={{whiteSpace: "nowrap"}}>
-               
-                 <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
-                 </AllInclusiveIcon>
-                <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
-                NTM CHARITY!
-                </Typography>
-            </Toolbar>
-        </AppBar>
-
-        <div className={classes.paper}>
-          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One"}}>
-            Edit Profile
-          </Typography>
+    return <div >
 
           <img src={photo} 
-                style={{
-                  position:"absolute",
-                  width:"100%",
-                  left:"50%",
-                  top:"50%",
-                  Height:"100%",
-                  objectFit:"cover",
-                  transform:"translate(-50% , -50%)",
-                  zIndex:"-1"
-                }}
-             />
-             
-          <form className={classes.form} noValidate>
-            <Grid container spacing={20} >
-               <Grid item xs={12} className={classes.margiiin}>
-                 <TextField
-                 disabled={disableViews}
-                 id="fn"
-                 onChange={(e)=>setFirstname(e.target.value)}
-                 value={firstname}
-                 label="FirstName"
-                 //defaultValue={firstname}
-                 required
-                 variant="filled"
-                 style={{ width:'100%'}}
-               />
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-               <TextField
-                 disabled={disableViews}
-                 id="ln"
-                 onChange={(e)=>setLastname(e.target.value)}
-                 value={lastname}
-                 label="LastName"
-                 //defaultValue={lastname}
-                 required
-                 variant="filled"
-                 style={{ width:'100%'}}
-                 fullWidth
-                />
-                
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                <FormControl variant="outlined" style={{ width:'100%'} } disabled={disableViews}>
-                  <InputLabel  id="demo-simple-select-outlined-label">Gender</InputLabel>
-                  <Select
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                    label="Gender"
-                    variant="filled"
+            style={{
+             position:"fixed",
+             width:"100%",
+             height:"-webkit-fill-available",
+             objectFit:"cover",
+             zIndex:"-1"
+             }}
+            />
+
+          <div style={{paddingTop:"50px"}}></div>
+
+
+          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
+
+
+
+            <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
+
+            <Button
+                  variant="contained"
+                  style={{display:"inline-block",fontFamily:"Orelega One"}}
+                  onClick={onEditprofileSubmit}
+                  style= {{
+                  backgroundColor: "#4caf50",
+                  paddingRight:8,
+                  paddingLeft:8,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  variant="contained"
+                  color="primary"       
+                  startIcon={<CheckCircleOutlineIcon />}
                   >
-                    <MenuItem value={0}>Male</MenuItem>
-                    <MenuItem value={1}>Female</MenuItem>
-                   </Select>
-                 </FormControl>
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                 <TextField
-                 disabled={disableViews}
-                 id="mc"
-                 onChange={(e)=>setCodemelli(e.target.value)}
-                 value={codemelli}
-                 label="MelliCode"
-                 //defaultValue={codemelli}
-                 variant="filled"
-                 type="number"
-                 required
-                 style={{ width:'100%'}}
-                 />
-                 
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                 <TextField
-                 disabled={disableViews}
-                 id="j"
-                 onChange={(e)=>setJob(e.target.value)}
-                 value={job}
-                 label="Job"
-                 //defaultValue={job}
-                 variant="filled"
-                 style={{ width:'100%'}}
-                 />
-               </Grid>
-                 <Grid item xs={12} className={classes.margiiin}> 
-                   <TextField
-                   disabled={disableViews}
-                   id="mb"
-                   onChange={(e)=>setMobilenumber(e.target.value)}
-                   value={mobilenumber}
-                   label="MobileNumber"
-                   type="number"
-                   //defaultValue={mobilenumber}
-                   required
-                   variant="filled"
-                   style={{ width:'100%'}}
-                   />
-                   
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                   <TextField
-                   disabled={disableViews}
-                     id="hp"
-                     onChange={(e)=>setHousephone(e.target.value)}
-                     value={housephone}
-                     label="HousePhone"
-                     type="number"
-                     //defaultValue={housephone}
-                     variant="filled"
-                     style={{ width:'100%'}}
-                   />
-                   </Grid>
-                   <Grid item xs={12} className={classes.margiiin}>
-                   <TextField
-                   disabled={disableViews}
-                     id="wp"
-                     onChange={(e)=>setWorkplacephone(e.target.value)}
-                     value={workplacephone}
-                     label="WorkplacePhone"
-                     type="number"
-                     //defaultValue={workplacephone}
-                     variant="filled"
-                     style={{ width:'100%'}}
-                   />
-               </Grid>
-               <Grid item xs={12} className={classes.margiiin}>
-                  <TextField
-                  disabled={disableViews}
-                    id="a"
-                    onChange={(e)=>setAddress(e.target.value)}
-                    value={address}
-                    label="Address"
-                    //defaultValue={address}
-                    variant="filled"
-                    style={{ width:'100%' , height:'20%'}}
-                  />
-               </Grid>
-               <Button
-                  className={classes.margiiin}
+                    Edit Profile
+               </Button>
+              
+            <Button
                   variant="contained"
                   style={{display:"inline-block" , fontFamily:"Orelega One"}}
                   onClick={goprofile}
@@ -369,33 +249,95 @@ const EditProfile =() =>
                     Back to Profile
                </Button>
 
-               <Button
-                  className={classes.margiiin}
-                  variant="contained"
-                  style={{display:"inline-block",fontFamily:"Orelega One"}}
-                  onClick={onEditprofileSubmit}
-                  //size="small"
-                  style= {{
-                  backgroundColor: "#4caf50",
-                  paddingRight:8,
-                  paddingLeft:8,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  //fullWidth
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<CheckCircleOutlineIcon />}
+
+
+
+            </div>
+
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One", textAlign:'-webkit-center'}}>
+            {usernamee} Profile
+          </Typography>
+
+          <div style={{width:'100%',textAlign:'-webkit-center'}}>
+          <Avatar alt="Remy Sharp" src="https://s19.picofile.com/file/8436319426/download.jpg" style={{width:"200px", height:"200px"}} />
+          </div>
+
+
+
+
+             
+          <form className={classes.form} noValidate>
+            <Grid container>
+               <Grid item xs={12} className={classes.margiiin}>
+                 <TextField
+                 disabled={disableViews}
+                 id="fn"
+                 label="FirstName"
+                 value={firstname}
+                 onChange={(e)=>setFirstname(e.target.value)}
+                 required
+                 variant="filled"
+                 style={{ width:'100%'}}
+               />
+               </Grid>
+               <Grid item xs={12} className={classes.margiiin}>
+               <TextField
+               disabled={disableViews}
+                 id="ln"
+                 label="LastName"
+                 value={lastname}
+                 onChange={(e)=>setLastname(e.target.value)}
+                 required
+                 variant="filled"
+                 style={{ width:'100%'}}
+                 fullWidth
+                />
+                
+               </Grid>
+               <Grid item xs={12} className={classes.margiiin}>
+                <FormControl variant="outlined" style={{ width:'100%'} } disabled={disableViews}>
+                  <InputLabel  id="demo-simple-select-outlined-label" style={{marginTop:"12px"}}>Gender</InputLabel>
+                  <Select
+                    value={gender}
+                    label="Gender"
+                    onChange={(e) => setGender(e.target.value)}
+                    variant="filled"
                   >
-                    Edit Profile
-               </Button>
-               
+                    <MenuItem value={0}>Male</MenuItem>
+                    <MenuItem value={1}>Female</MenuItem>
+                   </Select>
+                 </FormControl>
+               </Grid>
+               <Grid item xs={12} className={classes.margiiin}>
+                 <TextField
+                 disabled={disableViews}
+                 id="mc"
+                 label="MelliCode"
+                 value={codemelli}
+                 onChange={(e) => setCodemelli(e.target.value)}
+                 variant="filled"
+                 required
+                 style={{ width:'100%'}}
+                 />
+                 
+               </Grid>
+
+
+               <Grid item xs={12} className={classes.margiiin}>
+               {alert()}
+                 
+               </Grid>
+
+
+
                </Grid>
             
           </form>
-        </div>
-        {alert()}
       </Container>
-    )
+
+
+        </div>
+
     };
 
 export default EditProfile;

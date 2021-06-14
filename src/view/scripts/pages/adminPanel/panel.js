@@ -208,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
             {localStorage.getItem("username")}
           </Typography>
 
-          <IconButton onClick={()=>{history.push("/")}} >
+          <IconButton onClick={()=>{history.push("/home")}} >
              <HomeIcon style={{color:"#ffc107"}}/>
           </IconButton>
 
