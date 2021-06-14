@@ -42,7 +42,6 @@ const GDonate = (props) =>{
         GDonateRequest({donatemount})
         .then((resp)=>
         {
-          console.log(resp);
           if(resp.data.success === "1")
           {
             setStatus("1");
@@ -52,7 +51,6 @@ const GDonate = (props) =>{
 
         }).catch((p)=> {
 
-          console.log(p);
             if(!p.status)
             {
               setStatus("oops");

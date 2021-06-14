@@ -234,7 +234,6 @@ const EventRequestRenderer =()=>
 
         EditRequestForRequestedEvent({eventid:res.eventid,feedback:res.feedback,admintoken:localStorage.getItem("token")})
         .then((response)=>{
-            console.log(response)
             if(response.data.success === "1")
             {
 

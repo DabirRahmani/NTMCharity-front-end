@@ -344,7 +344,6 @@ const SingleEvent = (probs)=> {
       }
     }
 
-    console.log(imageurl)
 
 
     return(

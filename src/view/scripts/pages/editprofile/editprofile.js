@@ -22,6 +22,8 @@ import photo from '../img/signin.png'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import UploadProflieImage from './uploadProfileImage'
+import UploadImageRequest from '../../../../core/uploadImage';
 
 
 
@@ -48,13 +50,18 @@ const EditProfile =() =>
     const [ismobilevarified , setIsmobilevarified] = useState('');
     const [isemailvarified , setIsemailvarified] = useState('');
 
+    const [imageurl, setImageUrl]= useState('');
+
+    const [submitImage, setsubmitImage]= useState(false);
+
+
+    
 
     useEffect(()=>{
 
     ProfileRequest({Username : localStorage.getItem("username")})
     .then((res)=>
     {
-        console.log(res);
         if(res.data.success === "1"){
             setUsernamee(res.data.username)
             setFirstname(res.data.first_name)
@@ -78,6 +85,7 @@ const EditProfile =() =>
             setIsprofilecompleted(res.data.is_profile_completed)
             setIsmobilevarified(res.data.verified_mobile)
             setIsemailvarified(res.data.verified_email)
+            setImageUrl(res.data.image_url)
         }
         else if(res.data.success === "0")
         {
@@ -106,20 +114,22 @@ const EditProfile =() =>
   },[])
 
 
+    const onEditprofileSubmit=() =>{
+      setsubmitImage(true)
+    }
     
-    const onEditprofileSubmit=(p)=>
+    const EditprofileSubmit=(src)=>
     {
-        if((codemelli==="") || (firstname==="") || (lastname==="") || (mobilenumber===""))
+        if((codemelli==="") || (firstname==="") || (lastname==="") )
         {
             setStatus("0");
         }
         else
         {
-            EditProfileRequest({usernamee ,firstname , lastname ,usertype, codemelli , job, address
-                , mobilenumber , housephone ,  workplacephone, gender , married ,birthdate})
+            EditProfileRequest({usernamee ,firstname , lastname ,usertype, codemelli 
+                , mobilenumber , gender,src })
                 .then((resp)=>
                 {
-                  console.log(resp);
                     if(resp.data.success === "1")
                     {
                         setStatus("1");
@@ -131,12 +141,10 @@ const EditProfile =() =>
                     }
                 }).catch((p)=> {
 
-                  console.log(p);
                     if(!p.status)
                     {
                       setStatus("oops");
                     }
-                    //setDisableViews(false)
                 });
 
         }
@@ -161,6 +169,24 @@ const EditProfile =() =>
             return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
     
       }
+    }
+
+    const handleImage=(probs)=>{
+      if(probs.changed === true)
+      {
+        UploadImageRequest({state:probs.state})
+        .then((res)=>{
+            var src = res.data.image_url;
+            EditprofileSubmit(src)
+        })
+      }
+      else
+      {
+        EditprofileSubmit(probs.src)
+      }
+      setsubmitImage(false)
+
+      
     }
 
     
@@ -204,7 +230,7 @@ const EditProfile =() =>
              }}
             />
 
-          <div style={{paddingTop:"50px"}}></div>
+          <div style={{paddingTop:"20px"}}></div>
 
 
           <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
@@ -227,7 +253,7 @@ const EditProfile =() =>
                   color="primary"       
                   startIcon={<CheckCircleOutlineIcon />}
                   >
-                    Edit Profile
+                    submit
                </Button>
               
             <Button
@@ -259,7 +285,8 @@ const EditProfile =() =>
           </Typography>
 
           <div style={{width:'100%',textAlign:'-webkit-center'}}>
-          <Avatar alt="Remy Sharp" src="https://s19.picofile.com/file/8436319426/download.jpg" style={{width:"200px", height:"200px"}} />
+
+          <UploadProflieImage image={imageurl} onsubmit={submitImage} handleImage={handleImage}  />
           </div>
 
 

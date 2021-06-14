@@ -36,7 +36,6 @@ const GDonatelogedin = (props) =>{
         GDonateRequestLogedin({donatemount, state, token:localStorage.getItem("token")})
         .then((resp)=>
         {
-          console.log(resp);
           if(resp.data.success === "1")
           {
             props.close()
@@ -44,7 +43,6 @@ const GDonatelogedin = (props) =>{
 
         }).catch((p)=> {
 
-          console.log(p);
             if(!p.status)
             {
               setStatus("oops");

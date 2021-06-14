@@ -36,7 +36,6 @@ const Donate = (props) =>{
         DonateRequest({id,token,donatemount})
         .then((resp)=>
         {
-          console.log(resp);
           if(resp.data.success === "1")
           {
             setStatus("1");
@@ -46,7 +45,6 @@ const Donate = (props) =>{
 
         }).catch((p)=> {
 
-          console.log(p);
             if(!p.status)
             {
               setStatus("oops");
