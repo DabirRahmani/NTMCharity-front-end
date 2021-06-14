@@ -21,6 +21,7 @@ const UploadImage=(probs)=>
     
       const handleImageChange = (e) => 
       {
+
         e.preventDefault()
         setState({
           image: e.target.files[0]
@@ -36,27 +37,27 @@ const UploadImage=(probs)=>
 
         setChange(true)
 
-      };
+    };
 
 
 
 
 
-      const cancelImage=(e)=>{
+    const cancelImage=(e)=>{
         e.preventDefault()
         setSrc("");
         setShowImage(null);
         setState(null);
         setChange(false)
-      }
+    }
 
-      if(probs.onsubmit === true)
-      {
-        probs.handleImage({src:src,state:state,changed:change})
-      }
+    if(probs.onsubmit === true)
+    {
+      probs.handleImage({src:src,state:state,changed:change})
+    }
 
 
-      if((src === undefined) || (src === ""))
+    if((src === undefined) || (src === ""))
       {
         if(showImage === null)
         {
@@ -99,8 +100,8 @@ const UploadImage=(probs)=>
         }
 
 
-      }
-      else
+    }
+    else
       {
         return <div style={{width:"200px",  maxHeight:"200px",minWidth:"200px", marginRight:"8px"}} >
 
@@ -115,7 +116,7 @@ const UploadImage=(probs)=>
 
   
       </div>
-      }
+    }
 
 
 
