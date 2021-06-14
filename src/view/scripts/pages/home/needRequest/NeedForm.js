@@ -51,7 +51,6 @@ const NeedForm =(probs)=>
                 probs.success();
             }
         })
-        .catch((res)=>{console.log(res)})
         .finally(()=>{})
         cancelEdit();
 

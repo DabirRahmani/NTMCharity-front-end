@@ -26,7 +26,6 @@ const DeliveryRenderer=()=>
         GetNotDeliveredProducts()
         .then((res)=>{
             let arr2 = Object.values(res.data.donate_set)
-            console.log(res.data)
             setProductsList(arr2)
         })
     

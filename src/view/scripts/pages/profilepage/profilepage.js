@@ -35,6 +35,9 @@ const Profile =() =>{
     const [codemelli , setCodemelli] = useState('');
     const [gender , setGender] = useState('');
 
+    const [imageurl, setImageUrl]= useState('');
+
+
     
     //useEffect(()=>{setFirstname("amin")} , []);
 
@@ -44,7 +47,6 @@ const Profile =() =>{
     ProfileRequest({Username : localStorage.getItem("username")})
     .then((res)=>
     {
-        console.log(res);
         if(res.data.success === "1"){
             setStatus("1")
             setUsernamee(res.data.username)
@@ -59,6 +61,8 @@ const Profile =() =>{
             else{
               setGender("0")
             }
+            setImageUrl(res.data.image_url)
+
         }
         else if(res.data.success === "0")
         {
@@ -129,7 +133,7 @@ const Profile =() =>{
              }}
             />
 
-          <div style={{paddingTop:"50px"}}></div>
+          <div style={{paddingTop:"20px"}}></div>
 
 
           <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
@@ -176,7 +180,7 @@ const Profile =() =>{
           </Typography>
 
           <div style={{width:'100%',textAlign:'-webkit-center'}}>
-          <Avatar alt="Remy Sharp" src="https://s19.picofile.com/file/8436319426/download.jpg" style={{width:"200px", height:"200px"}} />
+          <Avatar alt="Remy Sharp" src={imageurl} style={{width:"200px", height:"200px"}} />
           </div>
 
 

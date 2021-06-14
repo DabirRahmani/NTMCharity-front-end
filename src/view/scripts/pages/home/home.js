@@ -23,6 +23,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Height } from '@material-ui/icons';
+import Avatar from '@material-ui/core/Avatar';
 
 
 import Donate from '../donate/donate'
@@ -50,6 +51,7 @@ import photo from '../img/signin.png'
 
 
 import requestedlist from './rquestEvent/requestedList'
+import UserBioRequest from '../../../../core/userBioRequest'
 
 const Home =()=>
 {
@@ -78,6 +80,8 @@ const Home =()=>
     const [NeedReqDialogStatus, setNeedReqDialogStatus]=useState(false);
 
     const [poductDialogStatus,setPoductDialogStatus] = useState(false);
+
+    const [avatar, setAvatar] = useState("")
 
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
@@ -116,6 +120,12 @@ const Home =()=>
 
 
     },[reload])
+
+
+    useEffect(()=>{
+        UserBioRequest({username: localStorage.getItem("username")})
+        .then(e=>setAvatar(e.data.image_url))
+    },[])
 
     const closeNeedDialog=()=>{
         setNeedReqDialogStatus(false);
@@ -326,7 +336,7 @@ const Home =()=>
         if(localStorage.getItem("token") !== null)
         return <div>
           <IconButton onClick={goProflie} >
-             <AccountCircleIcon/>
+             <Avatar src={avatar}/>
           </IconButton>
 
           {showadminpanelButton()}

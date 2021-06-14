@@ -30,7 +30,6 @@ const Chart =(probs)=>{
         { 
             if(probs.dataAnalysis !== undefined)
             {
-                console.log(probs)
 
 
                 var v = probs.subcatlist.filter(e=>e.category_id == probs.id);

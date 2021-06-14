@@ -1,12 +1,13 @@
 import { Dialog, IconButton } from "@material-ui/core"
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CancelIcon from '@material-ui/icons/Cancel';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import { useEffect } from "react";
+import Avatar from '@material-ui/core/Avatar';
 
-const UploadImage=(probs)=>
+const UploadProflieImage=(probs)=>
 {
+
     
 
     const [state, setState] = useState(null)
@@ -17,10 +18,7 @@ const UploadImage=(probs)=>
 
     const [change, setChange] = useState(false)
     
-    useEffect(()=>{setSrc(probs.image)},[probs.image])
-    
-      const handleImageChange = (e) => 
-      {
+      const handleImageChange = (e) => {
         e.preventDefault()
         setState({
           image: e.target.files[0]
@@ -38,9 +36,9 @@ const UploadImage=(probs)=>
 
       };
 
-
-
-
+    useEffect(()=>{
+        setSrc(probs.image)
+    },[probs])
 
       const cancelImage=(e)=>{
         e.preventDefault()
@@ -56,13 +54,14 @@ const UploadImage=(probs)=>
       }
 
 
-      if((src === undefined) || (src === ""))
+      if((src === undefined) || (src === "") || (src === null))
       {
         if(showImage === null)
         {
-          return <div style={{display: 'inline-block', marginRight:"8px"}} >
+          return <div >
+            
+          
           <form >
-            <div style={{display: 'inline-block'}}>No Image</div>
               <input type="file"
                      id="icon-button-file"
                      accept="image/png, image/jpeg" 
@@ -71,8 +70,10 @@ const UploadImage=(probs)=>
                      style={{maxWidth:"80%",display:"none"}}
                      />
 
+          <Avatar alt="Remy Sharp" src={src} style={{width:"200px", height:"200px"}} />
+
           <label htmlFor="icon-button-file">
-            <IconButton color="primary" aria-label="upload picture" component="span">
+            <IconButton style={{marginTop:"-60px", zIndex:"+1"}} color="primary" aria-label="upload picture" component="span">
               <PhotoCamera />
             </IconButton>
           </label>
@@ -82,17 +83,13 @@ const UploadImage=(probs)=>
         }
         else
         {
-          return <div style={{width:"200px",  maxHeight:"200px",minWidth:"200px", marginRight:"8px"}} >
+          return <div >
 
-            
-            <IconButton onClick={cancelImage}  >
+            <Avatar alt="Remy Sharp" src={showImage.image} style={{width:"200px", height:"200px"}} />
+
+            <IconButton style={{marginTop:"-60px", zIndex:"+1"}} onClick={cancelImage}  >
               <CancelIcon />
             </IconButton>
-
-            <img 
-                  src={showImage.image}
-                  style={{width:"200px",  maxHeight:"200px",minWidth:"200px"}}
-                  />
 
       
           </div>
@@ -102,18 +99,16 @@ const UploadImage=(probs)=>
       }
       else
       {
-        return <div style={{width:"200px",  maxHeight:"200px",minWidth:"200px", marginRight:"8px"}} >
+        return <div  >
 
-          
-        <IconButton onClick={cancelImage}  >
+        <Avatar alt="Remy Sharp" src={src} style={{width:"200px", height:"200px"}} />
+
+
+        <IconButton style={{marginTop:"-60px", zIndex:"+1"}} onClick={cancelImage}  >
           <CancelIcon />
         </IconButton>
-        <img 
-              src={src}
-              style={{width:"200px",  maxHeight:"200px",minWidth:"200px"}}
-              />
 
-  
+
       </div>
       }
 
@@ -123,4 +118,4 @@ const UploadImage=(probs)=>
     
 }
 
-export default UploadImage
+export default UploadProflieImage

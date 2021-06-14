@@ -42,7 +42,6 @@ const DonateProduct = (props) =>{
       })
     },[])
 
-    console.log(arr)
     
     const onDonateSubmit=(p)=>
     {
@@ -61,7 +60,6 @@ const DonateProduct = (props) =>{
             DonateProducrRequest({token:localStorage.getItem("token"),product,number})
             .then((resp)=>
             {
-              console.log(resp);
               if(resp.data.success === "1")
               {
                 setStatus("1");
@@ -72,7 +70,6 @@ const DonateProduct = (props) =>{
     
             }).catch((p)=> {
     
-              console.log(p);
                 if(!p.status)
                 {
                   setStatus("oops");

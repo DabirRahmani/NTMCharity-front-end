@@ -121,7 +121,6 @@ const SignUp = () =>
         SignUpRequest({username,password,email,type})
         .then((res)=>
         {
-          console.log(res);
             if(res.data.success === "1")
             {
               setDianogStatus(true)
@@ -132,7 +131,6 @@ const SignUp = () =>
               setStatus(res.data.status);
             }
         }).catch((res)=>{
-          console.log(res);
           setStatus("net"); 
           setDisableViews(false);
         })

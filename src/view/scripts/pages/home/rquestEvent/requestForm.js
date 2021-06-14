@@ -108,13 +108,11 @@ const RequestForm =(probs)=>
         setsubmitImage(false)
         if(probs.changed === true)
         {
-
             UploadImageRequest(probs)
             .then(res => 
             {
               postEventRequest({new:true, image:res.data.image_url})
             })
-            .catch(err => console.log(err))
         } 
         else
         {
@@ -125,7 +123,6 @@ const RequestForm =(probs)=>
 
     }
 
-    console.log(image)
 
 
     const postEventRequest= (probs)=>{
@@ -134,7 +131,9 @@ const RequestForm =(probs)=>
             CreateEventRequest({token:localStorage.getItem("token"),title:title,description:description,listofneeds:listOfNeeds, imageurl:probs.image, moneytarget:moneyTarget})
             .then((res)=>{
             })
-            .catch((res)=>{console.log(res)})
+            .catch((res)=>{
+
+            })
             .finally(()=>{cancelEdit();})
             cancelEdit();
         }
@@ -143,7 +142,9 @@ const RequestForm =(probs)=>
             EditRequestedEvent({token:localStorage.getItem("token"),eventid:eventId,title:title,description:description,listofneeds:listOfNeeds, imageurl:probs.image,moneytarget:moneyTarget})
             .then((res)=>{
             })
-            .catch((res)=>{console.log(res)})
+            .catch((res)=>{
+                
+            })
             .finally(()=>{cancelEdit();})
             cancelEdit();
         }

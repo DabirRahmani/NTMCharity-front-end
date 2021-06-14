@@ -3,7 +3,6 @@ import BackendUrl from '../backendUrl'
 
 const CreateEventRequest =({token,title,description,listofneeds,imageurl,moneytarget})=> 
 {
-    console.log(imageurl)
     return axios.create({baseURL: BackendUrl()})
     .post( '/CreateEvent',
     {
