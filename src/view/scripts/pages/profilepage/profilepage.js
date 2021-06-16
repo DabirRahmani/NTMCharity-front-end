@@ -20,6 +20,7 @@ import photo from '../img/signin.png';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import BackendImageUrl from '../../../../core/BacknedImageUrl';
 
 
 const Profile =() =>{
@@ -113,6 +114,9 @@ const Profile =() =>{
         }
       }));
       const classes = useStyles();
+
+
+      const src = BackendImageUrl()+imageurl;
       
       if(localStorage.getItem("token")=== null)
       {
@@ -180,7 +184,7 @@ const Profile =() =>{
           </Typography>
 
           <div style={{width:'100%',textAlign:'-webkit-center'}}>
-          <Avatar alt="Remy Sharp" src={imageurl} style={{width:"200px", height:"200px"}} />
+          <Avatar alt="Remy Sharp" src={src} style={{width:"200px", height:"200px"}} />
           </div>
 
 

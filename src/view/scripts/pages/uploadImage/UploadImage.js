@@ -4,6 +4,7 @@ import { useState } from "react";
 import CancelIcon from '@material-ui/icons/Cancel';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { useEffect } from "react";
+import BackendImageUrl from "../../../../core/BacknedImageUrl";
 
 const UploadImage=(probs)=>
 {
@@ -110,18 +111,14 @@ const UploadImage=(probs)=>
           <CancelIcon />
         </IconButton>
         <img 
-              src={src}
+              src={BackendImageUrl()+src}
               style={{width:"200px",  maxHeight:"200px",minWidth:"200px"}}
               />
-
   
       </div>
     }
 
 
-
-
-    
 }
 
 export default UploadImage

@@ -37,6 +37,16 @@ const SingleEvent = (probs)=> {
       }
     }
 
+    const ListOfneedsText=()=>{
+      if(probs.listofneeds !== undefined)
+      if(probs.listofneeds !== null)
+      if(      Object.values(probs.listofneeds).length >0      )
+      return <div style={{display: 'block', marginLeft:"8px"}}>
+      <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
+      <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
+      </div>
+    }
+
     useEffect(()=>{
       if(/\S/.test(probs.imageurl))
       {
@@ -127,10 +137,7 @@ const SingleEvent = (probs)=> {
                 </Typography>
 
 
-                <div style={{display: 'block', marginLeft:"8px"}}>
-                <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
-                <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
-                </div>
+              {ListOfneedsText()}
 
                 <div style={{marginLeft:"16px",fontFamily:"Orelega One"}}>
                 {ListOfNeedsRenderer()}

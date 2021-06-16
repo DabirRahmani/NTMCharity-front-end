@@ -1,6 +1,7 @@
 import Alert from '@material-ui/lab/Alert'
 import SingleEvent from './singleEvent'
 import React from 'react';
+import BackendImageUrl from '../../../../core/BacknedImageUrl';
 
 
 const EventRenderer = (props)=>{
@@ -14,7 +15,7 @@ const EventRenderer = (props)=>{
             eventid={e.id}
             title={e.title}
             username={e.creator_username}
-            imageurl={e.image_url}
+            imageurl={BackendImageUrl()+e.image_url}
             date={e.create_date}
             description={e.description}
             moneytarget={e.money_target}

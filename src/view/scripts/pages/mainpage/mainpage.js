@@ -20,7 +20,7 @@ const Mainpage =()=>
         history.push("/home")
       }
     return(
-        <dive>
+        <div>
             
             <div>
                 
@@ -95,7 +95,7 @@ In our site every needy people can whatch the store list of things that donators
                 </p>
 
             </div>
-        </dive>
+        </div>
     )
 }
 export default Mainpage;

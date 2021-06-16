@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import CancelIcon from '@material-ui/icons/Cancel';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Avatar from '@material-ui/core/Avatar';
+import BackendImageUrl from "../../../../core/BacknedImageUrl";
 
 const UploadProflieImage=(probs)=>
 {
-
+  
     
 
     const [state, setState] = useState(null)
@@ -52,6 +53,8 @@ const UploadProflieImage=(probs)=>
       {
         probs.handleImage({src:src,state:state,changed:change})
       }
+
+      console.log(src)
 
 
       if((src === undefined) || (src === "") || (src === null))
@@ -101,7 +104,7 @@ const UploadProflieImage=(probs)=>
       {
         return <div  >
 
-        <Avatar alt="Remy Sharp" src={src} style={{width:"200px", height:"200px"}} />
+        <Avatar alt="Remy Sharp" src={BackendImageUrl()+src} style={{width:"200px", height:"200px"}} />
 
 
         <IconButton style={{marginTop:"-60px", zIndex:"+1"}} onClick={cancelImage}  >
