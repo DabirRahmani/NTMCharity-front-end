@@ -124,6 +124,10 @@ const EditProfile =() =>
         {
             setStatus("0");
         }
+        else if(codemelli.length!="10")
+        {
+          setStatus("5");
+        }
         else
         {
             EditProfileRequest({usernamee ,firstname , lastname ,usertype, codemelli 
@@ -164,6 +168,9 @@ const EditProfile =() =>
     
           case "0":
             return <Alert severity="error">Please fill all necessary fields!</Alert>
+    
+          case "5":
+            return <Alert severity="error">Please enter a correct mellicode!</Alert>
     
           case "oops":
             return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>

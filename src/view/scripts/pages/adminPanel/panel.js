@@ -213,7 +213,7 @@ const useStyles = makeStyles((theme) => ({
           </IconButton>
 
           <IconButton onClick={signOut}>
-             <PowerSettingsNewIcon   style={{color:"#ffc107"}}/>
+             <PowerSettingsNewIcon   style={{color:"#FF0000"}}/>
           </IconButton>
 
         </Toolbar>

@@ -109,7 +109,7 @@ const GDonate = (props) =>{
               Donate
             </Button>
             <Button onClick={goSignin} style={{
-                backgroundColor: "#4caf50"
+               backgroundColor: "#4caf50"
             }}>
               Signin
             </Button>
