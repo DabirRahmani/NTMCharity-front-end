@@ -269,14 +269,21 @@ const Home =()=>
 
         if(localStorage.getItem("token") !== null)
         if(localStorage.getItem("user_type") !== "4")
-        return <Button 
+        return <Button
         variant="contained"
-        size="small"
-        onClick={openDialog} 
-        size="small" 
-        style={{fontFamily:"Orelega One", marginRight:"8px"}} >
-            Request New Event
-       </Button>
+        style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
+        onClick={openNeedDialog}
+        //size="small"
+        style= {{
+        paddingRight:8,
+        paddingLeft:8,
+        whiteSpace: "nowrap",
+        textAlign: "center"}}   
+        //fullWidth
+        variant="contained"       
+        >
+          Request New Event
+        </Button>
 
     }
 
@@ -284,12 +291,20 @@ const Home =()=>
 
         if(localStorage.getItem("user_type")!=="4")
         {
-            return <Button 
-            onClick={oopenDialog}
+            return <Button
             variant="contained"
-            size="small"
-            size="small" 
-            style={{fontFamily:"Orelega One", marginRight:"8px"}}>General Donate 
+            style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
+            onClick={oopenDialog}
+            //size="small"
+            style= {{
+            paddingRight:8,
+            paddingLeft:8,
+            whiteSpace: "nowrap",
+            textAlign: "center"}}   
+            //fullWidth
+            variant="contained"   
+            >
+              General Donate
             </Button>
         }
   
@@ -300,13 +315,21 @@ const Home =()=>
 
         if(localStorage.getItem("user_type")!=="4")
         {
-            return <Button 
-            onClick={openProduct}
-            variant="contained"
-            size="small"
-            size="small" 
-            style={{fontFamily:"Orelega One", marginRight:"8px"}}>Donate Product 
-            </Button>
+            return<Button
+                  variant="contained"
+                  style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
+                  onClick={openProduct}
+                  //size="small"
+                  style= {{
+                  paddingRight:8,
+                  paddingLeft:8,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  //fullWidth
+                  variant="contained"      
+                  >
+                    Donate Product
+                  </Button>
         }
   
       }
@@ -350,8 +373,8 @@ const Home =()=>
 
           {showadminpanelButton()}
 
-          <IconButton onClick={signOut} >
-             <PowerSettingsNewIcon/>
+          <IconButton onClick={signOut}>
+             <PowerSettingsNewIcon style={{color:"#FF0000"}}/>
           </IconButton>
 
           

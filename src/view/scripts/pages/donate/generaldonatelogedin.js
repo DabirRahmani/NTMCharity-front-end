@@ -97,13 +97,13 @@ const GDonatelogedin = (props) =>{
           </DialogContent>
           <DialogActions>
             <Button onClick={()=>{props.close()}} style={{
-                backgroundColor: "#e7ea84",
+                backgroundColor: "#ffc107",
                 fontFamily:"Orelega One"
             }}>
               Cancel
             </Button>
             <Button onClick={onDonateSubmit} style={{
-                backgroundColor: "#8db1f3",
+                backgroundColor: "#4caf50",
                 fontFamily:"Orelega One"
             }}>
               Donate
