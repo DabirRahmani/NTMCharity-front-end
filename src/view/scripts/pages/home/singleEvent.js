@@ -12,6 +12,7 @@ import ListIcon from '@material-ui/icons/List';
 import Donate from '../donate/donate'
 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import BackendImageUrl from '../../../../core/BacknedImageUrl';
 
 const SingleEvent = (probs)=> {
 
@@ -24,6 +25,21 @@ const SingleEvent = (probs)=> {
     const [openDialog, setOpenDialog] = useState(false)
 
     const [donatedmoney, setdonatedmoney]= useState(probs.donatedmoney)
+
+    const [profilestatus,setprofilestatus]= useState("false")
+
+    useEffect(()=>{
+      if(probs.profilestatus !== false)
+      {
+        setprofilestatus(true)
+
+      }
+      else setprofilestatus(false)
+
+
+    },[probs.profilestatus,probs])
+
+
 
     const ListOfNeedsRenderer=()=>
     {
@@ -78,11 +94,16 @@ const SingleEvent = (probs)=> {
 
     const createDonateButton=()=>{
 
+      if(profilestatus === false)
+      {
+        return <div style={{fontFamily:"Orelega One"}}> You are not verified yet! </div>
+      }
+
       if(localStorage.getItem("token") === null )
-      return <div style={{fontFamily:"Orelega One"}}> sign in to donate </div>
+      return <div style={{fontFamily:"Orelega One"}}> Sign in to donate! </div>
       
       if(localStorage.getItem("user_type")=== "4")
-      return <div style={{fontFamily:"Orelega One"}}> cant donate as needy </div>
+      return <div style={{fontFamily:"Orelega One"}}> Cant donate as needy! </div>
 
 
       return <Button 
@@ -92,6 +113,16 @@ const SingleEvent = (probs)=> {
       style={{background:"#8db1f3",fontFamily:"Orelega One"}}>Donate 
       </Button>
 
+    }
+
+    const CreateImage=() =>{
+      if(probs.imageurl === undefined || probs.imageurl === null || probs.imageurl === "")
+      {
+        return <div></div>
+      }
+      return <div  style={{alignItems: 'center'}} >
+      <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={BackendImageUrl()+probs.imageurl} />
+      </div>
     }
 
 
@@ -150,9 +181,7 @@ const SingleEvent = (probs)=> {
             {imageDivider()}
 
 
-            <div  style={{alignItems: 'center'}} >
-              <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={probs.imageurl} />
-              </div>
+            {CreateImage()}
   
             </div>
 

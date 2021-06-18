@@ -24,7 +24,8 @@ import { useHistory} from 'react-router-dom';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Height } from '@material-ui/icons';
 import Avatar from '@material-ui/core/Avatar';
-
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import clsx from 'clsx';
 
 import Donate from '../donate/donate'
 import GDonate from '../donate/generaldonate'
@@ -48,14 +49,40 @@ import {GetTopTransactions} from '../../../../core/home/trnasaction'
 import NeedReqDialog from './needRequest/NeedReqDialog';
 import DonateProduct from '../donate/donateproduct';
 import photo from '../img/signin.png'
-
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 import requestedlist from './rquestEvent/requestedList'
 import UserBioRequest from '../../../../core/userBioRequest'
 import BackendImageUrl from '../../../../core/BacknedImageUrl'
 
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        transition: theme.transitions.create(['width', 'margin'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+      },
+      appBarShift: {
+        marginLeft: drawerWidth,
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['width', 'margin'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      }
+}));
+
+
 const Home =()=>
 {
+
+    const classes = useStyles();
+
+    const [open, setOpen] = useState(false)
+
     const [eventList,seteventList]=useState([]);
 
     const [reload, setReload] = useState(0);
@@ -83,6 +110,8 @@ const Home =()=>
     const [poductDialogStatus,setPoductDialogStatus] = useState(false);
 
     const [avatar, setAvatar] = useState("")
+
+    const [userVerified, setUserVerified] = useState(false)
 
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
@@ -125,8 +154,13 @@ const Home =()=>
 
     useEffect(()=>{
         UserBioRequest({username: localStorage.getItem("username")})
-        .then(e=>setAvatar(e.data.image_url))
+        .then(e=>{
+            setUserVerified(e.data.verified_needy)
+            setAvatar(e.data.image_url)
+        })
     },[])
+
+
 
     const closeNeedDialog=()=>{
         setNeedReqDialogStatus(false);
@@ -185,11 +219,15 @@ const Home =()=>
     const renderDonateDialog=()=>{
         if(donateDialogStatus === true)
         {
-            if(localStorage.getItem("token")===null)
+            if((localStorage.getItem("token")===null) )
             {
                 return <GDonate close={ccloseDialog} id="redialog" />
             }
-            else 
+            else if((userVerified === false))
+            {
+                return <GDonatelogedin close={ccloseDialog} profilestatus="false" id="redialog" />
+            }
+            else
             {
                 return <GDonatelogedin close={ccloseDialog} id="redialog" />
             }
@@ -232,7 +270,6 @@ const Home =()=>
         severity="info" 
         style={{marginLeft: "20%", marginRight: "20%", marginTop: "16px", marginBottom: "16px",fontFamily:"Mate SC"}} 
         >
-
         You are not signed in, 
 
         <Button
@@ -269,21 +306,14 @@ const Home =()=>
 
         if(localStorage.getItem("token") !== null)
         if(localStorage.getItem("user_type") !== "4")
-        return <Button
+        return <Button 
         variant="contained"
-        style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
-        onClick={openNeedDialog}
-        //size="small"
-        style= {{
-        paddingRight:8,
-        paddingLeft:8,
-        whiteSpace: "nowrap",
-        textAlign: "center"}}   
-        //fullWidth
-        variant="contained"       
-        >
-          Request New Event
-        </Button>
+        size="small"
+        onClick={openDialog} 
+        size="small" 
+        style={{fontFamily:"Orelega One", marginRight:"8px"}} >
+            Request New Event
+       </Button>
 
     }
 
@@ -292,19 +322,11 @@ const Home =()=>
         if(localStorage.getItem("user_type")!=="4")
         {
             return <Button
-            variant="contained"
-            style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
             onClick={oopenDialog}
-            //size="small"
-            style= {{
-            paddingRight:8,
-            paddingLeft:8,
-            whiteSpace: "nowrap",
-            textAlign: "center"}}   
-            //fullWidth
-            variant="contained"   
-            >
-              General Donate
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{fontFamily:"Orelega One", marginRight:"8px"}}>General Donate 
             </Button>
         }
   
@@ -315,21 +337,13 @@ const Home =()=>
 
         if(localStorage.getItem("user_type")!=="4")
         {
-            return<Button
-                  variant="contained"
-                  style={{display:"inline-block" , fontFamily:"Orelega One",marginRight:"8px"}}
-                  onClick={openProduct}
-                  //size="small"
-                  style= {{
-                  paddingRight:8,
-                  paddingLeft:8,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  //fullWidth
-                  variant="contained"      
-                  >
-                    Donate Product
-                  </Button>
+            return <Button 
+            onClick={openProduct}
+            variant="contained"
+            size="small"
+            size="small" 
+            style={{fontFamily:"Orelega One", marginRight:"8px"}}>Donate Product 
+            </Button>
         }
   
       }
@@ -450,14 +464,25 @@ const Home =()=>
 
     const createtablecellusername =({username})=>{
         if(username === undefined)
-        return <TableCell style={{fontFamily:"Mate SC"}}>Guess</TableCell>
+        return <TableCell style={{fontFamily:"Mate SC"}}>Guest</TableCell>
 
         if(username === null)
-        return <TableCell style={{fontFamily:"Mate SC"}}>Guess</TableCell>
+        return <TableCell style={{fontFamily:"Mate SC"}}>Guest</TableCell>
 
         return <TableCell style={{fontFamily:"Mate SC"}}>{username}</TableCell>
 
 
+    }
+    
+    const CreateButtons=()=>{
+        if (userVerified===true) 
+            return <div>
+                {CreateOpenRequestButton()}
+                {createProductDonateButton()}
+                {CreateOpenNeedRequestButton()}
+                </div>
+
+        else if(localStorage.getItem("token") !== null) return <div style={{alignSelf: 'center', paddingRight: '8px', paddingLeft: '16px'}}>WARNING: Your account is not verified yet, so you cant create event</div>
     }
 
     const createtablecellid =({id, title})=>
@@ -483,67 +508,61 @@ const Home =()=>
              width:"100%",
              height:"-webkit-fill-available",
              objectFit:"cover",
-             zIndex:"-1"
+             zIndex:"-2"
              }}
             />
 
             <CssBaseline />
 
-             <AppBar position="static">
-             <Toolbar style={{whiteSpace: "nowrap"}}>
-               
+            <AppBar position="fixed"  >
+             <Toolbar style={{whiteSpace: "nowrap", paddingRight:"24px"}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
                 <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
                 NTM CHARITY!
                 </Typography>
-
                 <div style={{ minWidth: "40%", maxWidth: "40%"}}>
                 <Search
                 onclick={SearchClick}
                 />
                 </div> 
-
                 <div style={{ width: '-webkit-fill-available'}}> </div>
-
                 <Typography position="end" component="h1" variant="h6" color="inherit">
                     {localStorage.getItem("username")}
                 </Typography>
-
                 {createActionButtons()}
-
-
-
-
 
             </Toolbar>
         </AppBar>
 
 
 
-        {signupBarAlert()}
 
         <div style={{marginTop:"24px",marginRight:"3%", marginLeft:"3%"}}>
 
+
         
-        <div style={{display: "inline-flex",flexWrap:"wrap", flexDirection: "row", alignItems:"flex-start", justifyContent:"space-evenly", width:"100%"}}>
+        <div style={{display: "inline-flex",flexWrap:"wrap", flexDirection: "row", alignItems:"flex-start", justifyContent:"space-evenly", width:"100%", marginTop:"70px"}}>
+
+
+        {signupBarAlert()}
 
 
             <div style={{minWidth:"550px",width:"55%",maxWidth:"50%"}}>
 
-                <div style={{display:"flex", marginBottom:"8px"}} >
+                <div style={{display:"flex",flexWrap:"wrap", marginBottom:"8px"}} >
 
-                {CreateOpenRequestButton()}
+                {CreateButtons()}
+                
+                
                 {createDonateButton()}
-                {createProductDonateButton()}
-                {CreateOpenNeedRequestButton()}
 
                 </div>
 
                 <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
 
 
-                <EventRenderer eventList={eventList}/>
+                <EventRenderer eventList={eventList} profilestatus={userVerified}/>
 
                 <Pagination page={pageNumber} count={pageCount} color="primary" onChange={handlePageNumber} style={{paddingTop:"40px" }}/>
 
@@ -551,7 +570,7 @@ const Home =()=>
             </div>
 
             
-            <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px"}}>
+            <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px", marginBottom:"50px"}}>
                 <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Latest transitions</div>
                 {CreateTable()}
                 <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Top transaction amouts</div>
@@ -560,6 +579,9 @@ const Home =()=>
 
 
         </div>
+
+
+
         
         </div>
 
@@ -578,6 +600,33 @@ const Home =()=>
             {renderDonateDialog()}
             {renderDonateProducrDialog()}
             {NeedReqDialogRenderer()}
+
+        </div>
+
+
+        <div id="footer" style={{ maxWidth:"100%", minWidth: "100%", backgroundColor:"#263273", minHeight:"150px", padding:"32px", paddingTop: "-16px", display: "flex"}}>
+        
+        
+        <div style={{display:"grid", minWidth:"30%"}}>
+
+            <a href="https://github.com" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
+            <GitHubIcon style={{verticalAlign:"top"}}/>
+            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Back-End</div>
+            </a>
+            <a href="https://github.com" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
+            <GitHubIcon style={{verticalAlign:"top"}}/>
+            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Front-End</div>
+            </a>
+            <a href={"mailto:"+"ntm.patronage@gmail.com"} target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
+            <AlternateEmailIcon style={{verticalAlign:"top"}}/>
+            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>E-mail</div>
+            </a>
+        </div>
+
+
+        <div style={{width:"100%", textAlign:"center", alignSelf:"center",color:"#fff"}}>(working on it)</div>
+            
+
 
         </div>
         

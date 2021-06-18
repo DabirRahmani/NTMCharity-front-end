@@ -30,6 +30,7 @@ const RequestEventDialog =(probs)=>
     const [requestList, setRequestList]= useState([])
 
 
+    console.log(requestList)
     useEffect(()=>
     {
         //اطلاعات مورد نیاز برای ریکوئست لیست اینجا باید اپدیت بشن
@@ -40,7 +41,10 @@ const RequestEventDialog =(probs)=>
                 setRequestList([])
             }
             else {
-                let arr = Object.values(res.data.event_set)
+                let arr = Object.values(res.data.event_set);
+
+                arr.sort((a,b)=>{ if(a.id > b.id) return -1; return 1});
+                
                 setRequestList(arr)
             }
 

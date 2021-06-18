@@ -98,21 +98,35 @@ const GDonate = (props) =>{
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=>{props.close()}} style={{
-                backgroundColor: "#ffc107"
-            }}>
-              Cancel
-            </Button>
-            <Button onClick={onDonateSubmit} style={{
-                backgroundColor: "#4caf50"
-            }}>
-              Donate
-            </Button>
-            <Button onClick={goSignin} style={{
-               backgroundColor: "#4caf50"
-            }}>
-              Signin
-            </Button>
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#ffc107",fontFamily:"Orelega One"}}
+            onClick={()=>{props.close()}}
+            >
+                cancel
+            </Button>  
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#4caf50",fontFamily:"Orelega One"}}
+            onClick={onDonateSubmit}
+            >
+                Donate
+            </Button>  
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#4caf50",fontFamily:"Orelega One"}}
+            onClick={goSignin}
+            >
+                Signin
+            </Button>  
+
+
             {alert()}
           </DialogActions>
         </Dialog>

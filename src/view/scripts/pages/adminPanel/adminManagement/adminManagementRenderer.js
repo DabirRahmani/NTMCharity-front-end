@@ -6,6 +6,7 @@ import GetAdminSet from '../../../../../core/adminPanel/adminmanager/getAllAdmin
 import postPromote from '../../../../../core/adminPanel/adminmanager/promote';
 import postDemote from '../../../../../core/adminPanel/adminmanager/demote';
 import MuiAlert from '@material-ui/lab/Alert';
+import PostEmailRequest from './../../../../../core/sendEmail/sedEmailRequest'
 
 
 
@@ -54,6 +55,7 @@ const AdminManagementRenderer =()=>
     })
   },[realod])
 
+
   const Demote =()=>{
 
     if(admin === "")
@@ -71,6 +73,17 @@ const AdminManagementRenderer =()=>
       if(e.data.success === "1")
       {
         setDialogText("admin "+ admins.filter(f=> f.id === admin)[0].username+ " demoted to donater");
+
+        var un = admins.filter(f=> f.id === admin)[0].username
+
+        var em = admins.filter(f=> f.id === admin)[0].email
+
+        var message = "Hi, Dear "+un+" your account in NTM CHARITY has been demoted to donater!\nThanks!"
+
+        var subject = "Account Demoted"
+
+        PostEmailRequest({"email":em,subject:subject,message:message})
+        .then((e)=>{console.log(e)})
 
         setRealod(realod+1);
         setAdmin("")
@@ -110,6 +123,18 @@ const AdminManagementRenderer =()=>
       if(e.data.success === "1")
       {
         setDialogText("user "+ users.filter(f=> f.id === user)[0].username+ " promoted to admin");
+
+
+        var un = users.filter(f=> f.id === user)[0].username
+
+        var em = users.filter(f=> f.id === user)[0].email
+
+        var message = "Hi, Dear "+un+" your account in NTM CHARITY has been Promoted to admin!\nThanks!"
+
+        var subject = "Account Promoted"
+
+        PostEmailRequest({"email":em,subject:subject,message:message})
+        .then((e)=>{console.log(e)})
 
         setRealod(realod+1);
         setAdmin("")

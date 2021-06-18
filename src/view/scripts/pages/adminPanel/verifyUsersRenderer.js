@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import SyncIcon from '@material-ui/icons/Sync';
 import React from 'react';
+import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
 
 const VerifyUsersRenderer=()=>
 {
@@ -91,6 +92,30 @@ const VerifyUsersRenderer=()=>
         .then((res)=>{
             if(res.data.success === "1")
             {
+
+                    if(usersDonatorList.filter(e=> e.id === probs.id).length !== 0)
+                    {
+                        var v = usersDonatorList.filter(e=> e.id === probs.id)[0]
+                    }
+                    else
+                    {
+                        var v = usersNeedyList.filter(e=> e.id === probs.id)[0]
+                    }
+                    var un = v.username;
+                    var em = v.email;
+                    if(probs.action === "1")
+                    {
+                        var st= "Verified"
+                    }
+                    else 
+                    {
+                        var st= "Rejected"
+                    }
+                    var subject = "Your account "+st;
+                    var message = "Hi, Dear "+ " "+ un +"\n" + "your account in NTM CHARITY is "+ st+"\nthanks!"
+
+                    PostEmailRequest({"email":em,subject:subject,message:message})
+
                 setUsersDonatorList(usersDonatorList.filter(e=> e.id !== probs.id))
                 setUsersNeedyList(usersNeedyList.filter(e=> e.id !== probs.id))
             }

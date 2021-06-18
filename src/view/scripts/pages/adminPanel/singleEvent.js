@@ -36,6 +36,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import UploadImage from '../../../../view/scripts/pages/uploadImage/UploadImage'
 import UploadImageRequest from '../../../../core/uploadImage';
+import BackendImageUrl from '../../../../core/BacknedImageUrl';
 
 
 
@@ -322,7 +323,16 @@ const SingleEvent = (probs)=> {
     const CreateImageView =()=>{
 
       if(inModify === "none")
-      return <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={imageurl} />
+      {
+        if(imageurl === undefined || imageurl === null || imageurl === "")
+        {
+          return <div></div>
+        }
+        else
+        return <img style={{maxWidth: "300px",maxHeight:"200px"}}  src={BackendImageUrl()+imageurl} />
+
+      }
+      
 
       return <UploadImage image={imageurl} onsubmit={submitImage} handleImage={handleImage}/>
     }

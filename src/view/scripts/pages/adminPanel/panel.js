@@ -209,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
           </Typography>
 
           <IconButton onClick={()=>{history.push("/home")}} >
-             <HomeIcon style={{color:"#ffc107"}}/>
+             <HomeIcon/>
           </IconButton>
 
           <IconButton onClick={signOut}>

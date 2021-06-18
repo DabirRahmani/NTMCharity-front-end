@@ -54,7 +54,6 @@ const UploadProflieImage=(probs)=>
         probs.handleImage({src:src,state:state,changed:change})
       }
 
-      console.log(src)
 
 
       if((src === undefined) || (src === "") || (src === null))

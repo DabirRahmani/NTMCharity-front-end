@@ -24,6 +24,8 @@ const GDonatelogedin = (props) =>{
 
     const [state , setState] = useState(true);
 
+    const [profilestatus, setProfilestatus] = useState(props.profilestatus)
+
 
     const onDonateSubmit=(p)=>
     {
@@ -51,6 +53,24 @@ const GDonatelogedin = (props) =>{
       }
     };
 
+    const CreateUnknownTick=()=>{
+      if(profilestatus === "false")
+      {
+          return <div>NOTE: You are Donating as Guest, because your not verified</div>
+      }
+      else
+      return <FormControlLabel
+      control={
+        <Checkbox
+          checked={state}
+          onChange={()=>{if(state===false){setState(true)}else setState(false)}}
+          name="checkedF"
+          //indeterminate
+     />}
+     label="Unknown Donator"
+    />
+    }
+
 
     const alert = () => {
 
@@ -75,16 +95,9 @@ const GDonatelogedin = (props) =>{
             <DialogContentText>
               You Can Donate How Much You Want...!
             </DialogContentText>
-            <FormControlLabel
-             control={
-               <Checkbox
-                 checked={state}
-                 onChange={()=>{if(state===false){setState(true)}else setState(false)}}
-                 name="checkedF"
-                 //indeterminate
-            />}
-            label="Unknown Donator"
-           />
+
+            {CreateUnknownTick()}
+
             <TextField
               autoFocus
               onChange={(e)=>{setDonatemount(e.target.value)}}
@@ -96,18 +109,29 @@ const GDonatelogedin = (props) =>{
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=>{props.close()}} style={{
-                backgroundColor: "#ffc107",
-                fontFamily:"Orelega One"
-            }}>
-              Cancel
-            </Button>
-            <Button onClick={onDonateSubmit} style={{
-                backgroundColor: "#4caf50",
-                fontFamily:"Orelega One"
-            }}>
-              Donate
-            </Button>
+
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#ffc107",fontFamily:"Orelega One"}}
+            onClick={()=>{props.close()}}
+            >
+                cancel
+            </Button>  
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#4caf50",fontFamily:"Orelega One"}}
+            onClick={onDonateSubmit}
+            >
+                Donate
+            </Button>  
+
+
+
+
             {alert()}
           </DialogActions>
         </Dialog>

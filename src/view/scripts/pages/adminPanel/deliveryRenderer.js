@@ -13,6 +13,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 import React from 'react';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import DeliverRequest from '../../../../core/adminPanel/deliverRequest';
+import PostEmailRequest from '../../../../core/sendEmail/sedEmailRequest';
 
 const DeliveryRenderer=()=>
 {
@@ -37,12 +38,25 @@ const DeliveryRenderer=()=>
 
     const deliverproduct =(probs)=>{
         DeliverRequest({id:probs.id , token:localStorage.getItem("token")}).then(e=>{
-            if(e.data.success==="1"){
+            if(e.data.success==="1")
+            {
+                var v = productsList.filter(p=>p.donate_id===probs.id)[0];
+
+                var un = v.username;
+                var em= v.donator_email;
+
+                var message = "Hi,\nDear "+un+ ", Your products ("+ v.quantity+" * "+v.product_name+") have been received by NTM CHARITY!\nThank You for your donates :X"
+
+                var subject = "Products received"
+
+                PostEmailRequest({"email":em,subject:subject,message:message})
                 forceReload();
             }
         })
     }
 
+
+    console.log(productsList)
 
 
     const CreateProductsList=()=>{

@@ -4,7 +4,10 @@ import React from 'react';
 import BackendImageUrl from '../../../../core/BacknedImageUrl';
 
 
-const EventRenderer = (props)=>{
+const EventRenderer = (props)=>
+{
+
+
     const createList=()=>{
 
         if(props.eventList !== undefined)
@@ -15,13 +18,13 @@ const EventRenderer = (props)=>{
             eventid={e.id}
             title={e.title}
             username={e.creator_username}
-            imageurl={BackendImageUrl()+e.image_url}
+            imageurl={e.image_url}
             date={e.create_date}
             description={e.description}
             moneytarget={e.money_target}
             listofneeds={e.list_of_needs}
             donatedmoney={e.donated_money}
-            
+            profilestatus={props.profilestatus}
             />})
 
             return <Alert severity="info" style={{fontFamily:"Mate SC"}}>there is no request!</Alert> 

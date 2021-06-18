@@ -67,6 +67,10 @@ const DonateProduct = (props) =>{
                 props.number(number)
                 props.product(product)
               }
+              else
+              {
+                setStatus("mellicode")
+              }
     
             }).catch((p)=> {
     
@@ -86,6 +90,9 @@ const DonateProduct = (props) =>{
     const alert = () => {
 
       switch(status){
+        case "mellicode":
+        return <Alert severity="error"> Please complete your profile </Alert>
+
         case "1":
           return <Alert severity="success">Profile Edited Successfully!</Alert>
 
@@ -98,7 +105,9 @@ const DonateProduct = (props) =>{
           return <Alert severity="error">Please Donate Less Than RemainedMoney!</Alert>
   
         case "oops":
-          return <Alert severity="error">something went wrong, Check your connection and try again!</Alert>
+          return <Alert severity="error">Something went wrong, Check your connection and try again!</Alert>
+
+        
   
     }
   }
@@ -138,16 +147,25 @@ const DonateProduct = (props) =>{
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=>{props.close()}} style={{
-                backgroundColor: "#ffc107"
-            }}>
-              Cancel
-            </Button>
-            <Button onClick={onDonateSubmit} style={{
-                backgroundColor: "#4caf50"
-            }}>
-              Donate
-            </Button>
+
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#ffc107",fontFamily:"Orelega One"}}
+            onClick={()=>{props.close()}}
+            >
+                cancel
+            </Button>  
+
+            <Button
+            variant="contained"
+            size="small" 
+            style={{background:"#4caf50",fontFamily:"Orelega One"}}
+            onClick={onDonateSubmit}
+            >
+                Donate
+            </Button>  
             {alert()}
           </DialogActions>
         </Dialog>
