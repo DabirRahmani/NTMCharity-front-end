@@ -226,6 +226,9 @@ const EditProfile =() =>
       return <div style={{padding:"24px"}}>404 page not found</div>
     }
     return <div >
+      <div>
+                
+               
 
           <img src={photo} 
             style={{
@@ -236,66 +239,68 @@ const EditProfile =() =>
              zIndex:"-1"
              }}
             />
+             <AppBar position="static" style={{backgroundColor:"#78a6c1"}}>
+                 <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
+                     <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                     </AllInclusiveIcon>
+                    <Typography style={{fontSize:"30px",fontFamily:"Dancing Script",marginLeft:"3vh"}}>
+                    NTM CHARITY!
+                    </Typography>
+                    </Toolbar>
+                 </AppBar>
+                </div>
+                <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
 
-          <div style={{paddingTop:"20px"}}></div>
-
-
-          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
-
-
-
-            <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
-
-            <Button
-                  variant="contained"
-                  style={{display:"inline-block",fontFamily:"Orelega One"}}
-                  onClick={onEditprofileSubmit}
-                  style= {{
-                  backgroundColor: "#4caf50",
-                  paddingRight:8,
-                  paddingLeft:8,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<CheckCircleOutlineIcon />}
-                  >
-                    submit
-               </Button>
-              
-            <Button
-                  variant="contained"
-                  style={{display:"inline-block" , fontFamily:"Orelega One"}}
-                  onClick={goprofile}
-                  //size="small"
-                  style= {{
-                  backgroundColor: "#ffc107",
-                  paddingRight:8,
-                  paddingLeft:8,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  //fullWidth
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<CancelIcon />}
-                  >
-                    Back to Profile
-               </Button>
+<Button
+      variant="contained"
+      style={{display:"inline-block",fontFamily:"Orelega One"}}
+      onClick={onEditprofileSubmit}
+      style= {{
+        backgroundColor:"#688494",
+      paddingRight:8,
+      paddingLeft:8,
+      whiteSpace: "nowrap",
+      textAlign: "center"}}   
+      variant="contained"
+      color="primary"       
+      startIcon={<CheckCircleOutlineIcon />}
+      >
+        submit
+   </Button>
+  
+<Button
+      variant="contained"
+      style={{display:"inline-block" , fontFamily:"Orelega One"}}
+      onClick={goprofile}
+      //size="small"
+      style= {{
+        backgroundColor:"#688494",
+      paddingRight:8,
+      paddingLeft:8,
+      whiteSpace: "nowrap",
+      textAlign: "center"}}   
+      //fullWidth
+      variant="contained"
+      color="primary"       
+      startIcon={<CancelIcon />}
+      >
+        Back to Profile
+   </Button>
 
 
 
 
-            </div>
+</div>
 
-          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One", textAlign:'-webkit-center'}}>
-            {usernamee} Profile
-          </Typography>
-
+          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px",marginTop:"20px"}}>
           <div style={{width:'100%',textAlign:'-webkit-center'}}>
 
           <UploadProflieImage image={imageurl} onsubmit={submitImage} handleImage={handleImage}  />
           </div>
 
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Mate SC", textAlign:'-webkit-center'}}>
+            {usernamee}
+          </Typography>
 
 
 
@@ -368,7 +373,7 @@ const EditProfile =() =>
             
           </form>
       </Container>
-
+      <div style={{padding:"16px"}}></div>
 
         </div>
 

@@ -26,7 +26,7 @@ export const mainListItems =(probs) =>
 
     <ListItem button onClick={()=>probs.eventRequest()}>
     <Tooltip title={<Typography fontSize="16">Event Requests</Typography>} placement="right-end" fontSize="32px">
-      <ListItemIcon>
+      <ListItemIcon style={{color:"#096dd9"}}>
       <EventBusyIcon />
       </ListItemIcon>
       </Tooltip>
@@ -34,8 +34,8 @@ export const mainListItems =(probs) =>
 
     <ListItem button onClick={()=>probs.verifyUsers()}>
     <Tooltip title={<Typography fontSize="16">verify users</Typography>} placement="right-end" fontSize="32px">
-      <ListItemIcon>
-      <PeopleIcon />
+      <ListItemIcon >
+      <PeopleIcon style={{color:"#096dd9"}}/>
       </ListItemIcon>
       </Tooltip>
     </ListItem>
@@ -43,7 +43,7 @@ export const mainListItems =(probs) =>
     <ListItem button onClick={()=>probs.delivery()}>
     <Tooltip title={<Typography fontSize="16">delivery</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
-      <CardGiftcardIcon />
+      <CardGiftcardIcon style={{color:"#096dd9"}}/>
       </ListItemIcon>
       </Tooltip>
     </ListItem>
@@ -51,7 +51,7 @@ export const mainListItems =(probs) =>
     <ListItem button onClick={()=>probs.storeManagement()}>
     <Tooltip title={<Typography fontSize="16">store management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
-      <StoreIcon />
+      <StoreIcon style={{color:"#096dd9"}}/>
       </ListItemIcon>
       </Tooltip>
     </ListItem>
@@ -59,7 +59,7 @@ export const mainListItems =(probs) =>
     <ListItem button onClick={()=>probs.adminmanagement()}>
     <Tooltip title={<Typography fontSize="16">admin management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
-      <VerifiedUserIcon />
+      <VerifiedUserIcon style={{color:"#096dd9"}}/>
       </ListItemIcon>
       </Tooltip>
     </ListItem>

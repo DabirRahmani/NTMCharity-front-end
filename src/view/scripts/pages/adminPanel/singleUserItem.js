@@ -28,7 +28,7 @@ const SignleUserItem=(probs)=>{
 
     <div style={{textAlign: '-webkit-right'}}>
     <IconButton  onClick={()=>{probs.action({id:probs.id, action:"1"})}}>
-    <CheckCircleIcon style={{color:"#4caf50"}} />
+    <CheckCircleIcon style={{color:"#794949"}} />
     </IconButton >
     <IconButton onClick={()=>{probs.action({id:probs.id, action:"0"})}}>
     <CancelIcon  style={{color:"#e53935"}}/>

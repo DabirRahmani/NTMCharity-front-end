@@ -54,6 +54,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import requestedlist from './rquestEvent/requestedList'
 import UserBioRequest from '../../../../core/userBioRequest'
 import BackendImageUrl from '../../../../core/BacknedImageUrl'
+import PerfectScrollbar from 'perfect-scrollbar';
 
 const drawerWidth = 240;
 
@@ -276,8 +277,8 @@ const Home =()=>
         <Button
         variant="contained"
         size="small" 
-        color="primary"
-        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        color="#688494"
+        style={{background:"#78a6c1", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signup"
         >
             signup
@@ -286,8 +287,8 @@ const Home =()=>
         <Button
         variant="contained"
         size="small" 
-        color="primary"
-        style={{background:"#1890ff", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
+        color="#688494"
+        style={{background:"#78a6c1", marginLeft:"4px", marginRight:"4px",fontFamily:"Orelega One"}}
         href="/signin"
         >
             signin
@@ -312,7 +313,7 @@ const Home =()=>
         size="small"
         onClick={openDialog} 
         size="small" 
-        style={{fontFamily:"Orelega One", marginRight:"8px"}} >
+        style={{fontFamily:"Orelega One", marginRight:"8px",backgroundColor:"#688494"}} >
             Request New Event
        </Button>
 
@@ -324,10 +325,10 @@ const Home =()=>
         {
             return <Button
             onClick={oopenDialog}
-            variant="contained"
+            variant="contained"S
             size="small"
             size="small" 
-            style={{fontFamily:"Orelega One", marginRight:"8px"}}>General Donate 
+            style={{fontFamily:"Orelega One", marginRight:"8px",backgroundColor:"#688494"}}>General Donate 
             </Button>
         }
   
@@ -343,7 +344,7 @@ const Home =()=>
             variant="contained"
             size="small"
             size="small" 
-            style={{fontFamily:"Orelega One", marginRight:"8px"}}>Donate Product 
+            style={{fontFamily:"Orelega One", marginRight:"8px",backgroundColor:"#688494"}}>Donate Product 
             </Button>
         }
   
@@ -355,7 +356,7 @@ const Home =()=>
 
         if(localStorage.getItem("user_type") === "4")
         return <Button 
-        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One", marginRight:"8px"}}
+        style={{whiteSpace: 'nowrap',fontFamily:"Orelega One", marginRight:"8px",backgroundColor:"#688494"}}
         variant="contained"
         size="small"
         onClick={openNeedDialog} 
@@ -389,7 +390,7 @@ const Home =()=>
           {showadminpanelButton()}
 
           <IconButton onClick={signOut}>
-             <PowerSettingsNewIcon style={{color:"#FF0000"}}/>
+             <PowerSettingsNewIcon style={{color:"ivory"}}/>
           </IconButton>
 
           
@@ -399,7 +400,7 @@ const Home =()=>
     const showadminpanelButton =()=>{
         if((localStorage.getItem("user_type") === "1") || (localStorage.getItem("user_type") === "2"))
         return <IconButton onClick={goAdminPanel}>
-            <SettingsIcon/>
+            <SettingsIcon style={{color:"ivory"}}/>
             </IconButton>
     }
 
@@ -498,11 +499,10 @@ const Home =()=>
         return <TableCell style={{fontFamily:"Mate SC"}}>{title} (id:{id})</TableCell>
 
     }
+    
 
         return(
          <div >
-             
-          
             <img src={photo} 
             style={{
              position:"fixed",
@@ -515,8 +515,8 @@ const Home =()=>
 
             <CssBaseline />
 
-            <AppBar position="fixed"  >
-             <Toolbar style={{whiteSpace: "nowrap", paddingRight:"24px"}}>
+            <AppBar position="fixed" >
+             <Toolbar style={{whiteSpace: "nowrap", paddingRight:"24px",backgroundColor:"#78a6c1"}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
                 <Typography style={{fontSize:"30px", fontFamily:"Dancing Script"}}>
@@ -560,7 +560,7 @@ const Home =()=>
 
                 </div>
 
-                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"24px",fontFamily:"Sigmar One"}}>Active events</div>
+                <div style={{marginBottom:"8px",marginLeft:"10px",marginRight:"10px", fontSize:"5VH",fontFamily:"Mate SC",fontWeight:"bold"}}>Active events</div>
 
 
                 <EventRenderer eventList={eventList} profilestatus={userVerified}/>
@@ -572,9 +572,9 @@ const Home =()=>
 
             
             <Paper style={{ marginTop:"24px", width:"-webkit-fill-available", padding:"12px", minWidth:"400px",maxWidth:"400px", marginBottom:"50px"}}>
-                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Latest transitions</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"8px", fontWeight:"bold",fontFamily:"Mate SC",fontSize:"3VH"}}> Latest transitions</div>
                 {CreateTable()}
-                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold",fontFamily:"Sigmar One"}}> Top transaction amouts</div>
+                <div style={{textAlign:"-webkit-center", marginTop:"24px", fontWeight:"bold",fontFamily:"Mate SC",fontSize:"3VH"}}> Top transaction amouts</div>
                 {CreateTable02()}
             </Paper>
 
@@ -605,7 +605,7 @@ const Home =()=>
         </div>
 
 
-        <div id="footer" style={{ maxWidth:"100%", minWidth: "100%", backgroundColor:"#263273", minHeight:"150px", padding:"32px", paddingTop: "-16px", display: "flex"}}>
+        <div id="footer" style={{ maxWidth:"100%", minWidth: "100%", backgroundColor:"#263273", minHeight:"150px", padding:"32px", paddingTop: "-16px", display: "inline-grid"}}>
         
         
         <div style={{display:"grid", minWidth:"30%"}}>

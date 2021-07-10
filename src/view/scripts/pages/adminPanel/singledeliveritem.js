@@ -62,7 +62,7 @@ const SingleDeliveryItem = (probs)=> {
       variant="contained"
       color="primary"
       size="small"
-      style= {{backgroundColor: "#4caf50", fontFamily:"Orelega One",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
+      style= {{backgroundColor: "#794949", fontFamily:"Orelega One",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
       >
         Delivered
     </Button>  

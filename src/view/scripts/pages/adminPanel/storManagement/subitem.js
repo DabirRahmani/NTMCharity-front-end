@@ -62,7 +62,7 @@ const SignleSubItem =(probs)=>
                 </IconButton>
 
                 <IconButton  onClick={()=>{probs.add(probs)}} style={{verticalAlign:'-webkit-baseline-middle'}} size="small">
-                <AddCircleIcon style={{color:"#4caf50"}} fontSize="small"/>
+                <AddCircleIcon style={{color:"#794949"}} fontSize="small"/>
                 </IconButton>
 
                 <IconButton  onClick={()=>{probs.change(probs)}} style={{verticalAlign:'-webkit-baseline-middle'}} size="small">
@@ -80,7 +80,7 @@ const SignleSubItem =(probs)=>
         </IconButton>
          : 
         <IconButton onClick={()=>setStatus(false)} style={{verticalAlign:'-webkit-baseline-middle'}} size="small">
-        <ExpandMore style={{color:"#4caf50"}} fontSize="small" />
+        <ExpandMore style={{color:"#794949"}} fontSize="small" />
         </IconButton>
         }
         </>

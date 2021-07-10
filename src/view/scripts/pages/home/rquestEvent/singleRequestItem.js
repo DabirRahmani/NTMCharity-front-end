@@ -51,7 +51,7 @@ const SignleRequestListItem =(probs)=>
                  return <div 
                 style={{verticalAlign:"middle",paddingLeft:"8px", display:"inline-block"}}>
                     <Typography 
-                        style={{color:"#4caf50",display:"inline-block",paddingLeft:"4px",verticalAlign:"top",fontFamily:"Mate SC"}}>
+                        style={{color:"#794949",display:"inline-block",paddingLeft:"4px",verticalAlign:"top",fontFamily:"Mate SC"}}>
                         accepted
                     </Typography>
                 </div>

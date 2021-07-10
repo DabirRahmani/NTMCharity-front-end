@@ -35,7 +35,7 @@ const RequestedList =(probs)=>
     style={{margin:"24px",marginTop:"48px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px", paddingBottom:"8px"}}>
         
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography style={{fontFamily:"Sigmar One"}}>Your Requests</Typography>
+            <Typography style={{fontFamily:"Mate SC",fontWeight:"bold"}}>Your Requests</Typography>
         </div>
 
         <div>

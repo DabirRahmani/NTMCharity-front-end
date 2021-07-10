@@ -124,6 +124,10 @@ const Profile =() =>{
       }
     return(
         <div >
+          <div>
+                
+               
+                </div>
 
 
 
@@ -136,21 +140,36 @@ const Profile =() =>{
              zIndex:"-1"
              }}
             />
-
-          <div style={{paddingTop:"20px"}}></div>
-
-
-          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px"}}>
-
-
-
-            <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
-              
+             <AppBar position="static" style={{backgroundColor:"#78a6c1"}}>
+                 <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
+                     <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
+                     </AllInclusiveIcon>
+                    <Typography style={{fontSize:"30px",fontFamily:"Dancing Script",marginLeft:"3vh"}}>
+                    NTM CHARITY!
+                    </Typography>
+                   </Toolbar>
+                 </AppBar>
+                 <div style={{display:"-webkit-flex", justifyContent:"space-between"}}>
+            <Button
+                  variant="contained"
+                  onClick={goHome}
+                  style= {{
+                    backgroundColor:"#688494",
+                  paddingRight:8,
+                  paddingLeft:8,
+                  whiteSpace: "nowrap",
+                  textAlign: "center"}}   
+                  variant="contained"
+                  color="primary"       
+                  startIcon={<HomeIcon />}
+                  >
+                    home
+               </Button>
                 <Button
                   variant="contained"
                   onClick={goeditprofile}
                   style= {{
-                  backgroundColor: "#4caf50",
+                    backgroundColor:"#688494",
                   paddingRight:24,
                   paddingLeft:24,
                   whiteSpace: "nowrap",
@@ -161,32 +180,16 @@ const Profile =() =>{
                   >
                     Edit Profile
                </Button>
-
-               <Button
-                  variant="contained"
-                  onClick={goHome}
-                  style= {{
-                  backgroundColor: "#ffc107",
-                  paddingRight:24,
-                  paddingLeft:24,
-                  whiteSpace: "nowrap",
-                  textAlign: "center"}}   
-                  variant="contained"
-                  color="primary"       
-                  startIcon={<HomeIcon />}
-                  >
-                    home
-               </Button>
             </div>
 
-          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Sigmar One", textAlign:'-webkit-center'}}>
-            {usernamee} Profile
-          </Typography>
+          <Container component="main" maxWidth="xs" style={{backgroundColor:"whitesmoke", paddingTop:"16px",marginTop:"20px"}}>
 
           <div style={{width:'100%',textAlign:'-webkit-center'}}>
           <Avatar alt="Remy Sharp" src={src} style={{width:"200px", height:"200px"}} />
           </div>
-
+          <Typography component="h2" variant="h5" style={{fontSize:"30px", fontFamily:"Mate SC", textAlign:'-webkit-center'}}>
+            {usernamee} 
+          </Typography>
 
 
 
@@ -248,6 +251,7 @@ const Profile =() =>{
             
           </form>
       </Container>
+      <div style={{padding:"16px"}}></div>
         </div>
         
     )

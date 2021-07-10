@@ -133,14 +133,14 @@ const VerifyUsersRenderer=()=>
           </IconButton>
         </Box>
 
-        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"24px"}}>list of needies</div>
+        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"30px",fontFamily:"Mate SC",fontWeight:"bold"}}>List of needies</div>
 
         <div style={{display:"inline-flex", flexWrap:"wrap"}}>
         {CreateNeedyList()}
 
         </div>
 
-        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"24px"}}>list of donators</div>
+        <div style={{marginBottom:"8px",marginLeft:"16px", fontSize:"30px",fontFamily:"Mate SC",fontWeight:"bold"}}>List of donators</div>
 
         <div  style={{display:"inline-flex", flexWrap:"wrap"}}>
         {CreateDonatorList()}
