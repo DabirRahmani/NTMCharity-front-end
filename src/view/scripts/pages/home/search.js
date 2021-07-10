@@ -67,7 +67,7 @@ const Search = (props)=>{
         marginLeft:"55px",
         backgroundColor: inputBackGround,
         borderRadius:"4px",
-        fontFamily:"Sigmar One",
+        fontFamily:"Mate SC",
     }}
     >
         <InputBase  

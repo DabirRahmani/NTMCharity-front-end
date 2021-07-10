@@ -355,7 +355,7 @@ const EventRequestRenderer =()=>
                 variant="contained"
                 color="primary"
                 size="small"
-                style= {{backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
+                style= {{backgroundColor: "#794949",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
                 startIcon={<CheckCircleOutlineIcon />}>
                   ok
                 </Button>

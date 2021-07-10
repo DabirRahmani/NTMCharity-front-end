@@ -59,7 +59,7 @@ const SingleEvent = (probs)=> {
       if(      Object.values(probs.listofneeds).length >0      )
       return <div style={{display: 'block', marginLeft:"8px"}}>
       <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
-      <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
+      <Typography style={{display: 'inline-block',fontFamily:"Mate SC"}} >List of needs</Typography>
       </div>
     }
 
@@ -110,7 +110,7 @@ const SingleEvent = (probs)=> {
       onClick={()=>{setOpenDialog(true)}}
       variant="contained"
       size="small"
-      style={{background:"#8db1f3",fontFamily:"Orelega One"}}>Donate 
+      style={{background:"#794949",fontFamily:"Orelega One"}}>Donate 
       </Button>
 
     }

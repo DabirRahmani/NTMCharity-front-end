@@ -114,7 +114,7 @@ const GDonatelogedin = (props) =>{
             <Button
             variant="contained"
             size="small" 
-            style={{background:"#ffc107",fontFamily:"Orelega One"}}
+            style={{backgroundColor:"#93aa2a",fontFamily:"Orelega One"}}
             onClick={()=>{props.close()}}
             >
                 cancel
@@ -123,7 +123,7 @@ const GDonatelogedin = (props) =>{
             <Button
             variant="contained"
             size="small" 
-            style={{background:"#4caf50",fontFamily:"Orelega One"}}
+            style={{background:"#794949",fontFamily:"Orelega One"}}
             onClick={onDonateSubmit}
             >
                 Donate

@@ -218,9 +218,9 @@ const SignUp = () =>
         <h3  >you are signed in as</h3>
         <h2 style={{padding:"4px", color:"#e53935"}} >{localStorage.getItem("username")}</h2>
         <h3 style={{paddingRight:"8px"}} >you can  </h3>
-        <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50",fontFamily:"Orelega One"}} >  back to home</Button>
+        <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#794949",fontFamily:"Orelega One"}} >  back to home</Button>
         <h3 style={{padding:"8px"}} >or</h3>
-        <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#ffc107",fontFamily:"Orelega One"}}>sign out</Button>
+        <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#93aa2a",fontFamily:"Orelega One"}}>sign out</Button>
         <h3 style={{padding:"8px"}} >to continue</h3>
         </div>
     } 
@@ -228,7 +228,7 @@ const SignUp = () =>
     return( 
       <div>
         <div>
-            <AppBar position="static">
+            <AppBar position="static" style={{backgroundColor:"#78a6c1"}}>
              <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
@@ -269,7 +269,7 @@ const SignUp = () =>
           color="primary"
           size="small"
           onClick={verifyEmailClicked}
-          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center", width:"90px",fontFamily:"Orelega One"}}
+          style= {{alignSelf:'center',backgroundColor: "#794949",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center", width:"90px",fontFamily:"Orelega One"}}
           startIcon={<VerifiedUserIcon />}>
             verify
           </Button>
@@ -279,7 +279,7 @@ const SignUp = () =>
           <Avatar size="small" style={{marginTop:"8px"}}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" style={{fontFamily:"Sigmar One"}}>
+          <Typography component="h1" variant="h5" style={{fontFamily:"Mate SC"}}>
             Sign up
           </Typography>
           <form className={classes.form} noValidate>

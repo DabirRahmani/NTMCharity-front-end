@@ -483,7 +483,7 @@ const SingleEvent = (probs)=> {
              color="primary"
              size="small"
              variant="contained"
-             style= {{paddingRight:16,paddingLeft:16, display:inDeleteOrConfirm, backgroundColor:"#e7ea84"}}
+             style= {{paddingRight:16,paddingLeft:16, display:inDeleteOrConfirm,backgroundColor:"#93aa2a"}}
              startIcon={<CancelIcon/>}
              onClick={onCancelClicked}
              >
@@ -507,7 +507,7 @@ const SingleEvent = (probs)=> {
              color="primary"
              size="small"
              variant="contained"
-             style= {{paddingRight:16,paddingLeft:16,display: inOnModify}}
+             style= {{paddingRight:16,paddingLeft:16,display: inOnModify,backgroundColor:"#794949"}}
              startIcon={<CreateIcon/>}
              onClick={onModifyClicked}
              >
@@ -520,7 +520,7 @@ const SingleEvent = (probs)=> {
             variant="contained"
             color="primary"
             size="small"
-            style= {{backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,display: inModify, whiteSpace: "nowrap", textAlign: "center"}}
+            style= {{backgroundColor: "#794949",paddingRight:24,paddingLeft:24,display: inModify, whiteSpace: "nowrap", textAlign: "center"}}
             startIcon={<CheckCircleOutlineIcon />}>
               Confrim
             </Button>    
@@ -543,7 +543,7 @@ const SingleEvent = (probs)=> {
             variant="contained"
             color="primary"
             size="small"
-            style= {{backgroundColor: "#4caf50",paddingRight:16,paddingLeft:16,display: inOnConfirm}}
+            style= {{backgroundColor: "#794949",paddingRight:16,paddingLeft:16,display: inOnConfirm}}
             startIcon={<CheckCircleOutlineIcon />}>
               Confirm
             </Button>    

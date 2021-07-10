@@ -33,7 +33,8 @@ import { useHistory} from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home';
 import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
-import photo from '../img/signin.png'
+import photo from '../img/blue.jpg';
+
 import NeedReqRenderer from './needReq/needReqRenderer';
 
 const drawerWidth = 240;
@@ -203,13 +204,21 @@ const useStyles = makeStyles((theme) => ({
   else
   return (
       <div id="admin-panel" className={classes.root}>
-
+         <img src={photo} 
+            style={{
+             position:"absolute",
+             width:"100%",
+             height:"100%",
+             objectFit:"fill",
+             zIndex:"-1"
+             }}
+            />
 
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)} style={{backgroundColor:"#78a6c1"}}>
         <Toolbar className={classes.toolbar}>
 
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} style={{fontFamily:"Mate SC"}}>
             Admin Panel
           </Typography>
 
@@ -218,11 +227,11 @@ const useStyles = makeStyles((theme) => ({
           </Typography>
 
           <IconButton onClick={()=>{history.push("/home")}} >
-             <HomeIcon/>
+             <HomeIcon style={{color:"white"}}/>
           </IconButton>
 
           <IconButton onClick={signOut}>
-             <PowerSettingsNewIcon   style={{color:"#FF0000"}}/>
+             <PowerSettingsNewIcon   style={{color:"white"}}/>
           </IconButton>
 
         </Toolbar>
@@ -234,7 +243,7 @@ const useStyles = makeStyles((theme) => ({
         }}
         open={open}
       >
-        <div className={classes.toolbarIcon}>
+        <div className={classes.toolbarIcon} >
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon  />
           </IconButton>

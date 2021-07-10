@@ -117,7 +117,7 @@ const Login = () => {
           </Typography>
 
           <Button
-            style={{backgroundColor:"#4caf50",display:"inline-block",alignSelf:'center', marginRight:"6px", marginLeft:"6px",textAlign: "center",fontFamily:"Orelega One"}}
+            style={{backgroundColor:"#794949",display:"inline-block",alignSelf:'center', marginRight:"6px", marginLeft:"6px",textAlign: "center",fontFamily:"Orelega One"}}
             variant="contained"
             size="small"
             onClick={()=> {setVerifyDianoStatus(true)}}
@@ -321,16 +321,16 @@ const Login = () => {
       <h3 style={{overflow: 'hidden',whiteSpace:"nowrap",textOverflow:"ellipsis",fontFamily:"Mate SC"}}>you are signed in as</h3>
       <h2 style={{padding:"4px", color:"#e53935",fontFamily:"Mate SC"}} >{localStorage.getItem("username")}</h2>
       <h3 style={{paddingRight:"8px",fontFamily:"Mate SC"}} >you can  </h3>
-      <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#4caf50",fontFamily:"Orelega One"}} >  back to home</Button>
+      <Button onClick={goHome} color="primary" variant="contained" size="small" startIcon={<HomeIcon/>} style= {{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#794949",fontFamily:"Orelega One"}} >  back to home</Button>
       <h3 style={{padding:"8px",fontFamily:"Mate SC"}} >or</h3>
-      <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#ffc107",fontFamily:"Orelega One"}}>sign out</Button>
+      <Button onClick={signOut} color="primary" variant="contained" size="small" startIcon={<NoEncryptionIcon/>} style={{display:"inherit",paddingRight:16,paddingLeft:16,backgroundColor:"#93aa2a",fontFamily:"Orelega One"}}>sign out</Button>
       <h3 style={{padding:"8px",fontFamily:"Mate SC"}} >to continue</h3>
       </div>
   } 
   return (
     <div>
     <div>
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundColor:"#78a6c1"}}>
          <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
              <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
              </AllInclusiveIcon>
@@ -405,7 +405,7 @@ const Login = () => {
           variant="contained"
           color="primary"
           size="small"
-          style= {{backgroundColor:"#ffc107", display:"inherit" ,alignSelf:'center',paddingRight:12,paddingLeft:12,margin:24, textAlign: "center", width:"180px",fontFamily:"Orelega One"}}
+          style= {{backgroundColor:"#93aa2a", display:"inherit" ,alignSelf:'center',paddingRight:12,paddingLeft:12,margin:24, textAlign: "center", width:"180px",fontFamily:"Orelega One"}}
           startIcon={<CancelIcon/>}
           onClick={onCancelClicked}>
             cancel
@@ -417,7 +417,7 @@ const Login = () => {
           color="primary"
           size="small"
           onClick={sendResetPasswordToEmailClicked}
-          style= {{display:sendCodebtnStatus ,alignSelf:'center',backgroundColor: "#4caf50",paddingRight:12,paddingLeft:12,margin:24, textAlign: "center", width:"180px",fontFamily:"Orelega One"}}
+          style= {{display:sendCodebtnStatus ,alignSelf:'center',backgroundColor: "#794949",paddingRight:12,paddingLeft:12,margin:24, textAlign: "center", width:"180px",fontFamily:"Orelega One"}}
           startIcon={<EmailIcon />}>
             send code
         </Button>
@@ -427,7 +427,7 @@ const Login = () => {
           color="primary"
           size="small"
           onClick={sendResetPasswordToEmailClicked}
-          style= {{display:changePassbtnStatus ,alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,margin:24, textAlign: "center", width:"220px",fontFamily:"Orelega One"}}
+          style= {{display:changePassbtnStatus ,alignSelf:'center',backgroundColor: "#794949",paddingRight:24,paddingLeft:24,margin:24, textAlign: "center", width:"220px",fontFamily:"Orelega One"}}
           startIcon={<LockOutlinedIcon />}>
             Change password
         </Button>
@@ -453,7 +453,7 @@ const Login = () => {
           color="primary"
           size="small"
           onClick={verifyEmail}
-          style= {{alignSelf:'center',backgroundColor: "#4caf50",paddingRight:24,paddingLeft:24,margin:24, textAlign: "center", width:"100px",fontFamily:"Orelega One"}}
+          style= {{alignSelf:'center',backgroundColor: "#794949",paddingRight:24,paddingLeft:24,margin:24, textAlign: "center", width:"100px",fontFamily:"Orelega One"}}
           startIcon={<LockOutlinedIcon />}>
             verify
         </Button>
@@ -465,7 +465,7 @@ const Login = () => {
           <Avatar size="small" style={{marginTop:"8px"}}>
             <LockOutlinedIcon/>
           </Avatar>
-          <Typography component="h1" variant="h5" style={{fontFamily:"Sigmar One"}}>
+          <Typography component="h1" variant="h5" style={{fontFamily:"Mate SC"}}>
             Sign in
           </Typography>
           <form className={classes.form} noValidate>

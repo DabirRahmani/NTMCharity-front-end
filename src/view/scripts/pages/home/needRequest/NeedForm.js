@@ -70,7 +70,7 @@ const NeedForm =(probs)=>
                 variant="contained"
                 size="small" 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px",fontFamily:"Orelega One"}}
+                style={{marginBottom:"-20px",backgroundColor:"#93aa2a", marginRight:"8px",fontFamily:"Orelega One"}}
                 onClick={cancelEdit}>
                     cancel
                 </Button>
@@ -81,7 +81,7 @@ const NeedForm =(probs)=>
                 disabled={!submitButtonStatus}
 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#4caf50 ",fontFamily:"Orelega One"}}
+                style={{marginBottom:"-20px",background:"#794949 ",fontFamily:"Orelega One"}}
                 onClick={SubmitRequest}>
                     submit edit
                 </Button>
@@ -94,10 +94,9 @@ const NeedForm =(probs)=>
 
             <Button
             variant="contained"
-            size="small" 
-            color="primary"
+            size="small"
             disabled={!submitButtonStatus}
-            style={{marginBottom:"-20px",background:"#1890ff",fontFamily:"Orelega One"}}
+            style={{marginBottom:"-20px",backgroundColor:"#794949",fontFamily:"Orelega One"}}
             onClick={SubmitRequest}>
                 submit
             </Button>
@@ -108,7 +107,7 @@ const NeedForm =(probs)=>
 
         <div style={{margin:"24px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px" , height: '28vh'}}>
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography style={{fontFamily:"Sigmar One"}}>{formTitle}</Typography>
+            <Typography style={{fontFamily:"Mate SC"}}>{formTitle}</Typography>
         </div>
 
         <div style={{display:"flex"}}>

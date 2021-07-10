@@ -675,31 +675,31 @@ const StoreManagementRenderer =()=>{
             return <div style={{textAlign:"-webkit-center"}} >
                 <Input style={{display:"block", marginLeft:'16px', marginTop:'16px', marginRight:'16px'}} onChange={e=> setDialogValue(e.target.value)} value={dialogValue}/>
                 <div style={{marginBottom:'16px', color:"#e53935"}}>{errMsg}</div>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#4caf50", marginRight: "16px"}} variant="contained" size="small" onClick={onEdit} >edit</Button>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#ffc107"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#794949", marginRight: "16px"}} variant="contained" size="small" onClick={onEdit} >edit</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#93aa2a"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
             </div>
 
             case("delete"):
             return <div style={{textAlign:"-webkit-center",margin:'16px'}} >
                 <div style={{marginBottom:'16px', color:"#e53935"}}>{errMsg}</div>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#e53935", marginRight: "16px"}} variant="contained" size="small" onClick={onDelete} >delete</Button>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#ffc107"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#794949", marginRight: "16px"}} variant="contained" size="small" onClick={onDelete} >delete</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#93aa2a"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
             </div>
 
             case("add"):
             return <div style={{textAlign:"-webkit-center"}} >
                 <Input style={{display:"block", marginLeft:'16px', marginTop:'16px', marginRight:'16px'}} onChange={e=> setDialogValue(e.target.value)} value={dialogValue}/>
                 <div style={{marginBottom:'16px', color:"#e53935"}}>{errMsg}</div>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#4caf50", marginRight: "16px"}} variant="contained" size="small" onClick={onAdd} >add</Button>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#ffc107"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#794949", marginRight: "16px"}} variant="contained" size="small" onClick={onAdd} >add</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#93aa2a"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
             </div>
 
             case("change"):
             return <div style={{textAlign:"-webkit-center"}} >
             {CreateSelect()}
             <div style={{marginBottom:'16px', color:"#e53935"}}>{errMsg}</div>
-            <Button style={{whiteSpace: "nowrap" , backgroundColor:"#4caf50", marginRight: "16px"}} variant="contained" size="small" onClick={onChange} >change</Button>
-            <Button style={{whiteSpace: "nowrap" , backgroundColor:"#ffc107"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
+            <Button style={{whiteSpace: "nowrap" , backgroundColor:"#794949", marginRight: "16px"}} variant="contained" size="small" onClick={onChange} >change</Button>
+            <Button style={{whiteSpace: "nowrap" ,backgroundColor:"#93aa2a"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
             </div>
 
             case("counter"):
@@ -713,8 +713,8 @@ const StoreManagementRenderer =()=>{
                     /> 
                 </div>
                 <div style={{marginBottom:'16px', color:"#e53935"}}>{errMsg}</div>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#4caf50", marginRight: "16px"}} variant="contained" size="small" onClick={onCounter} >submit</Button>
-                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#ffc107"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#794949", marginRight: "16px"}} variant="contained" size="small" onClick={onCounter} >submit</Button>
+                <Button style={{whiteSpace: "nowrap" , backgroundColor:"#93aa2a"}} variant="contained" size="small" onClick={cancelDialog} >cancel</Button>
             </div>
 
             case("loading"):
@@ -743,7 +743,7 @@ const StoreManagementRenderer =()=>{
         </IconButton>
          : 
         <IconButton onClick={()=>setStatus(false)} style={{verticalAlign:'-webkit-baseline-middle'}} size="small">
-        <ExpandMore style={{color:"#4caf50"}} fontSize="small" />
+        <ExpandMore style={{color:"#794949"}} fontSize="small" />
         </IconButton>
         }
         </>
@@ -753,7 +753,7 @@ const StoreManagementRenderer =()=>{
         if(status === true)
         return <div >
         <IconButton  onClick={()=>{Add({title:"",type:"root",id:"0"})}} style={{verticalAlign:'-webkit-baseline-middle'}} size="small">
-        <AddCircleIcon style={{color:"#4caf50"}} fontSize="small"/>
+        <AddCircleIcon style={{color:"#794949"}} fontSize="small"/>
         </IconButton>
         </div>
     }
@@ -780,7 +780,7 @@ const StoreManagementRenderer =()=>{
             onClick={()=>{setStatus(true); Focus({id:0, type:"root"})}}
 
             size="medium" 
-            style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box", fontSize:"18px",fontWeight:'bold'}}>
+            style={{ textTransform:"none", padding:'0px',paddingLeft:'-8px', background:'space',display:"-webkit-box", fontSize:"18px",fontWeight:'bold',fontFamily:"Mate SC"}}>
                 All categories
             </Button>
 
@@ -789,7 +789,7 @@ const StoreManagementRenderer =()=>{
 
         </div>
 
-        <div style={{display: 'grid',marginLeft:'32px'}}>
+        <div style={{display: 'grid',marginLeft:'32px',fontFamily:"Mate SC"}}>
         {CreateCatList()}
 
         </div>
@@ -797,7 +797,7 @@ const StoreManagementRenderer =()=>{
 
 
 
-        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: 'block'}}>
+        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: 'block',fontFamily:"Mate SC"}}>
 
             {CreateDataAnalysisItems()}
 

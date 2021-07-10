@@ -171,7 +171,7 @@ const RequestForm =(probs)=>
                 variant="contained"
                 size="small" 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#ffc107", marginRight:"8px",fontFamily:"Orelega One"}}
+                style={{marginBottom:"-20px",backgroundColor:"#93aa2a", marginRight:"8px",fontFamily:"Orelega One"}}
                 onClick={cancelEdit}>
                     cancel
                 </Button>
@@ -182,7 +182,7 @@ const RequestForm =(probs)=>
                 disabled={!submitButtonStatus}
 
                 color="primary"
-                style={{marginBottom:"-20px",background:"#4caf50 ",fontFamily:"Orelega One"}}
+                style={{marginBottom:"-20px",background:"#794949",fontFamily:"Orelega One"}}
                 onClick={SubmitRequest}>
                     submit edit
                 </Button>
@@ -196,9 +196,9 @@ const RequestForm =(probs)=>
             <Button
             variant="contained"
             size="small"
-            color="primary"
+            color="black"
             disabled={!submitButtonStatus}
-            style={{marginBottom:"-20px",backgroundColor:"#1890ff",fontFamily:"Orelega One",textEmphasisColor:"black"}}
+            style={{marginBottom:"-20px",backgroundColor:"#794949",fontFamily:"Orelega One",textEmphasisColor:"black"}}
             onClick={SubmitRequest}>
                 submit
             </Button>
@@ -209,7 +209,7 @@ const RequestForm =(probs)=>
 
         <div style={{margin:"24px",border:"solid", borderColor:"#000000", borderRadius:"5px", borderWidth:"1px"}}>
         <div style={{marginTop:"-22px", marginLeft:"16px",background:"#ffffff", display:"table", padding:"8px", fontSize:"24px"}}>
-            <Typography style={{fontFamily:"Sigmar One"}}>{formTitle}</Typography>
+            <Typography style={{fontFamily:"Mate SC",fontWeight:"bold"}}>{formTitle}</Typography>
         </div>
 
         <div style={{display:"flex"}}>
@@ -256,7 +256,7 @@ const RequestForm =(probs)=>
         <div style={{display: 'block', marginLeft:"8px"}}>
 
         <ListIcon style={{display: 'inline-block', marginTop:"12px",verticalAlign:"bottom"}}/>
-        <Typography style={{display: 'inline-block',fontFamily:"Sigmar One"}} >List of needs</Typography>
+        <Typography style={{display: 'inline-block',fontFamily:"Mate SC",fontWeight:"bold"}} >List of needs</Typography>
         </div>
 
         <div style={{display: 'block', marginLeft:"8px"}}>

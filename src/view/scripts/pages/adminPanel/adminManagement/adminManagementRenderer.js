@@ -164,7 +164,7 @@ const AdminManagementRenderer =()=>
     return <Dialog
     style={{backgroundColor: 'transparent'}} open={dialogStatus}>
         <div style={{padding: '16px'}}>
-
+       
           {RenderDialogContent()}
 
         </div>
@@ -179,7 +179,7 @@ const AdminManagementRenderer =()=>
     }
 
     return <div>
-
+      
       <div style={{padding: '16px', fontSize:"18px"}}>{dialogText}</div>
 
       <Button
@@ -249,10 +249,10 @@ const AdminManagementRenderer =()=>
 
 
     <Paper style={{padding:"48px", textAlign: "center", minWidth:"400px", marginTop:"16px" }}>
-    <div style={{fontWeight: "bold", fontSize: "24px",display: "grid"}}> 
+    <div style={{fontWeight: "bold", fontSize: "24px",display: "grid",fontFamily:"Mate SC"}}> 
     Promotion
 
-    <div style={{fontSize: "16px", fontWeight: "normal", paddingBottom:"24px"}}>
+    <div style={{fontSize: "16px", fontWeight: "normal", paddingBottom:"24px",fontFamily:"Mate SC"}}>
       Choose user you want to promote
     </div>
     
@@ -269,6 +269,7 @@ const AdminManagementRenderer =()=>
           paddingRight:24,
           paddingLeft:24,
           textAlign: "center",
+          fontFamily:"Mate SC"
         }} 
         onClick={Promote}
       >
@@ -282,10 +283,10 @@ const AdminManagementRenderer =()=>
     </Paper>
 
     <Paper style={{padding:"48px", textAlign: "center", minWidth:"35%",  minWidth:"400px", marginTop:"16px"}}>
-    <div style={{fontWeight: "bold", fontSize: "24px",display: "grid"}}> 
+    <div style={{fontWeight: "bold", fontSize: "24px",display: "grid",fontFamily:"Mate SC"}}> 
     Demotion
 
-    <div style={{fontSize: "16px", fontWeight: "normal", paddingBottom:"24px"}}>
+    <div style={{fontSize: "16px", fontWeight: "normal", paddingBottom:"24px",fontFamily:"Mate SC"}}>
       Choose admin you want to demote
     </div>
 
@@ -305,6 +306,7 @@ const AdminManagementRenderer =()=>
           paddingRight:24,
           paddingLeft:24,
           textAlign: "center",
+          fontFamily:"Mate SC"
         }} 
         onClick={Demote}
       >
