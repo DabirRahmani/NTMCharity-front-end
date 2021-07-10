@@ -16,7 +16,7 @@ import { Typography } from '@material-ui/core';
 import StoreIcon from '@material-ui/icons/Store';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
-
+import CommentIcon from '@material-ui/icons/Comment';
 
 export const mainListItems =(probs) => 
 {
@@ -33,7 +33,7 @@ export const mainListItems =(probs) =>
     </ListItem>
 
     <ListItem button onClick={()=>probs.verifyUsers()}>
-    <Tooltip title={<Typography fontSize="16">verify users</Typography>} placement="right-end" fontSize="32px">
+    <Tooltip title={<Typography fontSize="16">Verify users</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <PeopleIcon />
       </ListItemIcon>
@@ -41,7 +41,7 @@ export const mainListItems =(probs) =>
     </ListItem>
 
     <ListItem button onClick={()=>probs.delivery()}>
-    <Tooltip title={<Typography fontSize="16">delivery</Typography>} placement="right-end" fontSize="32px">
+    <Tooltip title={<Typography fontSize="16">Delivery</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <CardGiftcardIcon />
       </ListItemIcon>
@@ -49,7 +49,7 @@ export const mainListItems =(probs) =>
     </ListItem>
 
     <ListItem button onClick={()=>probs.storeManagement()}>
-    <Tooltip title={<Typography fontSize="16">store management</Typography>} placement="right-end" fontSize="32px">
+    <Tooltip title={<Typography fontSize="16">Store management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <StoreIcon />
       </ListItemIcon>
@@ -57,12 +57,21 @@ export const mainListItems =(probs) =>
     </ListItem>
 
     <ListItem button onClick={()=>probs.adminmanagement()}>
-    <Tooltip title={<Typography fontSize="16">admin management</Typography>} placement="right-end" fontSize="32px">
+    <Tooltip title={<Typography fontSize="16">Admin management</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
       <VerifiedUserIcon />
       </ListItemIcon>
       </Tooltip>
     </ListItem>
+
+    <ListItem button onClick={()=>probs.needreq()}>
+    <Tooltip title={<Typography fontSize="16">Need Request</Typography>} placement="right-end" fontSize="32px">
+      <ListItemIcon>
+      <CommentIcon />
+      </ListItemIcon>
+      </Tooltip>
+    </ListItem>
+
 
     </div>
   )

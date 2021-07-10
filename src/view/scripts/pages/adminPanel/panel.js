@@ -34,6 +34,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import HomeIcon from '@material-ui/icons/Home';
 import AdminManagementRenderer from './adminManagement/adminManagementRenderer'
 import photo from '../img/signin.png'
+import NeedReqRenderer from './needReq/needReqRenderer';
 
 const drawerWidth = 240;
 
@@ -163,6 +164,10 @@ const useStyles = makeStyles((theme) => ({
     setActiveSection("adminmanagement")
   }
 
+  const needreq=()=>{
+    setActiveSection("needreq")
+  }
+
 
   //render menu sections, based on activeSection value, this will change by functions.item
   //which are defined below, its sth similar to delegate set values for each function
@@ -175,8 +180,10 @@ const useStyles = makeStyles((theme) => ({
         case("storeManagement"): return(<StoreManagementRenderer/>)
         case("delivery"): return(<DeliveryRenderer/>)
         case("adminmanagement"): return(<AdminManagementRenderer/>)
+        case("needreq"): return(<NeedReqRenderer/>)
         default:return(<div></div>)
       }
+
   }
 
   const functions =()=>{
@@ -184,7 +191,9 @@ const useStyles = makeStyles((theme) => ({
     "verifyUsers": verifyUsers, 
     "storeManagement": storeManagement,
     "delivery": delivery, 
-    "adminmanagement":adminmanagement});
+    "adminmanagement":adminmanagement,
+    "needreq":needreq,
+  });
   }
 
   if(localStorage.getItem("user_type")!== "1" && localStorage.getItem("user_type") !== "2")
