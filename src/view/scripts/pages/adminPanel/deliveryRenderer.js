@@ -56,7 +56,6 @@ const DeliveryRenderer=()=>
     }
 
 
-    console.log(productsList)
 
 
     const CreateProductsList=()=>{

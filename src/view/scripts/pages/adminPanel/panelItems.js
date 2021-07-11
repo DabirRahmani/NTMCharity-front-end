@@ -68,7 +68,7 @@ export const mainListItems =(probs) =>
     <ListItem button onClick={()=>probs.needreq()}>
     <Tooltip title={<Typography fontSize="16">Need Request</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon>
-      <CommentIcon />
+      <CommentIcon style={{color:"#096dd9"}} />
       </ListItemIcon>
       </Tooltip>
     </ListItem>
