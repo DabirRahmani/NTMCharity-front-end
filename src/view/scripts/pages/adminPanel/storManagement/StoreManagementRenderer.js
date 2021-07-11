@@ -28,6 +28,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TextField from '@material-ui/core/TextField';
 import Chart from './Chart'
+import Paper from '@material-ui/core/Paper';
 
 const StoreManagementRenderer =()=>{
 
@@ -206,7 +207,7 @@ const StoreManagementRenderer =()=>{
         .then(e=>{
             if(e.data.success === "1")
             {
-                productList.filter(e=> e.id === onProcessId)[0].quantity = dialogValue;
+                productList.filter(e=> e.id === onProcessId)[0].quantity = +dialogValue;
                 cancelDialog();
             } else
             {
@@ -767,6 +768,23 @@ const StoreManagementRenderer =()=>{
         </div>
     }
 
+    const CreateChart = ()=>{
+        return <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: 'block',fontFamily:"Mate SC"}}>
+            <Paper style ={{padding:"32px"}}>
+            {CreateDataAnalysisItems()}
+
+            <Chart 
+                catlist={catList} 
+                subcatlist={subCatList} 
+                productlist={productList} 
+                id={focusId} 
+                type={focusType} 
+                dataAnalysis={dataAnalysis} 
+            />
+            </Paper>
+            </div>
+    }
+
     return <div style={{display: 'grid'}}>
 
 
@@ -795,22 +813,9 @@ const StoreManagementRenderer =()=>{
         </div>
 
 
+        {CreateChart()}
 
 
-        <div style={{position:'absolute',top:'25%', right:'20px', maxWidth:'50vh', display: 'block',fontFamily:"Mate SC"}}>
-
-            {CreateDataAnalysisItems()}
-
-            <Chart 
-                catlist={catList} 
-                subcatlist={subCatList} 
-                productlist={productList} 
-                id={focusId} 
-                type={focusType} 
-                dataAnalysis={dataAnalysis} 
-            />
-
-        </div>
 
             
         {CreateDialog()}

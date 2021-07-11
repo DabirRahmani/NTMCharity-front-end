@@ -83,7 +83,7 @@ const AdminManagementRenderer =()=>
         var subject = "Account Demoted"
 
         PostEmailRequest({"email":em,subject:subject,message:message})
-        .then((e)=>{console.log(e)})
+        .then((e)=>{})
 
         setRealod(realod+1);
         setAdmin("")
@@ -134,7 +134,7 @@ const AdminManagementRenderer =()=>
         var subject = "Account Promoted"
 
         PostEmailRequest({"email":em,subject:subject,message:message})
-        .then((e)=>{console.log(e)})
+        .then((e)=>{})
 
         setRealod(realod+1);
         setAdmin("")

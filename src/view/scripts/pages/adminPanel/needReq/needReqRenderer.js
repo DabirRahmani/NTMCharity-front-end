@@ -42,7 +42,6 @@ const NeedReqRenderer =()=>
 
 
 const SingleNeedReq = ({probs})=>{
-    console.log(probs)
 
     return <Paper 
     style={{margin:"24px", maxWidth:"500px", minWidth:"500px"}}

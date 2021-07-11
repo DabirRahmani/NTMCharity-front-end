@@ -16,11 +16,17 @@ import photo from '../img/blue.jpg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import Footer from '../footer'
+
 const Mainpage =()=>
 {
     const history = useHistory();
     const SignUp =()=>{
         history.push("/signup")
+      }
+
+      const home =()=>{
+        history.push("/home")
       }
     return(
         <div>
@@ -36,17 +42,39 @@ const Mainpage =()=>
                 
             <AppBar position="static" style={{backgroundColor:"#78a6c1"}}>
              <Toolbar style={{whiteSpace: "nowrap", marginBottom: "1%",marginTop: "1%"}}>
+
+
+             <div style={{display:"flex", flexWrap: "nowrap",alignItems:"center", width:"100%", justifyContent:"space-between"}}>
+
+
+                 <div style={{display:"flex",}}>
                  <AllInclusiveIcon style={{fontSize:"50px",paddingRight:"10px"}}>
                  </AllInclusiveIcon>
+
+                 
                 <Typography style={{fontSize:"30px",fontFamily:"Dancing Script",marginLeft:"3vh"}}>
                 NTM CHARITY!
                 </Typography>
-                <button style={{marginLeft:"68%", backgroundColor: "#b7def5",fontFamily:"Orelega One",color:"WHITE"}}
+                 </div>
+
+
+
+                <div style={{display:"grid"}}>
+
+                <button style={{ backgroundColor: "#b7def5",fontFamily:"Orelega One",color:"WHITE", marginBottom:"8px"}}
+                 onClick={home}
+                 >
+                 Home
+                 </button>
+
+                 <button style={{ backgroundColor: "#b7def5",fontFamily:"Orelega One",color:"WHITE"}}
                  onClick={SignUp}
                  >
                  Sign Up
                  </button>
-                 <LockOpenIcon color="inherit" style={{fontSize: "5vh", marginLeft: "1%"}}/>
+                 </div>
+                 </div>
+
                 </Toolbar>
              </AppBar>
            
@@ -111,24 +139,8 @@ If this has inspired you to make a donation to charity, we can help. We make it 
 
 
         </div>
-        <div id="footer" style={{ maxWidth:"100%", minWidth: "100%", backgroundColor:"#263273", minHeight:"150px", padding:"32px", paddingTop: "-16px", display: "flex"}}>
-        <div style={{display:"grid", minWidth:"30%"}}>
 
-<a href="https://github.com" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-<GitHubIcon style={{verticalAlign:"top"}}/>
-<div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Back-End</div>
-</a>
-<a href="https://github.com/DabirRahmani/charity_front/tree/develop" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-<GitHubIcon style={{verticalAlign:"top"}}/>
-<div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Front-End</div>
-</a>
-<a href={"mailto:"+"ntm.patronage@gmail.com"} target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-<AlternateEmailIcon style={{verticalAlign:"top"}}/>
-<div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>E-mail</div>
-</a>
-</div>
-<div style={{width:"100%", textAlign:"center", alignSelf:"center",color:"#fff"}}>(working on it)</div>
-</div>
+        <Footer/>
         </div>
     )
 }
