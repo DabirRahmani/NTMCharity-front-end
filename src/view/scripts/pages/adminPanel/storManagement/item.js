@@ -47,7 +47,7 @@ const SignleItem =(probs)=>
             }
             else
             {
-                return <div style={{marginLeft:'12px'}}> no subs </div>
+                return <div style={{marginLeft:'12px'}}> No subs </div>
             }
         }
 

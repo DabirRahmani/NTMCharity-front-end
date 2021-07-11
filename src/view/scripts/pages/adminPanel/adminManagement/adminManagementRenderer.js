@@ -194,7 +194,7 @@ const AdminManagementRenderer =()=>
         }} 
         onClick={()=>{setDialogStatus(false); setDialogText("")}}
       >
-        ok
+        Ok
       </Button>
     </div>
     
@@ -274,7 +274,7 @@ const AdminManagementRenderer =()=>
         onClick={Promote}
       >
 
-        promote
+        Promote
       </Button>
     </div>
 

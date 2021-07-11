@@ -51,7 +51,7 @@ const VerifyUsersRenderer=()=>
 
     const CreateNeedyList=()=>{
         if(usersNeedyList.length ===0)
-        return <div style={{marginBottom:"16px", marginLeft:"16px"}}> there is no needy to verify</div>
+        return <div style={{marginBottom:"16px", marginLeft:"16px"}}> There is no needy to verify</div>
 
         return usersNeedyList
         .map((e)=> <SignleUserItem 
@@ -70,7 +70,7 @@ const VerifyUsersRenderer=()=>
 
     const CreateDonatorList=()=>{
         if(usersDonatorList.length ===0)
-        return <div style={{marginBottom:"16px",marginLeft:"16px"}}> there is no Donator to verify</div>
+        return <div style={{marginBottom:"16px",marginLeft:"16px"}}> There is no Donator to verify</div>
 
         return usersDonatorList
         .map((e)=> <SignleUserItem 

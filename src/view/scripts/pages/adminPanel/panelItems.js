@@ -33,7 +33,7 @@ export const mainListItems =(probs) =>
     </ListItem>
 
     <ListItem button onClick={()=>probs.verifyUsers()}>
-    <Tooltip title={<Typography fontSize="16">verify users</Typography>} placement="right-end" fontSize="32px">
+    <Tooltip title={<Typography fontSize="16">Verify users</Typography>} placement="right-end" fontSize="32px">
       <ListItemIcon >
       <PeopleIcon style={{color:"#096dd9"}}/>
 

@@ -87,12 +87,12 @@ const EventRequestRenderer =()=>
     const mapSotreToEvents = ()=>{
         if(networkError === true)
         {
-            return(<Alert severity="error">something went wrong!</Alert>)
+            return(<Alert severity="error">Something went wrong!</Alert>)
         }
         else
         if((store.getState() === undefined) || (store.getState().length === 0))
         {
-            return( <Alert severity="info" style={{fontFamily:"Mate SC"}}>there is no request!</Alert> )
+            return( <Alert severity="info" style={{fontFamily:"Mate SC"}}>There is no request!</Alert> )
         }
         else
         {
@@ -357,7 +357,7 @@ const EventRequestRenderer =()=>
                 size="small"
                 style= {{backgroundColor: "#794949",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
                 startIcon={<CheckCircleOutlineIcon />}>
-                  ok
+                  Ok
                 </Button>
                 </div>)
         }
@@ -371,7 +371,7 @@ const EventRequestRenderer =()=>
                 size="small"
                 style= {{backgroundColor: "#e53935",paddingRight:24,paddingLeft:24,marginBottom:24, textAlign: "center"}}
                 startIcon={<CheckCircleOutlineIcon />}>
-                  ok
+                  Ok
                 </Button>
                 </div>)
         }

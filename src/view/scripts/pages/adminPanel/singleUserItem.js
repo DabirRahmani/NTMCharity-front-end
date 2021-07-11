@@ -8,22 +8,22 @@ const SignleUserItem=(probs)=>{
 
     return<Paper style={{maxWidth:"250px",minWidth:"250px",padding:"8px",marginLeft:"16px",marginRight:"16px", marginBottom:"16px"}}>
     <div>
-        username: {probs.username}
+        Username: {probs.username}
     </div>
     <div>
-        name: {probs.firstname} {probs.lastname}
+        Name: {probs.firstname} {probs.lastname}
     </div>
     <div>
-        email: {probs.email}
+        Email: {probs.email}
     </div>
     <div>
-        mellicode: {probs.mellicode}
+        Mellicode: {probs.mellicode}
     </div>
     <div>
-        phone: {probs.phone}
+        Phone: {probs.phone}
     </div>
     <div>
-        gender: {probs.gender}
+        Gender: {probs.gender}
     </div>
 
     <div style={{textAlign: '-webkit-right'}}>

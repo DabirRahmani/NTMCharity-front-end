@@ -43,7 +43,7 @@ const SignleSubItem =(probs)=>
             }
             else
             {
-                return <div style={{marginLeft:'12px'}}> no products </div>
+                return <div style={{marginLeft:'12px'}}> No products </div>
             }
         }
     }
