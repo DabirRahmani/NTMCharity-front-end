@@ -30,7 +30,6 @@ const RequestEventDialog =(probs)=>
     const [requestList, setRequestList]= useState([])
 
 
-    console.log(requestList)
     useEffect(()=>
     {
         //اطلاعات مورد نیاز برای ریکوئست لیست اینجا باید اپدیت بشن

@@ -5,10 +5,14 @@ import { PieChart } from 'react-minimal-pie-chart';
 const Chart =(probs)=>{
 
 
+
+
     const [text,settext] = useState("")
 
 
     const [data, setdata]= useState([])
+
+
 
     const colors =['#E38627','#C13C37','#6A2135','#581845','#FF5733']
 
@@ -140,6 +144,16 @@ const Chart =(probs)=>{
 
     }
 
+    const CreateItemDetails =() => {
+        var vv = ""
+        if (text !== "")
+        { 
+            vv = data.filter(e=>e.title === text)[0]
+            return <div>Quantity: {vv.value}</div>
+        }
+        
+    }
+
 
     return <div>
         <div style={{maxWidth:"40vh"}}>
@@ -162,6 +176,7 @@ const Chart =(probs)=>{
 
 
         <div>{text}</div>
+        <div>{CreateItemDetails()}</div>
     </div>
 }
 

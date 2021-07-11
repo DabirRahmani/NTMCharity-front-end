@@ -55,6 +55,11 @@ import requestedlist from './rquestEvent/requestedList'
 import UserBioRequest from '../../../../core/userBioRequest'
 import BackendImageUrl from '../../../../core/BacknedImageUrl'
 import PerfectScrollbar from 'perfect-scrollbar';
+import Footer from '../footer'
+
+import Tooltip from '@material-ui/core/Tooltip';
+import Miniprof from '../miniprofile'
+
 
 const drawerWidth = 240;
 
@@ -114,6 +119,11 @@ const Home =()=>
 
     const [userVerified, setUserVerified] = useState(false)
 
+    const [profileStatus, setprofileStatus] = useState(false)
+
+    const [profileusername, setprofileusername] = useState("")
+
+    
     useEffect(()=>{
         GetEvents({key:searchKey,number:pageNumber})
         .then((res)=>{
@@ -143,6 +153,7 @@ const Home =()=>
                     {
                         var v= Object.values(e.data.transaction_set)
                         setTopTransActions(v.sort((a,b)=>{ if(a.amount > b.amount) return -1; return 1}))
+
                     }
                 })
 
@@ -151,6 +162,7 @@ const Home =()=>
 
 
     },[reload])
+
 
 
     useEffect(()=>{
@@ -471,7 +483,11 @@ const Home =()=>
         if(username === null)
         return <TableCell style={{fontFamily:"Mate SC"}}>Guest</TableCell>
 
-        return <TableCell style={{fontFamily:"Mate SC"}}>{username}</TableCell>
+
+            return <TableCell style={{fontFamily:"Mate SC", padding:"18px"}}>
+            <Button onClick={()=>{showprof(username)}} style={{fontSize:"14px", margin:"-16px", padding:"-16px",textTransform:"none",}}>{username}</Button>
+            </TableCell>
+
 
 
     }
@@ -498,6 +514,22 @@ const Home =()=>
 
         return <TableCell style={{fontFamily:"Mate SC"}}>{title} (id:{id})</TableCell>
 
+    }
+
+    const showprof = (username)=>{
+        setprofileStatus(true);
+        setprofileusername(username)
+    }
+
+    const miniProfileDialog= ()=>{
+        if(profileStatus === true)
+        {
+            return<Miniprof profileusername={profileusername} cancel={cancelminiprof}/>
+        }
+    }
+
+    const cancelminiprof = ()=>{
+        setprofileStatus(false)
     }
     
 
@@ -601,35 +633,12 @@ const Home =()=>
             {renderDonateDialog()}
             {renderDonateProducrDialog()}
             {NeedReqDialogRenderer()}
+            {miniProfileDialog()}
 
         </div>
 
 
-        <div id="footer" style={{ maxWidth:"100%", minWidth: "100%", backgroundColor:"#263273", minHeight:"150px", padding:"32px", paddingTop: "-16px", display: "inline-grid"}}>
-        
-        
-        <div style={{display:"grid", minWidth:"30%"}}>
-
-            <a href="https://github.com" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-            <GitHubIcon style={{verticalAlign:"top"}}/>
-            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Back-End</div>
-            </a>
-            <a href="https://github.com" target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-            <GitHubIcon style={{verticalAlign:"top"}}/>
-            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>Front-End</div>
-            </a>
-            <a href={"mailto:"+"ntm.patronage@gmail.com"} target = "_blank" style={{alignSelf:"flex-end",display: "table-cell",color:"#fff",fontSize:"16px", margin:"8px"}}>
-            <AlternateEmailIcon style={{verticalAlign:"top"}}/>
-            <div style={{display:"inline", verticalAlign:"text-bottom", paddingLeft:"4px"}}>E-mail</div>
-            </a>
-        </div>
-
-
-        <div style={{width:"100%", textAlign:"center", alignSelf:"center",color:"#fff"}}>(working on it)</div>
-            
-
-
-        </div>
+        <Footer/>
         
         </div>
         
